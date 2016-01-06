@@ -1,0 +1,90 @@
+{% extends 'FgmsShopifyBundle::base.html.twig' %}
+{% block javascripts %}
+<script type="text/javascript">
+	jQuery(function($){
+		$('#form_optionId').on('change',function(){
+			$('#form_optionDescription').val($(this).find('option:selected').text())
+		
+		})
+
+		
+	});
+</script>
+
+
+{% endblock %}
+{% block body %}
+	{{output}}
+	{% include "FgmsShopifyBundle::product_display.html.twig" %}
+	<h2>Product Options Configuration</h2>					
+	{% for meta in metadata%}
+		{% if meta.namespace == 'FGMS' and meta.key == 'options' %}
+		
+		<blockquote>
+			<div style="margin-bottom: 12px;"><strong>Format::</strong>{Product option id} || {option type} || {enable '1' } || {publish date timestamp} || {unpublish date timestamp}</div>
+			<div><strong>Placeholder: </strong>{{'{{'}}product.metafields.{{meta.namespace}}.{{meta.key}}{{'}}'}}</div>
+			<div><strong>ID:</strong> {{meta.id}}</div>
+			<div>{{meta.value}}</div>
+		</blockquote>
+	{% endif %}
+	{% endfor%}	
+
+	
+	
+	{% if form %}{{ form_start(form) }}{%endif%}	
+	<table class="table">
+		<thead>
+			<tr>
+				<th style="width: 5%">Sort</th>
+				<th style="width: 15%">Product</th>
+				<th style="width: 15%">Type</th>
+				<th style="width: 15%">Publish Date</th>						
+				<th style="width: 15%">UnPublish Date</th>
+				<th style="width: 15%">Enable</th>
+				<th style="width: 5%">Edit</th>
+				<th></th>
+				<th style="width: 5%">Delete</th>
+			</tr>
+			
+		</thead>
+		<tbody>		
+
+		{%for option in options %}						
+			<tr>
+				<td >{% if formid == option.id%}{{ form_widget(form.optionOrder) }}{% else %}{{option.optionOrder}}{% endif%}</td>
+				<td >{% if formid == option.id%}{{ form_widget(form.optionId) }}{% else %}{{option.optionDescription}}{% endif%} </td>
+				<td >{% if formid == option.id%}{{ form_widget(form.optionType) }}{% else %}{{option.optionType}}{% endif%}</td>
+				<td >{% if formid == option.id%}{{ form_widget(form.publishOn) }}{% else %}{{option.publishOn|date('Y-m-d')}}{% endif%}</td>
+				<td >{% if formid == option.id%}{{ form_widget(form.publishOff) }}{% else %}{{option.publishOff|date('Y-m-d')}}{% endif%}</td>
+				<td >{% if formid == option.id%}{{ form_widget(form.optionEnable) }}{% else %}{{option.optionEnable}}{% endif%}</td>
+				<td>{%if formid == option.id %}{{ form_widget(form.save) }}{%else%}<a href="?id={{option.id}}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i></a>{%endif%}</td>
+				<td>{% if formid == option.id%}<a href="/shopify/options/{{productDetail.id}}/" class="btn btn-warning"><i class="fa fa-ban"></i> Close</a>{%endif%}</td>
+				<td><a href="/shopify/options/{{productDetail.id}}/delete/{{option.id}}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
+			</tr>						
+		{%endfor%}	
+
+		{% if formid == 0 %}
+			<tr>
+				<td >{{ form_widget(form.optionOrder) }}{{form_widget(form.optionDescription)}}</td>
+				<td >{{ form_widget(form.optionId) }}</td>
+				<td >{{ form_widget(form.optionType) }}</td>
+				<td >{{ form_widget(form.publishOn) }}</td>
+				<td >{{ form_widget(form.publishOff) }}</td>
+				<td >{{ form_widget(form.optionEnable) }}</td>	
+				<td>{{ form_widget(form.save) }}</td>
+				<td></td>
+			</tr>							
+		{% endif %}			
+		</tbody>
+	</table>
+	{% if form %}{{ form_end(form) }}{%endif%}			
+	<ul>
+				{% for meta in metadata%}
+					<li>
+						{{meta.namespace}}.{{meta.key}}
+						<div style="font-size: 0.9em;">{{meta.value}}</div>
+					</li>
+				{% endfor%}
+	</ul>
+{% endblock %}
+{% block stylesheets %}{% endblock %}

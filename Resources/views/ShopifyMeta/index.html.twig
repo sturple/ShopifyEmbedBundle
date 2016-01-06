@@ -1,0 +1,66 @@
+{% extends 'FgmsShopifyBundle::base.html.twig' %}
+{% block javascripts %}	{% endblock %}
+{% block body %}
+	{{output}}
+	{% include "FgmsShopifyBundle::product_display.html.twig" %}
+	
+
+		<h2>Meta Data</h2>
+		{% if form %}
+		{{ form_start(form) }}	
+		<table class="table">
+			<thead>
+				<tr>
+					<th width="20%">Key</th>
+					<th width="20%">Value Type</th>
+					<th width="30%">Value</th>					
+					<th width="20%">Code</th>
+					<th width="5%">Edit</th>
+					<th></th>
+					<th width="5%">Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			
+	
+		{% for meta in metadata%}
+			{% if meta.namespace == 'FGMSMeta'%}
+				<tr>
+					<td>
+						{% if metaEditId == meta.id%}
+							{{form_widget(form.metaId)}}
+							{{form_widget(form.metaNamespace)}}							
+							{{form_widget(form.metaKey) }}
+							{{meta.key}}
+						{%else%}
+							{{meta.key}}
+						{%endif%}
+					</td>
+					<td>{% if metaEditId == meta.id%}{{form_widget(form.metaValueType)}}{%else%}{{meta.value_type}}{%endif%}</td>
+					<td>{% if metaEditId == meta.id%}{{form_widget(form.metaValue)}}{%else%}{{meta.value}}{%endif%}</td>					
+					<td>{{'{{'}}product.metafields.{{meta.namespace}}.{{meta.key}}{{'}}'}}</td>
+					<td>{% if metaEditId == meta.id%}{{form_widget(form.save) }}{%else%}<a href="?metaId={{meta.id}}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i></a>{%endif%}</td>
+					<td>{% if metaEditId == meta.id%}<a href="/shopify/meta/{{productDetail.id}}/" class="btn btn-warning"><i class="fa fa-ban"></i> close</a>{%endif%}</td>
+					<td><a href="/shopify/meta/{{productDetail.id}}/delete/{{meta.id}}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
+				</tr>			
+			{% endif %}
+		{% endfor %}
+		{% if metaEditId == 0 %}
+				<tr>
+					<td>{{form_widget(form.metaId)}}{{form_widget(form.metaKey)}}</td>
+					<td>{{form_widget(form.metaValueType)}}</td>
+					<td>{{form_widget(form.metaValue)}}</td>					
+					<td>{{ '{{' }}product.metafields.FGMSMeta.{{'}}'}}</td>
+					<td>{{form_widget(form.save) }}</td>
+					<td></td>
+				</tr>			
+		
+		
+			</tbody>
+		</table>	
+	{% endif%}
+	{{ form_end(form) }}
+	{%endif%}
+{% endblock %}
+{% block stylesheets %}{% endblock %}

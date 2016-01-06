@@ -1,0 +1,51 @@
+{% extends 'FgmsShopifyBundle::base.html.twig' %}
+{% block javascripts %}
+{% endblock %}
+{% block body %}
+
+{% if form %}		
+{{ form_start(form) }}
+<div style="text-align: right">
+	{{form_widget(form.save,{'attr' : {'class' : 'btn btn-success btn-lg'}})}}
+</div>
+
+{{ form_row(form.publishDate)}}
+{{ form_row(form.unpublishDate)}}
+{{ form_row(form.title)}}
+{{ form_row(form.subtitle)}}
+{{ form_row(form.content)}}
+{{ form_row(form.buttonText)}}
+{{ form_row(form.url)}}
+
+<div class="form-group">
+	{{ form_label(form.imageFile)}}
+	<div class="col-sm-9">
+		{{form_widget(form.imageFile)}}
+		<div style="font-size: 0.9em;margin-top: 8px;">
+			<em><a href="https://apps.fifthgeardev.net/uploads/specials/{{special.imageGuid}}" target="_blank" >
+					<img style="width: 100px; height: auto" src="https://apps.fifthgeardev.net/uploads/specials/{{special.imageGuid}}" />
+					{{special.imageGuid}}
+			</a></em>
+		</div>
+	</div>
+</div>
+<div class="form-group">
+	{{ form_label(form.permalink)}}
+	<div class="col-sm-9">
+		{{form_widget(form.permalink)}}
+		<div style="font-size: 0.9em;margin-top: 8px;">
+			<a target="_blank" href="https://{{special.shop}}/tools/fg/specials/{{special.permalink}}/">https://{{special.shop}}/tools/fg/specials/{{special.permalink}}/</a>
+		</div>
+	</div>
+</div>
+
+{{ form_row(form.shortlink)}}
+{{ form_row(form.shortlinkEnable)}}
+
+
+{{ form_widget(form) }}	
+{{ form_end(form) }}
+{% else %}
+	<blockquote>Form Error</blockquote>
+{% endif %}
+{% endblock%}

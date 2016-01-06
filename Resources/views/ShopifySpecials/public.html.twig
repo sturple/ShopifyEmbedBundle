@@ -1,0 +1,29 @@
+<div class="specials-wrapper">
+	<h1 class="specials-h1">{{special.title}}</h1>
+	{% if special.subtitle | length > 0 %}<blockquote style="margin: -32px 0 32px;;">{{special.subtitle}}</blockquote>{%endif%}
+	<div class="specials-image">
+		<a href="{{special.url}}">
+			<img class="img-responsive" src="https://apps.fifthgeardev.net/uploads/specials/{{special.imageGuid}}" alt="{{special.title}} Image" />
+		</a>
+	</div>
+	<div class="specials-content">
+		{{special.content | raw}}
+	</div>
+	<div class="specials-button">
+		<a class="btn btn-primary" href="{{special.url}}">{{special.buttonText | default('Learn More')}}</a>
+	</div>
+</div>
+
+<style>
+	.specials-image img {
+		display: inline;
+	}
+	.specials-image {
+		text-align: center;
+		margin-bottom: 24px;
+	}
+	.specials-button {
+		padding-top: 24px;
+	}
+</style>
+

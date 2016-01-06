@@ -1,0 +1,7 @@
+{% form_theme form _self %}
+{% block textarea_widget %}
+    <div class="integer_widget">
+        {% set type = type|default('number') %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}

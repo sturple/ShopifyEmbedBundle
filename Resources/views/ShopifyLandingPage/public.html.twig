@@ -1,0 +1,390 @@
+{% extends 'FgmsShopifyBundle::landing-page-base.html.twig' %}
+{% form_theme form _self %}
+{% block checkbox_widget %}
+	<input type="checkbox" style="position: relative; top: 2px;" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+	
+{% endblock checkbox_widget %}
+
+{% block header %}
+	<div class="lp-header">
+		<div id="header-wrapper" class="">
+			<div class="container">
+				<div class="column-wrapper">			
+					<div class="row" style="position: relative;">
+						<!-- header -->
+						<div class="col-md-4 col-sm-3">
+							<a href="{{formGlobals.website}}" target="_blank" >
+								<span class="sr-only"></span>								
+								<img class=" lp-site-logo" src="https://apps.fifthgeardev.net/uploads/lp/{{formGlobals.lPageLogoGuid}}" alt="{{formGlobals.company}} Logo" />		        
+							</a>
+						</div>
+						<div class="col-md-8 col-sm-9">
+							<div class="lp-site-caption script-line-height-center">
+								{{formGlobals.lPageTagLine}}
+							</div>
+						</div>			
+						
+              
+					</div>			
+				</div>			
+			</div>
+		
+		</div>	
+	</div>
+{%endblock %}
+
+{% block body %}
+	
+	<h1 class="lp-h1">{% if lp.pageTitle | length > 0 %}{{lp.pageTitle}}{%else%}{{lp.company}}{%endif%}
+		<a href="{{lp.logoUrl}}" target="_blank">
+			<img class=" lp-company-logo"  src="https://apps.fifthgeardev.net/uploads/lp/{{lp.logoGuid}}" alt="{{lp.company}} logo" />
+		</a>		
+	</h1>
+	
+	<div class="lp-content">
+		{% if lp.content | length > 0 %}
+			
+		{% else %}
+			<div class="script-feature-video lp-video-feature">
+				<iframe id="youTubePlayer" width="560" height="315" src="https://www.youtube.com/embed/{{lp.youtubeCode}}?rel=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+			</div>
+			{% if lp.youtubeCaption | length > 0 %}
+				<p class="lp-video-caption">{{lp.youtubeCaption}}</p>	
+			{% endif%}
+			
+			
+		{% endif %}		
+	</div>
+
+{% endblock %}
+
+
+
+{% block sidebar %}
+
+	
+
+{% endblock%}
+
+{% block footer %}
+	<div class="lp-footer-contact">
+		<div class="container">
+			<div class="column-wrapper">
+				<div class="row">
+					<div class="col-md-5 col-sm-6">
+						<a  href="{{lp.buttonUrl}}" target="_blank" class="btn btn-primary btn-lg lp-btn-lg">Visit Website</a>
+					</div>
+					<div class="col-md-7 col-sm-6 align-right-center-md">
+						{% if lp.phoneToll | length > 0 %}
+							
+						<div class="lp-contact-lg ">
+							<div class="lp-phone-title">Call {{lp.company}} at </div>
+							<div class="lp-phone-number">{{lp.phoneToll}}</div>							
+						</div>
+						{% elseif lp.phoneOffice | length > 0 %}
+						<div class="lp-contact-lg ">
+							<div class="lp-phone-title">Call {{lp.company}} at </div>
+							<div class="lp-phone-number">{{lp.phoneOffice}}</div>
+						</div>						
+						{% elseif lp.locatorLink | length > 0 %}
+							<a  href="{{lp.locatorLink}}" target="_blank" class="btn btn-primary btn-lg lp-btn-lg">Store Locator</a>
+						{% endif %}
+					</div>					
+				</div>
+			</div>
+		</div>
+	</div>
+	{% if lp.specialOfferLink | length > 0 %}
+	<div class="lp-special-horizontal hidden-lg hidden-md">
+		<div class="container">
+			<div class="column-wrapper">				
+				<a href="{{lp.specialOfferLink}}" target="_blank" ><img class="img-responsive" style="display: inline" src="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageHorizontalGuid}}" alt="Special Offer Banner Horizontal" /></a>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	<div class="lp-footer-message {% if lp.formEnable == false%} hidden-xs hidden-sm{%endif%}">
+		<div class="container">
+			<div class="column-wrapper">
+				<div class="row">
+					<!-- left side of footer -->
+					{% if lp.formEnable %}
+					<div class="col-md-6" >
+						<div class="">
+
+							
+							<h2>Send {{lp.company}} a Message</h2>
+							
+							{% if form %}		
+							{{ form_start(form) }}
+							
+							
+							<div class="form-group">								
+								<label class=" control-label  hidden-sm hidden-xs sr-only" for="fgms_shopifybundle_landingpageinquiry_firstName">First Name</label>
+								<div class="col-sm-10">
+									{{ form_widget(form.firstName,{'attr' : {'placeholder' : 'First Name'}})}}
+								</div>
+							</div>						
+							<div class="form-group">								
+								<label class="control-label  hidden-sm hidden-xs sr-only" for="fgms_shopifybundle_landingpageinquiry_lastName">Last name</label>
+								<div class="col-sm-10">
+									{{ form_widget(form.lastName,{'attr' : {'placeholder' : 'Last Name'}})}}
+								</div>
+							</div>
+							<div class="form-group">								
+								<label class="hidden-sm hidden-xs control-label  sr-only" for="fgms_shopifybundle_landingpageinquiry_email">Email</label>
+								<div class="col-sm-10">
+									{{ form_widget(form.email,{'attr' : {'placeholder' : 'Email'}})}}
+								</div>
+							</div>
+							<div class="form-group">								
+								<label class="hidden-sm hidden-xs control-label  sr-only" for="fgms_shopifybundle_landingpageinquiry_email">Message</label>
+								<div class="col-sm-10">
+									{{ form_widget(form.message,{'attr' : {'placeholder' : 'Message'}})}}
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-sm-10">
+									<label >
+										<table class="table" style="margin-bottom: 0;">
+											<tr>
+												<td style="padding: 0 12px 0 0;">
+													{{ form_widget(form.list1)}}
+												</td>
+												<td style="padding: 0;">
+													Subscribe for Special Offers on {{formGlobals.company}} through {{lp.company}}
+												</td>
+											</tr>
+										</table>						
+										
+									</label>									
+								</div>								
+							</div>							
+																		
+							<div class="form-group" style="margin-bottom: 0;">
+								<div class="col-sm-10">
+									{{ form_widget(form.save,{'attr' : {'class': 'btn btn-primary'}})}}
+								</div>
+							</div>							
+							{{ form_widget(form) }}	
+							{{ form_end(form) }}
+							{% else %}
+								<blockquote>Form Error</blockquote>
+							{% endif %}							
+							
+						</div>
+					</div>
+					
+					<!-- right side of footer -->
+					<div class="col-md-6 " >
+						<div class="lp-special-vertical">
+							{% if lp.specialOfferLink | length > 0 %}
+								<a href="{{lp.specialOfferLink}}" target="_blank" ><img class="img-responsive" style="display: inline" src="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageVerticalGuid}}" alt="Special Offer Banner Vertical" /></a>
+							
+							{% endif %}
+						</div>                
+					</div>
+					{% else %}
+						<div class="col-sm-12 " >
+							<div class="lp-special-vertical" style = "text-align: center"> 
+							<a href="{{lp.specialOfferLink}}" target="_blank" ><img class="img-responsive" style=" display: inline" src="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageHorizontalGuid}}" alt="Special Offer Banner Horizontal" /></a>
+							</div>
+						</div>
+						
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
+	<div class="lp-copyright">
+		<div class="container">
+			<div class="column-wrapper">
+				<a target="_blank" href="{{formGlobals.website}}">Copyright 2015 {{formGlobals.company}}</a>
+			</div>
+		</div>
+	</div>	
+</div>
+{% endblock %}
+
+{% block javascripts %}	
+<script type="text/javascript">
+	
+$(function(){
+	$('.script-feature-video').fitVids();
+	updateLineHeight();
+	fgmsTrack({category : 'View', action: 'OnLoad', label: 'Page Load', id : $('*[data-tracking-id]').data('tracking-id')});
+	$( window ).resize(function() {updateLineHeight();});
+	$('a,button,input[type="submit"],iframe').addClass('script-tracking');
+	$('*[data-tracking-id]').on('click','.script-tracking',function(){	
+		var eCategory = ($(this).data('category')) ? $(this).data('category') : 'Link' ;			
+		var eAction = ($(this).data('action')) ? $(this).data('action') : 'Click' ;			
+		var eLabel = ($(this).data('label')) ? $(this).data('label') : (($(this).find('img').length > 0) ? $(this).find('img').attr('alt') : $(this).text()) ;		
+		fgmsTrack({category : eCategory, action: eAction, label: eLabel, id : $(this).closest('*[data-tracking-id]').data('tracking-id')});			
+	})	
+	
+	// This code loads the IFrame Player API code asynchronously
+	var tag = document.createElement('script');
+	tag.src = "https://www.youtube.com/iframe_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);	
+	
+})
+
+// This code is called by the YouTube API to create the player object
+function onYouTubeIframeAPIReady(event) {
+  player = new YT.Player('youTubePlayer', {
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+
+var pauseFlag = false;
+function onPlayerReady(event) {
+   // do nothing, no tracking needed
+}
+function onPlayerStateChange(event) {
+    // track when user clicks to Play
+	
+	var eCategory = 'Video';
+	var eLabel = (event.target.B.videoUrl != undefined) ? event.target.B.videoUrl : 'Youtube Video';
+	var eAction = 'Play';
+	var eId = $('*[data-tracking-id]').data('tracking-id')
+    if (event.data == YT.PlayerState.PLAYING) {        
+		fgmsTrack({category : eCategory, action: eAction, label: eLabel, id : eId });
+        pauseFlag = true;
+    }
+    // track when user clicks to Pause
+    if (event.data == YT.PlayerState.PAUSED && pauseFlag) {
+        eAction= 'Pause';
+		fgmsTrack({category : eCategory, action: eAction, label: eLabel, id : eId});		  
+        pauseFlag = false;
+	
+    }
+    // track when video ends
+    if (event.data == YT.PlayerState.ENDED) {
+		eAction = 'Ended';
+		fgmsTrack({category : eCategory, action: eAction, label: eLabel, id : eId});
+		
+		
+    }
+}
+
+
+function updateLineHeight(){
+	$('.script-line-height-center').each(function(index){
+		$(this).css({'line-height': '1.4em'});
+		var lh = Math.min($(this).closest('.row').outerHeight(), 100);
+		$(this).css({'line-height': lh+'px'});
+		
+	});	
+	
+}
+
+function fgmsTrack(data){
+	data.referrer = document.referrer;
+	if (typeof ga == 'function') {	ga('send','event',data.eCategory,data.eAction,data.eLabel,data.eId)	};
+
+	$.ajax(	{
+		type : 'POST',
+		url : "track/",
+		data : data,
+		dataType: 'json'
+	}).done( function (msg) {	
+		
+	}).fail( function (msg) {
+		
+	});			
+}
+/*jshint browser:true */
+/*!
+* FitVids 1.1
+*
+* Copyright 2013, Chris Coyier - http://css-tricks.com + Dave Rupert - http://daverupert.com
+* Credit to Thierry Koblentz - http://www.alistapart.com/articles/creating-intrinsic-ratios-for-video/
+* Released under the WTFPL license - http://sam.zoy.org/wtfpl/
+*
+*/
+
+;(function( $ ){
+
+  'use strict';
+
+  $.fn.fitVids = function( options ) {
+    var settings = {
+      customSelector: null,
+      ignore: null
+    };
+	
+
+    if(!document.getElementById('fit-vids-style')) {
+      // appendStyles: https://github.com/toddmotto/fluidvids/blob/master/dist/fluidvids.js
+      var head = document.head || document.getElementsByTagName('head')[0];
+      var css = '.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}';
+      var div = document.createElement("div");
+      div.innerHTML = '<p>x</p><style id="fit-vids-style">' + css + '</style>';
+      head.appendChild(div.childNodes[1]);
+    }
+
+    if ( options ) {
+      $.extend( settings, options );
+    }
+
+    return this.each(function(){
+      var selectors = [
+        'iframe[src*="player.vimeo.com"]',
+        'iframe[src*="youtube.com"]',
+        'iframe[src*="youtube-nocookie.com"]',
+        'iframe[src*="kickstarter.com"][src*="video.html"]',
+        'object',
+        'embed'
+      ];
+
+      if (settings.customSelector) {
+        selectors.push(settings.customSelector);
+      }
+
+      var ignoreList = '.fitvidsignore';
+
+      if(settings.ignore) {
+        ignoreList = ignoreList + ', ' + settings.ignore;
+      }
+
+      var $allVideos = $(this).find(selectors.join(','));
+      $allVideos = $allVideos.not('object object'); // SwfObj conflict patch
+      $allVideos = $allVideos.not(ignoreList); // Disable FitVids on this video.
+
+      $allVideos.each(function(count){
+        var $this = $(this);
+        if($this.parents(ignoreList).length > 0) {
+          return; // Disable FitVids on this video.
+        }
+        if (this.tagName.toLowerCase() === 'embed' && $this.parent('object').length || $this.parent('.fluid-width-video-wrapper').length) { return; }
+        if ((!$this.css('height') && !$this.css('width')) && (isNaN($this.attr('height')) || isNaN($this.attr('width'))))
+        {
+          $this.attr('height', 9);
+          $this.attr('width', 16);
+        }
+        var height = ( this.tagName.toLowerCase() === 'object' || ($this.attr('height') && !isNaN(parseInt($this.attr('height'), 10))) ) ? parseInt($this.attr('height'), 10) : $this.height(),
+            width = !isNaN(parseInt($this.attr('width'), 10)) ? parseInt($this.attr('width'), 10) : $this.width(),
+            aspectRatio = height / width;
+        if(!$this.attr('id')){
+          var videoID = 'fitvid' + count;
+          $this.attr('id', videoID);
+        }
+        $this.wrap('<div class="fluid-width-video-wrapper"></div>').parent('.fluid-width-video-wrapper').css('padding-top', (aspectRatio * 100)+'%');
+        $this.removeAttr('height').removeAttr('width');
+      });
+    });
+  };
+// Works with either jQuery or Zepto
+})( window.jQuery || window.Zepto );	
+</script>
+	
+	
+{% endblock %}
+{% block stylesheets %}{% endblock %}

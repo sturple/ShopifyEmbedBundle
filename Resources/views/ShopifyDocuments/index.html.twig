@@ -1,0 +1,68 @@
+{% extends 'FgmsShopifyBundle::base.html.twig' %}
+{% block javascripts %}
+{% endblock %}
+{% block body %}
+	{{output}}
+	{% include "FgmsShopifyBundle::product_display.html.twig" %}
+
+		
+					
+				<h2 >Documents Configuration</h2>					
+				{% if metadata | length > 0 %}
+					{% for meta in metadata%}
+						{% if meta.namespace == 'FGMS' and meta.key == 'documents' %}				
+						<blockquote>
+							<div><strong>Placeholder: </strong>{{'{{'}}product.metafields.{{meta.namespace}}.{{meta.key}}{{'}}'}}</div>
+							<div><strong>ID:</strong> {{meta.id}}</div>
+							<div>{{meta.value}}</div>
+						</blockquote>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				
+					{% if form %}{{ form_start(form) }}{%endif%}	
+					<table class="table">
+						<thead>
+							<tr>
+								<th style="width: 10%">Sort</th>
+								<th style="width: 30%">Title</th>
+								<th style="width: 50%">Asset</th>
+								<th style="width: 5%">Edit</th>	
+								<th></th>															
+								<th style="width: 5%">Delete</th>
+							</tr>
+							
+						</thead>
+						<tbody>
+						{%for doc in documents%}						
+							<tr>
+								<td >{% if docid == doc.id%}{{ form_widget(form.productId) }}{{ form_widget(form.tabOrder) }}{% else %}{{doc.tabOrder}}{% endif%}</td>
+								<td >{% if docid == doc.id%}{{ form_widget(form.title) }}{% else %}{{doc.title}}{% endif%}</td>
+								<td >{% if docid == doc.id%}{{doc.asset}}{% else %}{{doc.asset}}{% endif%}</td>
+								<td>{%if docid == doc.id %}{{ form_widget(form.save) }}{%else%}<a href="?id={{doc.id}}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i></a>{%endif%}</td>
+								<td>{% if docid == doc.id%}<a href="/shopify/documents/{{productDetail.id}}/" class="btn btn-warning"><i class="fa fa-ban"></i> Close</a>{%endif%}</td>
+								<td><a href="/shopify/documents/{{productDetail.id}}/delete/{{doc.id}}/" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>								
+							</tr>						
+						{%endfor%}
+						{# This is if there is no values in database we load a new form #}
+						{% if docid == 0 %}
+							<tr>
+								<td >{{ form_widget(form.tabOrder) }}{{form_widget(form.productId)}}</td>
+								<td >{{ form_widget(form.title) }}</td>
+								<td >{{ form_widget(form.asset) }}</td>
+								<td>{{ form_widget(form.save) }}</td>
+								<td></td>
+								<td></td>
+							</tr>							
+						{% endif %}
+						</tbody>
+					</table>				
+					{% if form %}{{ form_end(form) }}{%endif%}			
+				
+
+
+
+		
+	
+{% endblock %}
+{% block stylesheets %}{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'FgmsShopifyBundle::proxy-base.html.twig' %}
+{% block javascripts %}	{% endblock %}
+
+
+{% block body %}
+{% if subtitle | length > 0%}<h2 style="margin: -38px 0 38px;">{{subtitle}}</h2>{%endif%}
+{% if form %}
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+{% else %}
+	<blockquote>Form Error</blockquote>
+{% endif %}
+{% endblock %}
+{% block stylesheets %}{% endblock %}

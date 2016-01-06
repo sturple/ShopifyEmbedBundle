@@ -1,0 +1,131 @@
+{% extends 'FgmsShopifyBundle::base.html.twig' %}
+{% block javascripts %}
+<script type="text/javascript">
+	jQuery(function($){
+		$('.script-add-tab').click(function(e){
+			
+			ShopifyApp.Modal.open({
+			  src: 'https://{{shop_name}}/apps/fgms/form/?productid={{productDetail.id}}&id=0&shop={{shop_name}}',
+			  title: 'Add Tab',
+			  width: 'small',
+			  height: 300,
+			  buttons: {
+				primary: { label: "OK",  callback: function () {
+					ShopifyApp.flashNotice("Tab was created.");
+					ShopifyApp.Modal.close();
+				}},
+				secondary: [
+				  { label: "Cancel", callback: function (label) {
+					ShopifyApp.Modal.close();
+					ShopifyApp.flashError("Tab was NOT created.");
+					}}
+				]
+			  }
+			}, function(result, data){			  
+			  
+			});				
+		});
+		
+		setupTabEdit($('#form_type'));
+		$('#form_type').change(function(){
+			setupTabEdit($(this));
+		})
+		function setupTabEdit(selector){
+			if (selector.val() == 'snippet'){
+				$('#form_html').addClass('hidden');
+				$('#form_snippet').removeClass('hidden');
+				
+			}
+			else if (selector.val() == 'html') {
+				$('#form_snippet').addClass('hidden');
+				$('#form_html').removeClass('hidden');
+			}
+			else {
+				$('#form_snippet').addClass('hidden');
+				$('#form_html').addClass('hidden');
+			}			
+		}
+	});
+</script>
+
+
+{% endblock %}
+{% block body %}
+	{{output}}
+	{% include "FgmsShopifyBundle::product_display.html.twig" %}
+	{% set tabFlag = false %}
+	{% if metadata | length > 0 %}
+		{% for meta in metadata%}
+			{% if meta.namespace == 'FGMS' and meta.key == 'tab' %}
+				{% set tabFlag = true %}
+				<div style="text-align: right;">
+					<a href="../updatemeta/?metaId={{meta.id}}&action=delete&productId={{productDetail.id}}" class="btn btn-primary"><i class="fa fa-minus-circle"></i> Disable Tabs</a>				
+				</div>		
+				<h2 style="margin-top: -36px;">Tab Configuration</h2>					
+				
+				<blockquote>
+					<div><strong>Placeholder: </strong>{{'{{'}}product.metafields.{{meta.namespace}}.{{meta.key}}{{'}}'}}</div>
+					<div><strong>ID:</strong> {{meta.id}}</div>
+					<div>{{meta.value}}</div>
+				</blockquote>
+						
+				 
+					{% if form %}{{ form_start(form) }}{%endif%}
+					<div>{{ form_errors(form) }}</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th style="width: 5%">Sort</th>
+								<th style="width: 15%">Title</th>
+								<th style="width: 15%">Content Type</th>
+								<th style="width: 55%">Content</th>						
+								
+								<th style="width: 5%">Edit</th>
+								<th></th>
+								<th style="width: 5%">Delete</th>
+							</tr>
+							
+						</thead>
+						<tbody>
+						{%for tab in tabs%}						
+							<tr>
+								<td >{% if formid == tab.id%}{{ form_widget(form.productId) }}{{ form_widget(form.tabOrder) }}{% else %}{{tab.tabOrder}}{% endif%}</td>
+								<td >{% if formid == tab.id%}{{ form_widget(form.title) }}{% else %}{{tab.title}}{% endif%} </td>
+								<td >{% if formid == tab.id%}{{ form_widget(form.type) }}{% else %}{{tab.type}}{% endif%}</td>
+								<td >{% if formid == tab.id%}{{ form_widget(form.snippet) }}{{ form_widget(form.html) }}{% else %}{{tab.snippet}}{{tab.html}}{% endif%}</td>
+															
+								<td>{%if formid == tab.id %}{{ form_widget(form.save) }}{%else%}<a href="?id={{tab.id}}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i></a>{%endif%}</td>
+								<td>{% if formid == tab.id%}<a href="/shopify/tabs/{{productDetail.id}}/" class="btn btn-warning"><i class="fa fa-ban"></i> Close</a>{%endif%}</td>
+								<td><a href="/shopify/tabs/{{productDetail.id}}/delete/{{tab.id}}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
+							</tr>						
+						{%endfor%}
+						{% if formid == 0 %}
+							<tr>
+								<td >{{ form_widget(form.tabOrder) }}</td>
+								<td >{{ form_widget(form.title) }}</td>
+								<td >{{ form_widget(form.type) }}</td>
+								<td >{{ form_widget(form.snippet) }}{{ form_widget(form.html) }}</td>												
+								<td>{{ form_widget(form.save) }}</td>
+								<td></td>
+							</tr>							
+						{% endif %}
+						</tbody>
+					</table>				
+					{% if form %}{{ form_end(form) }}{%endif%}			
+				
+			{% else %}
+
+			{% endif %}
+		{% endfor %}
+
+	{% else %}
+
+		
+	{% endif%}
+		{% if tabFlag == false %}
+		<div style="text-align:right;">
+			<a href="../updatemeta/?productId={{productDetail.id}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Enable Tabs</a>
+		</div>
+		{% endif %}	
+{% endblock %}
+{% block stylesheets %}{% endblock %}

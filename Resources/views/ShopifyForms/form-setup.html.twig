@@ -1,0 +1,97 @@
+{% extends 'FgmsShopifyBundle::base.html.twig' %}
+{% block javascripts %}	{% endblock %}
+{% block navigation%}{% include "FgmsShopifyBundle::forms-navigation.html.twig" %}{%endblock%}
+{% block body %}
+
+{% if form %}		
+{{ form_start(form) }}
+<div class="row">
+	<div class="col-sm-8">
+		<div class="well">
+			<h2>Company Details</h2>
+			{{ form_row(form.company)}}	
+			{{ form_row(form.website)}}				
+			{{ form_row(form.phoneToll)}}			
+			{{ form_row(form.phoneOffice)}}
+			{{ form_row(form.phoneFax)}}
+			{{ form_row(form.email)}}
+			{{ form_row(form.website)}}
+		</div>
+		
+		<div class="well">
+			<h2>Logo</h2>
+			<div class="form-group">
+				{{ form_label(form.logoFile)}}
+				<div class="col-sm-9">
+					{{form_widget(form.logoFile)}}
+					{% if fs.logoGuid | length > 0 %}
+					<div style="font-size: 0.9em;margin-top: 8px;">						
+						<em><a href="https://apps.fifthgeardev.net/uploads/lp/{{fs.logoGuid}}" target="_blank" >
+								<img style="width: 100px; height: auto" src="https://apps.fifthgeardev.net/uploads/lp/{{fs.logoGuid}}" />
+								{{fs.logoGuid}}
+						</a></em>						
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			{{form_row(form.logoText)}}
+		
+		</div>
+	
+		
+		<div class="well">
+			<h2>Email Colors</h2>
+			<p>6 digit hex code without #</p>
+			{{form_row(form.colorLink)}}
+			{{form_row(form.colorLinkHover)}}
+			{{form_row(form.colorBackgroundHeader)}}
+			{{form_row(form.colorBackgroundBody)}}
+			{{form_row(form.colorBackgroundContent)}}
+			{{form_row(form.colorBackgroundFooter)}}
+			{{form_row(form.colorTitle)}}
+			{{form_row(form.colorSubtitle)}}
+			{{form_row(form.colorText)}}
+			
+		
+		</div>
+
+		<div class="well">
+			<h2>Email Details</h2>
+			{{ form_row(form.salutation)}}
+		</div>
+		<div class="well">
+			<h2>Landing Page</h2>
+			<div class="form-group">
+				{{ form_label(form.lPageLogoFile)}}
+				<div class="col-sm-9">
+					{{form_widget(form.lPageLogoFile)}}
+					{% if fs.lPageLogoGuid | length > 0 %}
+					<div style="font-size: 0.9em;margin-top: 8px;">						
+						<em><a href="https://apps.fifthgeardev.net/uploads/lp/{{fs.lPageLogoGuid}}" target="_blank" >
+								<img style="width: 100px; height: auto" src="https://apps.fifthgeardev.net/uploads/lp/{{fs.lPageLogoGuid}}" />
+								{{fs.lPageLogoGuid}}
+						</a></em>						
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			{{ form_row(form.lPageTagLine)}}
+		</div>		
+		
+		
+		{{form_widget(form.save,{'attr' : {'class' : 'btn btn-success btn-lg'}})}}
+	</div>
+	
+</div>
+
+
+{{ form_widget(form) }}	
+{{ form_end(form) }}
+{% else %}
+	<blockquote>Form Error</blockquote>
+{% endif %}
+
+{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+

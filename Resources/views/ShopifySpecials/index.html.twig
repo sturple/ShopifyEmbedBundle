@@ -1,0 +1,48 @@
+{% extends 'FgmsShopifyBundle::base.html.twig' %}
+{% block javascripts %}
+{% endblock %}
+{% block body %}
+	{{output}}
+	<table class="table">
+		<thead>
+			<tr>
+				
+				<th>Title</th>
+				<th>Description</th>				
+				<th>Publish</th>
+				<th>UnPublish</th>
+				<th>Edit</th>
+				<th>View</th>
+				
+				
+			</tr>
+		</thead>
+		<tbody>
+			{% for special in specials%}
+			<tr>
+				
+				<td style="width: 150px;">{{special.title}}</td>
+				<td>{{special.content | striptags}}</td>
+				<td style="width: 100px;">{{special.publishDate | date('M d, Y')}}</td>
+				<td style="width: 100px;">{{special.unpublishDate | date('M d, Y')}}</td>
+				
+				<td><a href="/shopify/specials/{{special.id}}/" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a></td>
+				<td><a href="https://{{shop}}/tools/fg/specials/{{special.permalink}}/" class="btn btn-primary"><i class="fa fa-eye"></i> View</a></td>
+				
+				
+			</tr>	
+			{% endfor %}
+		</tbody>
+	</table>
+	
+	<div class="well" style="margin-top: 24px;">
+		<h3 style="padding: 0; margin: 0 0 18px;">Create New Special </h3>
+		
+		<a href="/shopify/specials/0/" class="btn btn-success btn-lg">New Special</a>
+	</div>
+
+
+		
+	
+{% endblock %}
+{% block stylesheets %}{% endblock %}

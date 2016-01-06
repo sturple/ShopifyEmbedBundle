@@ -1,0 +1,26 @@
+
+<div id="outer-container" data-tracking-id="{{lp.id}}">
+	<!-- header -->
+	{% block header %}{% endblock %}
+	<!-- content -->
+    <div class="main-outer-wrapper" style="background: none; ">
+        <div class="container" style=" min-height: 400px;" >
+            <div class="column-wrapper main" style="padding-top: 0;">									
+				<div id="content" class="row">
+					<div class="col-sm-12">					
+						{% block body %}{% endblock %}
+					</div>					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- footer -->
+	{% block footer %}{% endblock %}
+					
+
+{% block javascripts %}{% endblock %}
+
+
+	
+

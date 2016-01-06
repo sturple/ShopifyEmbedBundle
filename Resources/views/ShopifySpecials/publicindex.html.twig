@@ -1,0 +1,82 @@
+{% set emailForm %}
+{% if specials%}
+<p style="margin-bottom: 36px">
+	Make sure you register with our email notification list below and <strong>you'll be among the first to receive special offer announcements in the future</strong>!
+</p>		
+{%else%}
+<blockquote> Thank you for your interest in Level 5 Tools.
+We currently have no specials running.
+</blockquote>
+<p style="margin-bottom: 36px">
+	However make sure you register with our email notification list below and <strong>you'll be among the first to receive special offer announcements in the future</strong>!
+</p>	
+{%endif%}			
+<div class="well" >
+	{% if specials %}{%else%}<h2 style="padding: 0 ;margin: 0 0 32px;">Join Our Email Notification List</h2>{%endif%}
+	<form method="post" action="/contact" class="contact-form form-horizontal"  accept-charset="UTF-8">
+	<!-- CONTACT FORM INPUTS -->
+		<div class="form-group">
+			<label class="control-label  col-sm-3" for="contactFormFirstName">First Name</label>
+			<div class="col-sm-9">	
+				<input type="text" id="contactFormFirstName" required="" class="form-control" name="contact[first name]" >
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label  col-sm-3" for="contactFormLastName">Last Name</label>
+			<div class="col-sm-9">	
+				<input type="text" id="contactFormLastName" class="form-control" name="contact[last name]">
+			</div>
+		</div>
+		
+		<div class="form-group ">
+			<label class="control-label  col-sm-3" for="contactFormEmail">Email</label>
+			<div class="col-sm-9">			
+				<input type="email" id="contactFormEmail" required="" class="form-control" name="contact[email]">
+				<div class="input-error-message ">Email is required</div>
+			</div>
+		</div>	
+		<div class="form-group">
+			<div class="col-sm-12">
+				<input class="btn btn-primary" type="submit" value="Register">			
+			</div>		
+		</div>
+		
+	</form>	
+</div>
+{%endset %}
+
+<h1>{{title}}</h1>
+{% if specials %}
+
+<ul id="specialArticles">
+	{% for article in specials %}
+	<li>                                    
+		<article class="articleWrapper" itemscope itemtype="http://schema.org/Article"> 
+			<meta itemprop="author" content="" />									
+			  
+			<div  class="article-summary" itemprop="description">
+				<div class="row">
+					
+					{% if article.imageGuid %}<div class="col-sm-4 blog-index-image-full"><a href="/tools/fg/specials/{{ article.permalink }}/"><img class="img-responsive" src="https://apps.fifthgeardev.net/uploads/specials/{{article.imageGuid}}" alt="feature image {{article.title | escape}}" /></a> </div>{%endif%}
+					<div class="{% if article.imageGuid %}col-sm-8{%else%}col-sm-12{%endif%}">
+						<a href="/tools/fg/specials/{{ article.permalink }}/" title="{{ article.title  }}" itemprop="url"><h2 itemprop="name">{{ article.title }}</h2></a>
+						{% if article.subtitle | length > 0 %}<div style="margin: -12px 0 12px;;">{{article.subtitle}}</div>{%endif%}
+						<span class="articleDate" itemprop="datePublished"><b>{{article.publishDate | date('M d, Y')}}</b></span> - 
+						{{ article.content | striptags }}
+						<div style="padding-top: 12px;">                                                   
+							<a class="learn-more-link" href="/tools/fg/specials/{{ article.permalink }}/">View Special<i class="learn-more-icon fa fa-arrow-circle-right"></i></a>                                                 
+						</div>					         
+					</div>										 
+				</div>			   
+			</div><!-- articleSummary -->
+		 </article><!-- articleWrapper -->
+	 </li>
+	
+	  {% endfor %}
+</ul><!-- blogArticles -->
+<h2 style="">Join Our Email Notification List</h2>
+{{emailForm}}
+<style>h2, .h2 { color: inherit;}#specialArticles {	margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px dotted #ccc;}</style>
+{% else %}
+{{emailForm}}
+{% endif%}

@@ -1,0 +1,91 @@
+{% if products|length > 0 %}
+
+
+
+<p>Manage all of the default and customized product information on your Shopify website.</p>
+<table class="table">
+	<theader>
+		<tr>
+			<th>Image</th>
+			<th  style="width: 45%">Name</th>
+			<th style="width: 10%">Administration</th>
+			<th style="width: 5%"></th>
+			<th style="width: 5%"></th>
+			<th style="width: 5%"></th>
+		</tr>
+	</theader>
+	<tbody>
+		
+	{%for product in products%}
+	<tr>
+		<td><img style="max-width: 100px;" src="{{product.images.0.src}}" /></td>
+		<td>{{product.title}}</td>
+		<td><a href="javascript:void(0);" onclick="ShopifyApp.redirect('/admin/products/{{product.id}}')" class="btn btn-success"><i class="fa fa-file-o"></i> Base Product Content</a></td>
+		<td><a href="/shopify/meta/{{product.id}}/" class="btn btn-primary"><i class="fa fa-code"></i> Meta Data</a></td>
+		<td><a href="/shopify/options/{{product.id}}/" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Options</a></td>
+		<td><a href="/shopify/tabs/{{product.id}}/" class="btn btn-primary"><i class="fa fa-folder-o"></i> Tabs</a></td>
+		<td><a href="/shopify/documents/{{product.id}}/" class="btn btn-primary"><i class="fa fa-file-text-o"></i> Documents</a></td>
+
+		
+	</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% endif %}
+{% if productDetail | length > 0 %}
+<div style="margin: -12px 0 36px;;">
+	<div class="row">
+		<div class="col-md-8">
+			<h2 style="margin: 0" >{{productDetail.title}}</h2>
+		</div>
+		<div class="col-md-4">
+			<div style="text-align: right">	
+				<a style="margin-right: 12px;" class="btn btn-primary" href="https://{{shop_name}}/products/{{productDetail.handle}}" target="_blank"><i class="fa fa-eye"></i> Preview</a>
+				<a  href="/shopify/products/" class="btn btn-primary"><i class="fa fa-times-circle "></i> Close</a>
+			</div>
+			<div class="display-sub-nav">
+				{% if title != 'Meta Data' %}<a href="/shopify/meta/{{productDetail.id}}/" ><i class="fa fa-code"></i> Meta Data</a>{%endif%}
+				{% if title != 'Product Options' %}<a href="/shopify/options/{{productDetail.id}}/" ><i class="fa fa-plus-circle"></i> Options</a>{%endif%}
+				{% if title != 'Tabs' %}<a href="/shopify/tabs/{{productDetail.id}}/" ><i class="fa fa-folder-o"></i> Tabs</a>{%endif%}
+				{% if title != 'Documents' %}<a href="/shopify/documents/{{productDetail.id}}/"><i class="fa fa-file-text-o"></i> Documents</a>{%endif%}			
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+
+
+<div class="row">
+    <div class="col-sm-5">
+        <img class="img-responsive" style="max-width: 250px;" src="{{productDetail.image.src}}"/>        
+    </div>
+    <div class="col-sm-7">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Key</th><th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>id</td><td>{{productDetail.id}}</td> </tr>
+                <tr><td>handle</td><td>{{productDetail.handle}}</td> </tr>
+                <tr><td>vendor</td><td>{{productDetail.vendor}}</td> </tr>
+                <tr><td>tags</td><td>{{productDetail.tags}}</td> </tr>
+                
+            </tbody>
+        </table>        
+    </div>
+</div>
+<div style="padding: 12px 0 12px;margin-bottom: 24px;;border-bottom: 1px dotted #ccc; max-height: 150px; overflow:hidden; overflow-y: auto;">{{productDetail.body_html |raw}}</div>
+{% endif%}
+
+<style>
+	.display-sub-nav {
+		text-align: right;
+		margin-top: 12px;
+	}
+	.display-sub-nav a {
+		margin-left: 12px;
+	}
+</style>

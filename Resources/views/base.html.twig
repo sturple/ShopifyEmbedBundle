@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{{title}}{% endblock %}</title>
+    
+        <script type="text/javascript" src="/bundles/fgmsshopify/js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="/bundles/fgmsshopify/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdn.shopify.com/s/assets/external/app.js"></script>
+        <script type="text/javascript">
+            ShopifyApp.init({
+              apiKey: '{{app_api}}',
+              shopOrigin: 'https://{{shop_name}}'
+            });
+            ShopifyApp.ready(function() {
+                ShopifyApp.Bar.initialize({
+                    title: '{{title}}',
+                    buttons: {
+                        primary : { label : 'Home', href : "/shopify/oauth/", target: "app"},
+                        secondary: [
+                            { label: "Manage Products", href: "/shopify/products/", target: "app" }
+                            ,{ label: "Manage Forms", href: "/shopify/forms/", target: "app" }
+                            ,{ label: "Manage Specials", href: "/shopify/specials/", target: "app" } 
+                            ,{ label: "Manage Landing Pages", href: "/shopify/lp/", target: "app" }
+                             
+                            
+                        ],                    
+                    }
+                    /*
+                    ,breadcrumb: {
+                        label: "Home",
+                        href: "/shopify/oauth/",
+                        target: 'app',
+                        loading : false
+                    }*/
+                });
+                /*
+                ShopifyApp.flashError("FGMS App Management");
+                ShopifyApp.Modal.open({
+                  src: '/shopify/oauth/',
+                  title: 'A new modal',
+                  width: 'small',
+                  height: 300,
+                  buttons: {
+                    primary: { label: "OK" },
+                    secondary: [
+                      { label: "Cancel", callback: function (label) { ShopifyApp.Modal.close(); } }
+                    ]
+                  }
+                }, function(result, data){
+                  alert("result: " + result + "   data: " + data);
+                });		*/
+                
+            });  
+        </script>
+        <link href="/bundles/fgmsshopify/css/bootstrap.min.css" rel="stylesheet" type="text/css"  media="all"  />
+        <link href="/bundles/fgmsshopify/css/style.css" rel="stylesheet" type="text/css"  media="all"  />
+        
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+        
+    </head>
+    <body>
+        {% block navigation %}{%endblock%}
+        <div class="container">              
+            <div class="row">
+                <div class="col-md-12">                    
+                    <h1>{{title}}</h1>
+                    {% block body %}{% endblock %}
+                </div>                
+            </div>
+        </div>
+        
+      
+    </body>
+</html>

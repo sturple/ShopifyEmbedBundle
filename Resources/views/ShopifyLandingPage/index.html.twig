@@ -1,0 +1,45 @@
+{% extends 'FgmsShopifyBundle::base.html.twig' %}
+{% block javascripts %}
+{% endblock %}
+{% block body %}
+	{{output}}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Company</th>
+				<th>Title</th>
+				<th>Description</th>				
+				<th>Status</th>
+				<th>Edit</th>
+				<th>View</th>
+				<th>Statistics</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			{% for lp in landingpages%}
+			<tr>
+				<td>{{lp.company}}</td>
+				<td>{{lp.title}}</td>
+				<td>{{lp.summary}}</td>
+				<td>{{lp.status}}</td>
+				<td><a href="/shopify/lp/{{lp.id}}/" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a></td>
+				<td><a href="/shopify/lp/{{lp.id}}/" class="btn btn-primary"><i class="fa fa-eye"></i> View</a></td>
+				<td><a href="/shopify/lp/{{lp.id}}/" class="btn btn-primary"><i class="fa fa-line-chart"></i> Stats</a></td>
+				
+			</tr>	
+			{% endfor %}
+		</tbody>
+	</table>
+	
+	<div class="well" style="margin-top: 24px;">
+		<h3 style="padding: 0; margin: 0 0 18px;">Create New Landing Page </h3>
+		
+		<a href="/shopify/lp/0/" class="btn btn-success btn-lg">New Landing Page</a>
+	</div>
+
+
+		
+	
+{% endblock %}
+{% block stylesheets %}{% endblock %}
