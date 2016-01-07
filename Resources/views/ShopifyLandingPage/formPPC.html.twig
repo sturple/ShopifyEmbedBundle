@@ -1,29 +1,5 @@
 {% extends 'FgmsShopifyBundle::base.html.twig' %}
 
-
-
-
-
-{% set inquireTags  %}
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">Inquiry Form Tags</h3>
-	</div>	
-	<div class="panel-body">
-		inquire tags
-	</div>
-</div>
-{% endset %}
-{% set landingpageTags  %}
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">Landpage Tags</h3>
-	</div>	
-	<div class="panel-body">
-		lp tags
-	</div>
-</div>
-{% endset %}
 {% block javascripts %}
 {% endblock %}
 {% block body %}
@@ -99,7 +75,15 @@
 								</div>								
 								{{ form_row(form.pageTitle)}}
                                 {{ form_row(form.pageSubtitle)}}
+                                <div class="form-group">
+                                    <div class="col-sm-9 col-sm-offset-2" style="font-size: 0.9em; margin-bottom: -12px; font-style: italic;"><a href="https://daringfireball.net/projects/markdown/">Markdown</a> syntax is supported </div>
+                                </div>
+                                
                                 {{ form_row(form.content)}}
+                                <div class="form-group">
+                                    <div class="col-sm-9 col-sm-offset-2" style="font-size: 0.9em; margin-bottom: -12px;font-style: italic;"><a href="https://daringfireball.net/projects/markdown/">Markdown</a> syntax is supported </div>
+                                </div>
+                                {{ form_row(form.sidebarContent)}}
                                 {{ form_row(form.specialOfferLink)}}
 
 														

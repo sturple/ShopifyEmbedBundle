@@ -116,6 +116,7 @@ class ShopifyLandingPageController extends Controller {
 			$lp->setTemplate('publicPPC.html.twig');
 			
 		}
+		
 		$this->template_array['title'] ='PPC Landing Page: ' .$lp->getTitle();
 		$this->template_array['lp'] = $lp;
 		$form = $this->createForm(new LandingPagePPCType(),$lp);
@@ -173,6 +174,8 @@ class ShopifyLandingPageController extends Controller {
 		$this->logger->error('TEMPLATE:: '.$template);
 		$this->template_array['form'] = $form->createView();		
 		$this->template_array['lp'] = $lp;
+		$this->template_array['markdownContent'] =  $this->get('markdown.parser')->transformMarkdown($lp->getContent());
+		$this->template_array['markdownSidebar'] =  $this->get('markdown.parser')->transformMarkdown($lp->getSidebarContent());
 		$this->template_array['formGlobals'] = $this->get('fgms.settings')->getFormSettings($this->store_name);
 		return $this->renderAsLiquid('FgmsShopifyBundle:ShopifyLandingPage:'.$template,$this->template_array);	
 	}

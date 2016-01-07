@@ -28,6 +28,7 @@ class LandingPagePPCType extends AbstractType
             ->add('pageTitle',null,array('label'=>'Title','required'=>false))
             ->add('pageSubtitle',null,array('label'=>'Subtitle','required'=>false))
             ->add('content','textarea',array('required'=>false,'attr'=>array('rows'=>15)))
+            ->add('sidebarContent','textarea',array('required'=>false,'attr'=>array('rows'=>15)))
             ->add('specialOfferLink',null,array('label'=>'Link','required'=>false))
             
             ->add('save','submit',array('label'=>'Save'))	

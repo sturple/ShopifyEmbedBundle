@@ -74,7 +74,14 @@ class LandingPage
      * @ORM\Column(name="content", type="text", nullable=true)
      */
     private $content;
-	
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sidebarContent", type="text", nullable=true)
+     */
+    private $sidebarContent;
+    
     /**
      * @var string
      *
@@ -556,6 +563,29 @@ class LandingPage
     }
 
     /**
+     * Get sidebarContent
+     *
+     * @return string 
+     */
+    public function getSidebarContent()
+    {
+        return $this->sidebarContent;
+    }
+
+    /**
+     * Set sidebarContent
+     *
+     * @param string $sidebarContent
+     * @return LandingPage
+     */
+    public function setSidebarContent($content)
+    {
+        $this->sidebarContent = $content;
+
+        return $this;
+    }
+
+    /**
      * Get content
      *
      * @return string 
@@ -563,8 +593,9 @@ class LandingPage
     public function getContent()
     {
         return $this->content;
-    }
-
+    }    
+    
+    
     /**
      * Set template
      *

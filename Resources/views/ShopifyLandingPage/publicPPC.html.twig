@@ -29,17 +29,18 @@
                     <div class="col-md-8 lp-content">
                         <div  class="column-wrapper">
                             <h1 class="lp-h1 ppc">{{lp.pageTitle}}</h1>                        
-                            {% if lp.pageSutbtitle %}<div class="lp-subtitle">{{lp.pageSubtitle}}</div>{%endif %}
-                            {{lp.content}}
+                            {% if lp.pageSubtitle %}<div class="lp-subtitle">{{lp.pageSubtitle}}</div>{%endif %}
+                            {{markdownContent | raw}}
                         </div>
                         
                     </div>
                     <div class="col-md-4 lp-sidebar">
                         <div class="column-wrapper">
+                            {% if lp.sidebarContent | length > 0 %}<div style="margin-bottom: 24px;">{{markdownSidebar | raw}}</div>{% endif %}
                             {% if lp.specialOfferLink | length > 0 %}
-                               <a href="{{lp.specialOfferLink}}" target="_blank"  class="btn btn-primary btn-lg">More Info</a>
+                               <a style="margin-bottom: 24px; " href="{{lp.specialOfferLink}}" target="_blank"  class="btn btn-primary btn-lg">More Info</a>
                            {% endif %}
-                            <p style="padding-top: 36px;">You can also call us direct at:</p>
+                            <p >You can also call us direct at:</p>
                             <p><span style="font-size: 1.8em; font-weight:500;">{{formGlobals.phoneToll }}</span></p>
                         </div>
 
