@@ -1,0 +1,249 @@
+{% extends 'FgmsShopifyBundle::base.html.twig' %}
+
+
+
+
+
+{% set inquireTags  %}
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Inquiry Form Tags</h3>
+	</div>	
+	<div class="panel-body">
+		inquire tags
+	</div>
+</div>
+{% endset %}
+{% set landingpageTags  %}
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Landpage Tags</h3>
+	</div>	
+	<div class="panel-body">
+		lp tags
+	</div>
+</div>
+{% endset %}
+{% block javascripts %}
+{% endblock %}
+{% block body %}
+
+{% if form %}		
+{{ form_start(form) }}
+
+
+
+
+		
+	<div>
+		<div style="text-align: right">
+			{{form_widget(form.save,{'attr' : {'class' : 'btn btn-success btn-lg'}})}}
+		</div>
+		
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+		  <li role="presentation" class="active"><a href="#lpTabSettings" aria-controls="lpTabSettings" role="tab" data-toggle="tab">Settings</a></li>
+		  <li role="presentation"><a href="#lpTabContent" aria-controls="lpTabContent" role="tab" data-toggle="tab">Content</a></li>
+		  <li role="presentation"><a href="#lpTabAds" aria-controls="lpTabAds" role="tab" data-toggle="tab">Ads</a></li>
+		  <li role="presentation"><a href="#lpTabEmails" aria-controls="lpTabEmails" role="tab" data-toggle="tab">Emails</a></li>
+		</ul>
+		
+		<!-- Tab panes -->
+		<div class="tab-content" style="padding-top: 24px;">
+			<div role="tabpanel" class="tab-pane active" id="lpTabSettings">
+				<div class="row">
+					<div class="col-sm-8">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Page Configuration</h3>
+							</div>
+							<div class="panel-body">
+								{{ form_row(form.title)}}
+								{{ form_row(form.summary)}}
+								{{ form_row(form.status)}}
+								{{ form_row(form.formEnable)}}
+								<div class="form-group">
+									{{ form_label(form.permalink)}}
+									<div class="col-sm-9">
+										{{form_widget(form.permalink)}}
+										<div style="font-size: 0.9em;margin-top: 8px;">
+											<a target="_blank" href="https://{{lp.shop}}/tools/fg/lp/{{lp.permalink}}/">https://{{lp.shop}}/tools/fg/lp/{{lp.permalink}}/</a>
+										</div>
+									</div>
+								</div>						
+							</div>
+						</div>
+					</div>
+				</div>			  
+			</div>
+			<div role="tabpanel" class="tab-pane" id="lpTabContent">
+				<div class="row">
+					<div class="col-sm-8">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Page Content</h3>
+							</div>
+							<div class="panel-body">
+								{{ form_row(form.company)}}
+								{{ form_row(form.pageTitle)}}
+								<div class="form-group">
+									{{ form_label(form.logoFile)}}
+									<div class="col-sm-9">
+										{{form_widget(form.logoFile)}}
+										<div style="font-size: 0.9em;margin-top: 8px;">
+											<em><a href="https://apps.fifthgeardev.net/uploads/lp/{{lp.logoGuid}}" target="_blank" >
+													<img style="width: 100px; height: auto" src="https://apps.fifthgeardev.net/uploads/lp/{{lp.logoGuid}}" />
+													{{lp.logoGuid}}
+											</a></em>
+										</div>
+									</div>
+								</div>
+								{{ form_row(form.logoUrl)}}
+								{{ form_row(form.youtubeCode)}}
+								{{ form_row(form.youtubeCaption)}}
+								{{ form_row(form.buttonUrl)}}
+								{{ form_row(form.locatorLink)}}	
+								{{ form_row(form.phoneToll)}}			
+								{{ form_row(form.phoneOffice)}}								
+								
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Campaign Monitor</h3>
+							</div>
+							<div class="panel-body">
+								{{ form_row(form.campaignUrl)}}
+								{{ form_row(form.campaignEmail)}}
+								{{ form_row(form.campaignFirstName)}}
+								{{ form_row(form.campaignLastName)}}							
+							</div>
+						</div>					
+						
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="lpTabAds">
+				<div class="row">
+					<div class="col-sm-8">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Optional Special Offers</h3>
+							</div>
+							<div class="panel-body">
+								<div class="form-group">
+									{{ form_label(form.specialOfferImageHorizontalFile)}}
+									<div class="col-sm-9">
+										{{form_widget(form.specialOfferImageHorizontalFile)}}
+										<div style="font-size: 0.9em;margin-top: 8px;">
+											<em><a href="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageHorizontalGuid}}" target="_blank" >
+													<img style="width: 100px; height: auto" src="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageHorizontalGuid}}" />
+													{{lp.specialOfferImageHorizontalGuid}}
+											</a></em>
+										</div>
+									</div>
+								</div>					
+								<div class="form-group">
+									{{ form_label(form.specialOfferImageVerticalFile)}}
+									<div class="col-sm-9">
+										{{form_widget(form.specialOfferImageVerticalFile)}}
+										<div style="font-size: 0.9em;margin-top: 8px;">
+											<em><a href="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageVerticalGuid}}" target="_blank" >
+													<img style="width: 100px; height: auto" src="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageVerticalGuid}}" />
+													{{lp.specialOfferImageVerticalGuid}}
+											</a></em>
+										</div>
+									</div>
+								</div>							
+								{{ form_row(form.specialOfferLink)}}								
+							</div>
+						</div>					
+										
+					</div>
+				</div>	
+				
+			</div>
+			<div role="tabpanel" class="tab-pane" id="lpTabEmails">
+				<div class="row">
+					<div class="col-sm-8">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Emails To Customer</h3>
+							</div>
+							<div class="panel-body">
+								{{ form_row(form.emailCustomerEnable)}}	
+								{{ form_row(form.emailCustomerCc)}}			
+								{{ form_row(form.emailCustomerBcc)}}
+								{{ form_row(form.emailCustomerSubject)}}			
+								{{ form_row(form.emailCustomerMessageHtml)}}
+								{{ form_row(form.emailCustomerMessageText)}}							
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Emails to {{lp.company}}</h3>
+							</div>
+							<div class="panel-body">
+								{{ form_row(form.emailEnable)}}
+								{{ form_row(form.emailTo)}}
+								{{ form_row(form.emailCc)}}			
+								{{ form_row(form.emailBcc)}}
+								{{ form_row(form.emailSubject)}}
+								{{ form_row(form.emailMessageHtml)}}
+								{{ form_row(form.emailMessageText)}}							
+							</div>
+						</div>
+						
+				
+						
+						{{inquireTags }}
+						{{landingpageTags}}							
+					
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Sample HTML Email</h3>
+							</div>
+							<div class="panel-body">
+								
+								
+									{{
+										'<tr>
+											<td class="body-cell"
+												width="524"
+												align="left"
+												style="padding-top: 0px; padding-left: 42px; padding-right: 42px; padding-bottom: 18px; border-collapse:collapse;">
+												<table class="message-table" width="524" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+													<tbody>													
+														<!-- BODY MESSAGE -->
+													
+														<tr>
+															<td class="message-cell" width="524" style="{{body-style}}; padding-bottom: 12px;">
+															<!-- Text goes Here -->
+															</td>
+														</tr> 													
+														<!-- END BODY MESSAGE -->													
+													</tbody>
+												</table>    	
+											</td>
+										</tr>' 									
+									
+									|e}}
+									
+								
+								
+							</div>
+						</div>
+					</div>	
+						
+				</div>
+			</div>
+		</div>		
+	</div>
+		
+		
+{{ form_widget(form) }}	
+{{ form_end(form) }}
+{% else %}
+	<blockquote>Form Error</blockquote>
+{% endif %}
+{% endblock%}

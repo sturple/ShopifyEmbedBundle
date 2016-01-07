@@ -23,7 +23,13 @@ class LandingPage
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255, nullable=true)
+     */
+    private $type;
+    
     /**
      * @var string
      *
@@ -58,9 +64,9 @@ class LandingPage
     /**
      * @var string
      *
-     * @ORM\Column(name="subtitle", type="string", length=255, nullable=true)
+     * @ORM\Column(name="pageSubtitle", type="string", length=255, nullable=true)
      */
-    private $subtitle;
+    private $pageSubtitle;
 
     /**
      * @var string
@@ -403,7 +409,28 @@ class LandingPage
     {
         return $this->title;
     }
-	
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return LandingPage
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }	
     /**
      * Set company
      *
@@ -472,26 +499,26 @@ class LandingPage
         return $this->permalink;
     }	
     /**
-     * Set subtitle
+     * Set pageSubtitle
      *
-     * @param string $subtitle
+     * @param string $pageSubtitle
      * @return LandingPage
      */
-    public function setSubtitle($subtitle)
+    public function setPageSubtitle($subtitle)
     {
-        $this->subtitle = $subtitle;
+        $this->pageSubtitle = $subtitle;
 
         return $this;
     }
 
     /**
-     * Get subtitle
+     * Get pageSubtitle
      *
      * @return string 
      */
-    public function getSubtitle()
+    public function getPageSubtitle()
     {
-        return $this->subtitle;
+        return $this->pageSubtitle;
     }
     /**
      * Set summary

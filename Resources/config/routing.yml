@@ -200,11 +200,16 @@ fgms_shopify_landing_page_index:
     methods: [POST,GET]       
 
 #landing pages
-fgms_shopify_landing_page_edit:
-    path: /lp/{id}/
-    defaults: { _controller: FgmsShopifyBundle:ShopifyLandingPage:edit}
+fgms_shopify_landing_page_ppc_edit:
+    path: /lp/ppc/{id}/
+    defaults: { _controller: FgmsShopifyBundle:ShopifyLandingPage:editPPC}
     methods: [POST,GET]
-
+    
+#landing pages
+fgms_shopify_landing_page_qr_edit:
+    path: /lp/qr/{id}/
+    defaults: { _controller: FgmsShopifyBundle:ShopifyLandingPage:editQR}
+    methods: [POST,GET]
 
   
     

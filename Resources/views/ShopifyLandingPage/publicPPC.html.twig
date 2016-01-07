@@ -1,0 +1,93 @@
+    <div id="outer-container" data-tracking-id="{{lp.id}}">
+        <div class="container" style=" min-height: 400px;" >    
+            <div class="lp-header">
+                <div id="header-wrapper" class="">
+                    <div class="column-wrapper">			
+                        <div class="row" style="position: relative;">
+                            <!-- header -->
+                            <div class="col-md-4 col-sm-3">
+                                <a href="{{formGlobals.website}}" target="_blank" >
+                                    <span class="sr-only"></span>								
+                                    <img class=" lp-site-logo" src="https://apps.fifthgeardev.net/uploads/lp/{{formGlobals.lPageLogoGuid}}" alt="{{formGlobals.company}} Logo" />		        
+                                </a>
+                            </div>
+                            <div class="col-md-8 col-sm-9">
+                                <div class="lp-site-caption">
+                                    <a data-ga-label="visit-website" href="{{formGlobals.website}}" target="_blank" class="btn btn-primary ">Visit Website</a>
+                                </div>
+                            </div>	
+                        </div>
+                    </div>	
+                </div>
+            </div>
+            <div id="feature-image">
+                <img src="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageHorizontalGuid}}" class="img-responsive" alt="{{formGlobals.company}} Feature Image" />
+            </div>
+            <div id="content">							
+                
+                <div class="row">
+                    <div class="col-md-8 lp-content">
+                        <div  class="column-wrapper">
+                            <h1 class="lp-h1 ppc">{{lp.pageTitle}}</h1>                        
+                            {% if lp.pageSutbtitle %}<div class="lp-subtitle">{{lp.pageSubtitle}}</div>{%endif %}
+                            {{lp.content}}
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-4 lp-sidebar">
+                        <div class="column-wrapper">
+                            {% if lp.specialOfferLink | length > 0 %}
+                               <a href="{{lp.specialOfferLink}}" target="_blank"  class="btn btn-primary btn-lg">More Info</a>
+                           {% endif %}
+                            <p style="padding-top: 36px;">You can also call us direct at:</p>
+                            <p><span style="font-size: 1.8em; font-weight:500;">{{formGlobals.phoneToll }}</span></p>
+                        </div>
+
+                    </div>                        
+                </div>
+
+               
+            </div>
+            <div class="lp-footer">          
+                <div class="column-wrapper">                   
+                    <a class="lp-order-now-link " target="_blank" data-ga-label="order-now" href="{{lp.specialOfferLink}}">Order </a>  online. Or call {{formGlobals.phoneToll }}
+                </div>            
+            </div>	
+        </div>
+    </div>
+    <script type="text/javascript">
+        
+    $(function(){
+        fgmsTrack({category : 'View', action: 'OnLoad', label: 'Page Load', id : $('*[data-tracking-id]').data('tracking-id')});
+        $( window ).resize(function() {updateLineHeight();});
+        $('a,button,input[type="submit"],iframe').addClass('script-tracking');
+        $('*[data-tracking-id]').on('click','.script-tracking',function(){	
+            var eCategory = ($(this).data('category')) ? $(this).data('category') : 'Link' ;			
+            var eAction = ($(this).data('action')) ? $(this).data('action') : 'Click' ;			
+            var eLabel = ($(this).data('label')) ? $(this).data('label') : (($(this).find('img').length > 0) ? $(this).find('img').attr('alt') : $(this).text()) ;		
+            fgmsTrack({category : eCategory, action: eAction, label: eLabel, id : $(this).closest('*[data-tracking-id]').data('tracking-id')});			
+        })	
+        
+    
+        
+    })
+    
+    
+    
+    function fgmsTrack(data){
+        data.referrer = document.referrer;
+        if (typeof ga == 'function') {	ga('send','event',data.eCategory,data.eAction,data.eLabel,data.eId)	};
+    
+        $.ajax(	{
+            type : 'POST',
+            url : "track/",
+            data : data,
+            dataType: 'json'
+        }).done( function (msg) {	
+            
+        }).fail( function (msg) {
+            
+        });			
+    }
+    
+    </script>

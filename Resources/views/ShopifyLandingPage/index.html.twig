@@ -7,6 +7,8 @@
 		<thead>
 			<tr>
 				<th>Company</th>
+				<th>Type</th>
+				<th>Template</th>
 				<th>Title</th>
 				<th>Description</th>				
 				<th>Status</th>
@@ -20,12 +22,14 @@
 			{% for lp in landingpages%}
 			<tr>
 				<td>{{lp.company}}</td>
+				<td>{{lp.type}}</td>
+				<td>{{lp.template}}</td>
 				<td>{{lp.title}}</td>
 				<td>{{lp.summary}}</td>
 				<td>{{lp.status}}</td>
-				<td><a href="/shopify/lp/{{lp.id}}/" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a></td>
-				<td><a href="/shopify/lp/{{lp.id}}/" class="btn btn-primary"><i class="fa fa-eye"></i> View</a></td>
-				<td><a href="/shopify/lp/{{lp.id}}/" class="btn btn-primary"><i class="fa fa-line-chart"></i> Stats</a></td>
+				<td><a href="/shopify/lp/{{lp.type|default('ppc')}}/{{lp.id}}/" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a></td>
+				<td><a href="/shopify/lp/{{lp.type|default('ppc')}}/{{lp.id}}/" class="btn btn-primary"><i class="fa fa-eye"></i> View</a></td>
+				<td><a href="/shopify/{{lp.type|default('ppc')}}/{{lp.id}}/" class="btn btn-primary"><i class="fa fa-line-chart"></i> Stats</a></td>
 				
 			</tr>	
 			{% endfor %}
@@ -33,9 +37,9 @@
 	</table>
 	
 	<div class="well" style="margin-top: 24px;">
-		<h3 style="padding: 0; margin: 0 0 18px;">Create New Landing Page </h3>
-		
-		<a href="/shopify/lp/0/" class="btn btn-success btn-lg">New Landing Page</a>
+		<h3 style="padding: 0; margin: 0 0 18px;">Create New Landing Page </h3>		
+		<a href="/shopify/lp/qr/0/" class="btn btn-success btn-lg">New QR</a>
+		<a href="/shopify/lp/ppc/0/" class="btn btn-success btn-lg">New PPC</a>
 	</div>
 
 

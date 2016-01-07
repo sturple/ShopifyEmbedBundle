@@ -1,0 +1,125 @@
+{% extends 'FgmsShopifyBundle::base.html.twig' %}
+
+
+
+
+
+{% set inquireTags  %}
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Inquiry Form Tags</h3>
+	</div>	
+	<div class="panel-body">
+		inquire tags
+	</div>
+</div>
+{% endset %}
+{% set landingpageTags  %}
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Landpage Tags</h3>
+	</div>	
+	<div class="panel-body">
+		lp tags
+	</div>
+</div>
+{% endset %}
+{% block javascripts %}
+{% endblock %}
+{% block body %}
+
+{% if form %}		
+{{ form_start(form) }}
+
+
+
+
+		
+	<div>
+		<div style="text-align: right">
+			{{form_widget(form.save,{'attr' : {'class' : 'btn btn-success btn-lg'}})}}
+		</div>
+		
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+		  <li role="presentation" class="active"><a href="#lpTabSettings" aria-controls="lpTabSettings" role="tab" data-toggle="tab">Settings</a></li>
+		  <li role="presentation"><a href="#lpTabContent" aria-controls="lpTabContent" role="tab" data-toggle="tab">Content</a></li>
+		</ul>
+		
+		<!-- Tab panes -->
+		<div class="tab-content" style="padding-top: 24px;">
+			<div role="tabpanel" class="tab-pane active" id="lpTabSettings">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Page Configuration</h3>
+							</div>
+							<div class="panel-body">
+								{{ form_row(form.title)}}
+								{{ form_row(form.summary)}}
+								{{ form_row(form.status)}}
+                                {{ form_row(form.template)}}
+							
+								<div class="form-group">
+									{{ form_label(form.permalink)}}
+									<div class="col-sm-9">
+										{{form_widget(form.permalink)}}
+										<div style="font-size: 0.9em;margin-top: 8px;">
+											<a target="_blank" href="https://{{lp.shop}}/tools/fg/lp/{{lp.permalink}}/">https://{{lp.shop}}/tools/fg/lp/{{lp.permalink}}/</a>
+										</div>
+									</div>
+								</div>						
+							</div>
+						</div>
+					</div>
+				</div>			  
+			</div>
+			<div role="tabpanel" class="tab-pane" id="lpTabContent">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Page Content</h3>
+							</div>
+							<div class="panel-body">
+								<div class="form-group">
+									{{ form_label(form.specialOfferImageHorizontalFile)}}
+									<div class="col-sm-9">
+										{{form_widget(form.specialOfferImageHorizontalFile)}}
+										<div style="font-size: 0.9em;margin-top: 8px;">
+											<em><a href="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageHorizontalGuid}}" target="_blank" >
+                                                {% if lp.specialOfferImageHorizontalGuid | length > 0 %}
+													<img style="width: 100px; height: auto" src="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageHorizontalGuid}}" />
+													{{lp.specialOfferImageHorizontalGuid}}
+                                                {% endif %}
+											</a></em>
+										</div>
+									</div>
+								</div>								
+								{{ form_row(form.pageTitle)}}
+                                {{ form_row(form.pageSubtitle)}}
+                                {{ form_row(form.content)}}
+                                {{ form_row(form.specialOfferLink)}}
+
+														
+								
+							</div>
+						</div>								
+						
+					</div>
+				</div>
+			</div>
+        </div>		
+	</div>	
+	
+		
+
+
+
+{{ form_widget(form) }}	
+{{ form_end(form) }}
+{% else %}
+	<blockquote>Form Error</blockquote>
+{% endif %}
+{% endblock%}
