@@ -31,6 +31,9 @@
                             <h1 class="lp-h1 ppc">{{lp.pageTitle}}</h1>                        
                             {% if lp.pageSubtitle %}<div class="lp-subtitle">{{lp.pageSubtitle}}</div>{%endif %}
                             {{markdownContent | raw}}
+                            {% if lp.postContent | length > 3 %}
+                                <div class="lp-post-content">{{'{%'}} include '{{lp.postContent}}'{{'%}'}}</div>
+                            {% endif%}
                         </div>
                         
                     </div>
@@ -38,7 +41,7 @@
                         <div class="column-wrapper">
                             {% if lp.sidebarContent | length > 0 %}<div style="margin-bottom: 24px;">{{markdownSidebar | raw}}</div>{% endif %}
                             {% if lp.specialOfferLink | length > 0 %}
-                               <a style="margin-bottom: 24px; " href="{{lp.specialOfferLink}}" target="_blank"  class="btn btn-primary btn-lg">More Info</a>
+                               <a style="margin-bottom: 24px; width: 100%" href="{{lp.specialOfferLink}}" target="_blank"  class="btn btn-primary btn-lg">Buy Online</a>
                            {% endif %}
                             <p >You can also call us direct at:</p>
                             <p><span style="font-size: 1.8em; font-weight:500;">{{formGlobals.phoneToll }}</span></p>
@@ -51,7 +54,7 @@
             </div>
             <div class="lp-footer">          
                 <div class="column-wrapper">                   
-                    <a class="lp-order-now-link " target="_blank" data-ga-label="order-now" href="{{lp.specialOfferLink}}">Order </a>  online. Or call {{formGlobals.phoneToll }}
+                    <a class="lp-order-now-link " target="_blank" data-ga-label="order-now" href="{{lp.specialOfferLink}}">Order online</a>. Or call {{formGlobals.phoneToll }}
                 </div>            
             </div>	
         </div>

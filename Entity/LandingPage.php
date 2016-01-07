@@ -74,7 +74,13 @@ class LandingPage
      * @ORM\Column(name="content", type="text", nullable=true)
      */
     private $content;
-    
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="postContent", type="text", nullable=true)
+     */
+    private $postContent;    
     /**
      * @var string
      *
@@ -561,7 +567,38 @@ class LandingPage
 
         return $this;
     }
+    /**
+     * Get content
+     *
+     * @return string 
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }    
+    
+    /**
+     * Set postContent
+     *
+     * @param string $postContent
+     * @return LandingPage
+     */
+    public function setPostContent($content)
+    {
+        $this->postContent = $content;
 
+        return $this;
+    }
+    /**
+     * Get postContent
+     *
+     * @return string 
+     */
+    public function getPostContent()
+    {
+        return $this->postContent;
+    }    
+        
     /**
      * Get sidebarContent
      *
@@ -585,16 +622,7 @@ class LandingPage
         return $this;
     }
 
-    /**
-     * Get content
-     *
-     * @return string 
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }    
-    
+
     
     /**
      * Set template

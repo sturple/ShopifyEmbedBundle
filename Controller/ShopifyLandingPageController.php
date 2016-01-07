@@ -26,6 +26,7 @@ class ShopifyLandingPageController extends Controller {
 		$theme,
 		$store_name,
 		$redirect_url,
+		$liquidStr = '{% assign landingpage = true %}',
 		$template_array = array();
 		
 		
@@ -101,9 +102,16 @@ class ShopifyLandingPageController extends Controller {
 		return $this->render('FgmsShopifyBundle:ShopifyLandingPage:formQR.html.twig',$this->template_array);			
 		
 	}	
-	public function editPPCAction($id){
-		$id = intval($id);
+	public function editPPCAction($id)
+	{
 		$this->get_app_settings();	
+		$snippet_raw = ShopifyClient::get_assets($this->shopify);
+		$snippet_choice = array();
+		foreach ($snippet_raw as $snippet){
+			$snippet_choice[$snippet] = $snippet;
+		}		
+		$id = intval($id);
+		
 		$lp = $this->getDoctrine()
 			->getRepository('FgmsShopifyBundle:LandingPage')
 			->findOneBy(array('id'=>$id),array('id'=>'ASC'));
@@ -114,12 +122,13 @@ class ShopifyLandingPageController extends Controller {
 			$lp->setShop($this->store_name);
 			$lp->setType('ppc');
 			$lp->setTemplate('publicPPC.html.twig');
+			$lp->setPostContent('aboutus-default');
 			
 		}
 		
 		$this->template_array['title'] ='PPC Landing Page: ' .$lp->getTitle();
-		$this->template_array['lp'] = $lp;
-		$form = $this->createForm(new LandingPagePPCType(),$lp);
+		$this->template_array['lp'] = $lp;		
+		$form = $this->createForm(new LandingPagePPCType($snippet_choice),$lp);
 		
 		//form requests
 		$form->handleRequest($this->get('request'));
@@ -189,7 +198,7 @@ class ShopifyLandingPageController extends Controller {
 			Response::HTTP_OK,
 			array('content-type' => 'application/liquid')
 		);
-		$response->setContent('{% assign landingpage = true %}' .$this->renderView($template, $array));
+		$response->setContent($this->liquidStr .$this->renderView($template, $array));
 		return $response;
 	}	
 	
