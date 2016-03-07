@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}{{title}}{% endblock %}</title>
-    
+
         <script type="text/javascript" src="/bundles/fgmsshopify/js/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="/bundles/fgmsshopify/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdn.shopify.com/s/assets/external/app.js"></script>
@@ -19,12 +19,12 @@
                         primary : { label : 'Home', href : "/shopify/oauth/", target: "app"},
                         secondary: [
                             { label: "Manage Products", href: "/shopify/products/", target: "app" }
-                            ,{ label: "Manage Forms", href: "/shopify/forms/", target: "app" }
-                            ,{ label: "Manage Specials", href: "/shopify/specials/", target: "app" } 
-                            ,{ label: "Manage Landing Pages", href: "/shopify/lp/", target: "app" }
-                             
-                            
-                        ],                    
+                            {#,{ label: "Manage Forms", href: "/shopify/forms/", target: "app" }#}
+                            {% if enables.specials == 'true' %},{ label: "Manage Specials", href: "/shopify/specials/", target: "app" }{%endif%}
+                            {% if enables.landingPage == 'true' %},{ label: "Manage Landing Pages", href: "/shopify/lp/", target: "app" }{%endif%}
+
+
+                        ],
                     }
                     /*
                     ,breadcrumb: {
@@ -50,27 +50,27 @@
                 }, function(result, data){
                   alert("result: " + result + "   data: " + data);
                 });		*/
-                
-            });  
+
+            });
         </script>
         <link href="/bundles/fgmsshopify/css/bootstrap.min.css" rel="stylesheet" type="text/css"  media="all"  />
         <link href="/bundles/fgmsshopify/css/style.css" rel="stylesheet" type="text/css"  media="all"  />
-        
+
         {% block stylesheets %}{% endblock %}
         {% block javascripts %}{% endblock %}
-        
+
     </head>
     <body>
         {% block navigation %}{%endblock%}
-        <div class="container">              
+        <div class="container">
             <div class="row">
-                <div class="col-md-12">                    
+                <div class="col-md-12">
                     <h1>{{title}}</h1>
                     {% block body %}{% endblock %}
-                </div>                
+                </div>
             </div>
         </div>
-        
-      
+
+
     </body>
 </html>

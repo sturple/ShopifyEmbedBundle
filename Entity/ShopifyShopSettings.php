@@ -51,11 +51,38 @@ class ShopifyShopSettings
      */
     private $status;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="landingPageEnable", type="string", length=20)
+     */
+    private $landingPageEnable;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="productReturnEnable", type="string", length=20)
+     */
+    private $productReturnEnable;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="specialEnable", type="string", length=20)
+     */
+    private $specialEnable;
+
+   /**
+    * @var string
+    *
+    * @ORM\Column(name="photoContestEnable", type="string", length=20)
+    */
+   private $photoContestEnable;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -78,7 +105,7 @@ class ShopifyShopSettings
     /**
      * Get accessToken
      *
-     * @return string 
+     * @return string
      */
     public function getAccessToken()
     {
@@ -101,7 +128,7 @@ class ShopifyShopSettings
     /**
      * Get storeName
      *
-     * @return string 
+     * @return string
      */
     public function getStoreName()
     {
@@ -124,7 +151,7 @@ class ShopifyShopSettings
     /**
      * Get createDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreateDate()
     {
@@ -147,10 +174,105 @@ class ShopifyShopSettings
     /**
      * Get status
      *
-     * @return string 
+     * @return string
      */
     public function getStatus()
     {
         return $this->status;
     }
+
+
+    /*** enables ***/
+    /**
+     * Set landingPageEnable
+     *
+     * @param string $enable
+     * @return ShopifyShopSettings
+     */
+    public function setLandingPageEnable($enable)
+    {
+        $this->landingPageEnable = $enable;
+
+        return $this;
+    }
+
+    /**
+     * Get landingPageEnable
+     *
+     * @return string
+     */
+    public function getLandingPageEnable()
+    {
+        return $this->landingPageEnable;
+    }
+    /**
+     * Set productReturnEnable
+     *
+     * @param string $enable
+     * @return ShopifyShopSettings
+     */
+    public function setProductReturnEnable($enable)
+    {
+        $this->productReturnEnable = $enable;
+
+        return $this;
+    }
+
+    /**
+     * Get productReturnEnable
+     *
+     * @return string
+     */
+    public function getProductReturnEnable()
+    {
+        return $this->productReturnEnable;
+    }
+    /**
+     * Set specialEnable
+     *
+     * @param string $enable
+     * @return ShopifyShopSettings
+     */
+    public function setSpecialEnable($enable)
+    {
+        $this->specialEnable = $enable;
+
+        return $this;
+    }
+
+    /**
+     * Get specialEnable
+     *
+     * @return string
+     */
+    public function getSpecialEnable()
+    {
+        return $this->specialEnable;
+    }
+
+    /**
+     * Set photoContestEnable
+     *
+     * @param string $enable
+     * @return ShopifyShopSettings
+     */
+    public function setphotoContestEnable($enable)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get photoContestEnable
+     *
+     * @return string
+     */
+    public function getPhotoContestEnable()
+    {
+        return $this->photoContestEnable;
+    }
+
+
+
 }

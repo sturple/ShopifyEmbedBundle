@@ -1,6 +1,7 @@
 {% extends 'FgmsShopifyBundle::base.html.twig' %}
 {% block javascripts %}	{% endblock %}
 {% block body %}
+
 	<div class="row homepage">
 		<div class="col-sm-4">
 			<a href="/shopify/products/">
@@ -8,17 +9,17 @@
 					<div><i class="fa fa-shopping-cart fa-4x"></i></div>
 					<h2>Products</h2>
 					<p>Add and manage your products on Shopify as well as any product page meta information (i.e. custom content and functionality).</p>
-				</div>				
+				</div>
 			</a>
 		</div>
 		<div class="col-sm-4">
-			<a href="/shopify/lp/">
-				<div class="well" style="text-align: center;">
+			{% if enables.landingPage == 'true' %}<a href="/shopify/lp/">{% endif %}
+				<div class="well" style="text-align: center; {% if enables.landingPage !=  'true' %}color: #ccc; {% endif %}">
 					<div><i class="fa fa-file-text-o fa-4x"></i></div>
 					<h2>Landing Pages</h2>
 					<p>Build and manage landing pages for online marketing programs.</p>
 				</div>
-			</a>			
+			{% if enables.landingPage == 'true' %}</a>{% endif %}
 		</div>
 		<div class="col-sm-4">
 			<div class="well" style="text-align: center;">
@@ -26,37 +27,47 @@
 				<h2>Orders</h2>
 				<p><a  href="/shopify/orders/email/csv/" class="btn btn-success">Download Order Emails</a></p>
 			</div>
-		</div>			
+		</div>
 	</div>
 	<div class="row homepage">
 		<div class="col-sm-4">
-			<div class="well" style="text-align: center;">
-				<a href="/shopify/specials/">
+			<div class="well" style="text-align: center; {% if enables.specials != 'true' %}color: #ccc; {% endif %}">
+				{% if enables.specials == 'true' %}<a href="/shopify/specials/">{% endif %}
 					<div ><i class="fa fa-bullhorn fa-4x"></i></div>
 					<h2>Specials</h2>
-					<p>Configuration for Specials</p>				
-				</a>
+					<p>Configuration for Specials</p>
+				{% if enables.specials == 'true' %}</a>{% endif %}
 			</div>
 		</div>
-		<div class="col-sm-4 hidden">
+		{#<div class="col-sm-4 hidden">
 			<a href="/shopify/slideshow/">
 				<div class="well" style="text-align: center;">
 					<div ><i class="fa fa-desktop fa-4x"></i></div>
 					<h2>Slideshow</h2>
-					<p>Configuration for Slideshow</p>					
+					<p>Configuration for Slideshow</p>
 				</div>
-				
+
 			</a>
-		</div>
+		</div>#}
+
 		<div class="col-sm-4">
-			<a href="/shopify/forms/">
-				<div class="well" style="text-align: center;">
+			{% if enables.productReturn == 'true' %}<a href="/shopify/forms/">{% endif %}
+				<div class="well" style="text-align: center; {% if enables.productReturn != 'true' %}color: #ccc;{% endif %}">
 					<div ><i class="fa fa-envelope-o fa-4x"></i></div>
 					<h2>Product Returns</h2>
 					<p></p>
-				</div>				
-			</a>
-		</div>		
+				</div>
+			{% if enables.productReturn == 'true' %}</a>{% endif %}
+		</div>
+		<div class="col-sm-4">
+			{% if enables.contest == 'true' %}<a href="/shopify/contest/">{% endif %}
+				<div class="well" style="text-align: center; {% if enables.contest != 'true' %}color: #ccc;{% endif %}">
+					<div ><i class="fa fa-inbox fa-4x"></i></div>
+					<h2>Contests</h2>
+					<p></p>
+				</div>
+			{% if enables.contest == 'true' %}</a>{% endif %}
+		</div>
 	</div>
 
 	<div class="row homepage hidden">
@@ -66,7 +77,7 @@
 					<div ><i class="fa fa-envelope-o fa-4x"></i></div>
 					<h2>Form Submissions &amp; Emails</h2>
 					<p>Setup and configure forms as well as your HTML/Text email communications.</p>
-				</div>				
+				</div>
 			</a>
 		</div>
 		<div class="col-sm-4">
@@ -77,17 +88,17 @@
 					<p></p>
 				</div>
 			</a>
-			
+
 		</div>
 		<div class="col-sm-4">
 			<a href="/shopify/setup/">
 				<div class="well" style="text-align: center;">
 					<div ><i class="fa fa-cogs fa-4x"></i></div>
-					<h2>Settings</h2>					
-				</div>				
+					<h2>Settings</h2>
+				</div>
 			</a>
-		</div>				
-		
+		</div>
+
 	</div>
 
 {% endblock %}
@@ -97,5 +108,5 @@
 		.homepage a:hover {color: #666; text-decoration: none;}
 		.homepage .well { min-height: 260px;}
 	</style>
-	
+
 {% endblock %}

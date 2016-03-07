@@ -22,7 +22,7 @@
 			{% for lp in landingpages%}
 			<tr>
 				<td>{{lp.company}}</td>
-				<td>{{lp.type}}</td>
+				<td>{{lp.type | upper}}</td>
 				<td>{{lp.template}}</td>
 				<td>{{lp.title}}</td>
 				<td>{{lp.summary}}</td>
