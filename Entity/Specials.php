@@ -16,8 +16,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @Vich\Uploadable
  */
 
- 
- 
+
+
 class Specials
 {
     /**
@@ -133,16 +133,16 @@ class Specials
      * @ORM\Column(name="imageGuid", type="string", length=255, nullable=true)
      */
     private $imageGuid;
-	
+
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
+     *
      * @Vich\UploadableField(mapping="specials_image", fileNameProperty="imageGuid")
-     * 
+     *
      * @var File
      */
-    private $imageFile;		
-	
+    private $imageFile;
+
 
     /**
      * @var string
@@ -169,7 +169,7 @@ class Specials
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -192,7 +192,7 @@ class Specials
     /**
      * Get status
      *
-     * @return string 
+     * @return string
      */
     public function getStatus()
     {
@@ -215,7 +215,7 @@ class Specials
     /**
      * Get shop
      *
-     * @return string 
+     * @return string
      */
     public function getShop()
     {
@@ -237,7 +237,7 @@ class Specials
     /**
      * Get createDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreateDate()
     {
@@ -260,7 +260,7 @@ class Specials
     /**
      * Get updateDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdateDate()
     {
@@ -283,7 +283,7 @@ class Specials
     /**
      * Get publishDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getPublishDate()
     {
@@ -306,7 +306,7 @@ class Specials
     /**
      * Get unpublishDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUnpublishDate()
     {
@@ -329,7 +329,7 @@ class Specials
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -352,7 +352,7 @@ class Specials
     /**
      * Get subtitle
      *
-     * @return string 
+     * @return string
      */
     public function getSubtitle()
     {
@@ -375,7 +375,7 @@ class Specials
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -398,7 +398,7 @@ class Specials
     /**
      * Get buttonText
      *
-     * @return string 
+     * @return string
      */
     public function getButtonText()
     {
@@ -421,7 +421,7 @@ class Specials
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -444,7 +444,7 @@ class Specials
     /**
      * Get productURL
      *
-     * @return string 
+     * @return string
      */
     public function getProductURL()
     {
@@ -467,7 +467,7 @@ class Specials
     /**
      * Get collectionURL
      *
-     * @return string 
+     * @return string
      */
     public function getCollectionURL()
     {
@@ -490,7 +490,7 @@ class Specials
     /**
      * Get pageURL
      *
-     * @return string 
+     * @return string
      */
     public function getPageURL()
     {
@@ -513,7 +513,7 @@ class Specials
     /**
      * Get imageGuid
      *
-     * @return string 
+     * @return string
      */
     public function getImageGuid()
     {
@@ -532,8 +532,8 @@ class Specials
 
         return $this;
     }
-	
-	/* 
+
+	/*
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $imageFile
      */
     public function setImageFile(File $image = null)
@@ -548,13 +548,13 @@ class Specials
     public function getImageFile()
     {
         return $this->imageFile;
-    }	
-	
+    }
+
 
     /**
      * Get permalink
      *
-     * @return string 
+     * @return string
      */
     public function getPermalink()
     {
@@ -577,7 +577,7 @@ class Specials
     /**
      * Get shortlink
      *
-     * @return string 
+     * @return string
      */
     public function getShortlink()
     {
@@ -600,7 +600,7 @@ class Specials
     /**
      * Get shortlinkEnable
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getShortlinkEnable()
     {

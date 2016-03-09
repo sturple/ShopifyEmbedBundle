@@ -1,0 +1,66 @@
+{% extends 'FgmsShopifyBundle::proxy-base.html.twig' %}
+{% block javascripts %}
+
+<script type="text/javascript">
+	jQuery(function($){
+		if ($('.alert .alert-danger').length > 0) {
+			$('html, body').animate({scrollTop : $($('.alert-danger')).position().top}, 'slow');
+		}
+		else {
+			if ($('#form_session').length == 0) {
+				$('html, body').animate({scrollTop : $($('form')).position().top}, 'slow');
+			}
+		}
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+</script>
+{% endblock %}
+
+{% block body %}
+
+	<div class="Include">
+		<!--include -->
+		{{'{%'}} include 'contest-details' {{'%}'}}
+	</div>
+	<h2>Contest Entry</h2>
+	{% if form %}
+	{{ form_start(form) }}
+
+
+	{% if form_errors(form) %}
+    <div class="alert alert-danger alert-dismissible" role="alert" style="background-color:#f2dede; color: #a94442; margin-bottom: 24px; padding: 12px;border: 1px solid #a94442;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{form_errors(form)}}
+    </div>
+	{% endif %}
+
+	{{form_row(form.name)}}
+	{{form_row(form.email)}}
+	{{form_row(form.location)}}
+	{{form_row(form.description)}}
+	{{form_row(form.photoFile)}}
+	{{form_row(form.photoDate)}}
+	{{form_row(form.photoUrl)}}
+
+	<div class="form-group form-checkbox">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-10">
+			<div class="checkbox checkbox-inline">
+				<input required type="checkbox" id="fgms_shopifybundle_contestentry_terms" name="fgms_shopifybundle_contestentry[terms]"  value="1" >
+				<label for="fgms_shopifybundle_contestentry_terms"><span>I've read the
+				<a  href="/community/pages/ajax.html?type=modal&form_class=col-sm-9&label_class=sr-only&placeholder_flag=true&theme_id={{'{{'}}theme.id{{'}}'}}&asset=snippets/contest-details.liquid"
+					data-toggle="modal"
+					rel="nofollow"
+					data-target="#general-modal" >Terms and Conditions</a>.</span>	</label>
+			</div>
+		</div>
+	</div>
+	{{form_row(form.submit)}}
+
+
+	{{ form_end(form) }}
+	{% else %}
+		<blockquote>Form Error</blockquote>
+	{% endif %}
+{% endblock %}
+{% block stylesheets %}{% endblock %}

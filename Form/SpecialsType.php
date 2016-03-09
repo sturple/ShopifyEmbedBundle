@@ -25,14 +25,14 @@ class SpecialsType extends AbstractType
             ->add('productURL','hidden',array('required'=> false))
             ->add('collectionURL','hidden',array('required'=> false))
             ->add('pageURL','hidden',array('required'=> false))
-            ->add('imageFile','file', array('required'=> false))            
+            ->add('imageFile','file', array('required'=> false))
             ->add('permalink',null,array('required'=> false))
             ->add('shortlink', null,array('required'=> false))
             ->add('shortlinkEnable', null,array('required'=> false))
-            ->add('save','submit',array('label'=>'Save'))	
+            ->add('save','submit',array('label'=>'Save'))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

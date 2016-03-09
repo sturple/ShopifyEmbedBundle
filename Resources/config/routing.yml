@@ -2,126 +2,126 @@
 fgms_shopify_homepage:
     path:     /
     defaults: { _controller: FgmsShopifyBundle:Default:index }
-    
+
 fgms_shopify_add:
     path: /add/
     defaults: { _controller: FgmsShopifyBundle:Default:add }
-    methods: [GET,POST]    
+    methods: [GET,POST]
 fgms_shopify_oauth:
     path: /oauth/
     defaults: { _controller: FgmsShopifyBundle:Default:oauth }
     methods: [GET,POST]
-    
-    
+
+
 #product index routes
 fgms_shopify_products:
     path: /products/
     defaults: { _controller: FgmsShopifyBundle:Default:products }
-    methods: [GET]    
-    
+    methods: [GET]
 
-#Form Setup Routes   
+
+#Form Setup Routes
 fgms_shopify_forms:
     path: /forms/
     defaults: { _controller: FgmsShopifyBundle:ShopifyForms:index }
-    
+
 fgms_shopify_forms:
     path: /forms/setup/{formType}
-    defaults: { _controller: FgmsShopifyBundle:ShopifyForms:setup }    
-    
+    defaults: { _controller: FgmsShopifyBundle:ShopifyForms:setup }
+
 fgms_shopify_forms_communications:
     path: /forms/communications/
-    defaults: { _controller: FgmsShopifyBundle:ShopifyForms:communications }    
-    
+    defaults: { _controller: FgmsShopifyBundle:ShopifyForms:communications }
+
 fgms_shopify_forms_rma:
     path: /forms/rma/
-    defaults: { _controller: FgmsShopifyBundle:ShopifyForms:rmaIndex }      
-    
+    defaults: { _controller: FgmsShopifyBundle:ShopifyForms:rmaIndex }
+
 fgms_shopify_forms_rma:
    path: /forms/rma/{rmaNumber}/
-   defaults: { _controller: FgmsShopifyBundle:ShopifyForms:rmaDetail }    
-    
-    
+   defaults: { _controller: FgmsShopifyBundle:ShopifyForms:rmaDetail }
+
+
 #Product options Routs
 fgms_shopify_options:
     path: /options/
     defaults: { _controller: FgmsShopifyBundle:ShopifyOptions:index }
-    
-    
+
+
 fgms_shopify_options_updatemeta:
     path: /options/updatemeta/
     defaults: { _controller: FgmsShopifyBundle:ShopifyOptions:updatemeta }
     methods: [GET,POST]
-    
+
 fgms_shopify_options_admin:
     path: /options/admin/
     defaults: { _controller: FgmsShopifyBundle:ShopifyOptions:admin }
-    methods: [GET]    
-    
+    methods: [GET]
+
 fgms_shopify_options_show:
     path: /options/{productId}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyOptions:show }
     methods: [GET,POST]
-    
+
 fgms_shopify_options_delete:
     path: /options/{productId}/delete/{id}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyOptions:delete }
-    methods: [GET]       
-    
-    
-    
-    
-    
-    
-#Tab Routes    
+    methods: [GET]
+
+
+
+
+
+
+#Tab Routes
 fgms_shopify_tabs:
     path: /tabs/
-    defaults: { _controller: FgmsShopifyBundle:ShopifyTabs:index }    
-     
+    defaults: { _controller: FgmsShopifyBundle:ShopifyTabs:index }
+
 fgms_shopify_tabs_updatemeta:
     path: /tabs/updatemeta/
     defaults: { _controller: FgmsShopifyBundle:ShopifyTabs:updatemeta }
     methods: [GET,POST]
-    
+
 fgms_shopify_tabs_admin:
     path: /tabs/admin/
     defaults: { _controller: FgmsShopifyBundle:ShopifyTabs:admin }
-    methods: [GET]    
-    
+    methods: [GET]
+
 fgms_shopify_tabs_show:
     path: /tabs/{productId}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyTabs:show }
     methods: [GET,POST]
-    
+
 fgms_shopify_tabs_delete:
     path: /tabs/{productId}/delete/{id}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyTabs:delete }
-    methods: [GET]   
+    methods: [GET]
 
 #documents roues
 fgms_shopify_documents:
     path: /documents/
-    defaults: { _controller: FgmsShopifyBundle:ShopifyDocuments:index }    
-     
+    defaults: { _controller: FgmsShopifyBundle:ShopifyDocuments:index }
+
 fgms_shopify_documents_updatemeta:
     path: /documents/updatemeta/
     defaults: { _controller: FgmsShopifyBundle:ShopifyDocuments:updatemeta }
     methods: [GET,POST]
-    
+
 fgms_shopify_documents_admin:
     path: /documents/admin/
     defaults: { _controller: FgmsShopifyBundle:ShopifyDocuments:admin }
-    methods: [GET]    
-    
+    methods: [GET]
+
 fgms_shopify_documents_show:
     path: /documents/{productId}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyDocuments:show }
     methods: [GET,POST]
-    
+
 fgms_shopify_documents_delete:
     path: /documents/{productId}/delete/{id}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyDocuments:delete }
-    methods: [GET,POST]   
+    methods: [GET,POST]
 
 
 #settings routes
@@ -131,47 +131,47 @@ fgms_shopify_documents_delete:
 #Meta data routes
 fgms_shopify_meta:
     path: /meta/
-    defaults: { _controller: FgmsShopifyBundle:ShopifyMeta:index }    
-     
+    defaults: { _controller: FgmsShopifyBundle:ShopifyMeta:index }
+
 fgms_shopify_meta_updatemeta:
     path: /meta/updatemeta/
     defaults: { _controller: FgmsShopifyBundle:ShopifyMeta:updatemeta }
     methods: [GET,POST]
-    
+
 fgms_shopify_meta_admin:
     path: /meta/admin/
     defaults: { _controller: FgmsShopifyBundle:ShopifyMeta:admin }
-    methods: [GET]    
-        
-    
+    methods: [GET]
+
+
 fgms_shopify_meta_show:
     path: /meta/{productId}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyMeta:show }
     methods: [GET,POST]
-    
+
 fgms_shopify_meta_delete:
     path: /meta/{productId}/delete/{id}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyMeta:delete }
-    methods: [GET]       
-  
+    methods: [GET]
+
 #Proxy Routes
 fgms_shopify_proxy:
     path: /proxy/
     defaults: { _controller: FgmsShopifyBundle:ShopifyProxy:index }
-    methods: [GET,POST]  
-    
+    methods: [GET,POST]
+
 fgms_shopify_proxy_render:
     path: /proxy/form/{formType}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyProxy:render }
     methods: [POST,GET]
-    
-    
 
-    
+
+
+
 fgms_shopify_proxy_snippet:
     path: /proxy/snippet/{snippet}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyProxy:snippet }
-    methods: [GET,POST]    
+    methods: [GET,POST]
 
 
 #orders
@@ -179,61 +179,66 @@ fgms_shopify_orders_emailCsv:
     path: /orders/email/csv/
     defaults: { _controller: FgmsShopifyBundle:ShopifyOrders:emailCsv }
     methods: [POST,GET]
-        
-    
-    
+
+
+#contest
+fgms_shopify_contest_public:
+    path: /proxy/contest/{permalink}/
+    defaults: { _controller: FgmsShopifyBundle:ShopifyContest:public}
+    methods: [POST,GET]
+
 #landing pages
 fgms_shopify_landing_page_public:
     path: /proxy/lp/{permalink}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyLandingPage:public}
     methods: [POST,GET]
-    
+
 fgms_shopify_landing_page_track:
     path: /proxy/lp/{permalink}/track/
     defaults: { _controller: FgmsShopifyBundle:ShopifyLandingPage:track}
-    methods: [POST]    
-    
+    methods: [POST]
+
 #landing pages
 fgms_shopify_landing_page_index:
     path: /lp/
     defaults: { _controller: FgmsShopifyBundle:ShopifyLandingPage:index}
-    methods: [POST,GET]       
+    methods: [POST,GET]
 
 #landing pages
 fgms_shopify_landing_page_ppc_edit:
     path: /lp/ppc/{id}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyLandingPage:editPPC}
     methods: [POST,GET]
-    
+
 #landing pages
 fgms_shopify_landing_page_qr_edit:
     path: /lp/qr/{id}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyLandingPage:editQR}
     methods: [POST,GET]
 
-  
-    
+
+
 #Specials Public
 fgms_shopify_specials_public:
     path: /proxy/specials/{permalink}/
     defaults: { _controller: FgmsShopifyBundle:ShopifySpecials:public}
     methods: [POST,GET]
-    
-    
+
+
 fgms_shopify_specials_index_public:
     path: /proxy/specials/
     defaults: { _controller: FgmsShopifyBundle:ShopifySpecials:publicindex}
     methods: [POST,GET]
-        
-    
+
+
 #Specials Admin
 fgms_shopify_specials_index:
     path: /specials/
     defaults: { _controller: FgmsShopifyBundle:ShopifySpecials:index}
-    methods: [POST,GET]       
+    methods: [POST,GET]
 
 #landing pages
 fgms_shopify_specials_edit:
     path: /specials/{id}/
     defaults: { _controller: FgmsShopifyBundle:ShopifySpecials:edit}
-    methods: [POST,GET]     
+    methods: [POST,GET]
