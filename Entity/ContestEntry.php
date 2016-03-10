@@ -57,10 +57,15 @@ class ContestEntry
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="firstName", type="string", length=255, nullable=true)
      */
-    private $name;
-
+    private $firstName;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lastName", type="string", length=255, nullable=true)
+     */
+    private $lastName;
     /**
      * @var string
      *
@@ -230,26 +235,50 @@ class ContestEntry
     }
 
     /**
-     * Set name
+     * Set firstName
      *
-     * @param string $name
+     * @param string $firstName
      * @return ContestEntry
      */
-    public function setName($name)
+    public function setFirstName($name)
     {
-        $this->name = $name;
+        $this->firstName = $name;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get firstName
      *
      * @return string
      */
-    public function getName()
+    public function getFirstName()
     {
-        return $this->name;
+        return $this->firstName;
+    }
+
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     * @return ContestEntry
+     */
+    public function setLastName($name)
+    {
+        $this->lastName = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
     }
 
     /**

@@ -7,23 +7,24 @@ use Psr\Log\LoggerInterface;
 class Settings  {
 		var $em = null,
 		$logger = null;
-												  
+
 	public function __construct(EntityManager $em, LoggerInterface $logger) {
 		$this->em = $em;
 		$this->logger = $logger;
-		
+
 	}
-	
+
 	public function getFormSettings($shop){
 		$settings = $this->em
 			->getRepository('FgmsShopifyBundle:FormSettings')
 			->findOneBy(array('shop'=>$shop));
+		//$this->logger->notice('SETTINGS:: '.$shop .' '.print_R($settings,true));
 		if ($settings){
 			return $settings;
 		}
 		return new FormSettings();
 	}
-	
-	
+
+
 }
 ?>

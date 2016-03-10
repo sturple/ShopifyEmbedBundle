@@ -1,0 +1,10 @@
+{{ store.name}}
+
+{% block body %}{% endblock %}
+
+{% if global.phoneToll %}Toll: {{ global.phoneToll}}  {% endif %}
+{% if global.phoneOffice %}Office: {{ global.phoneOffice}} {% endif %}
+{% if global.email %}Email: {{ global.email}}{% endif %}
+{% if store.domain %}Website: {{store.domain}}{% endif %}
+{{store.adress1}}
+{{store.city}}, {{store.province}}, {{store.country}}, {{store.zip}}

@@ -1,0 +1,13 @@
+{% extends 'FgmsShopifyBundle::email-base.txt.twig' %}
+{% block body %}
+{% if email.title %}{{email.title | striptags}}{% endif %}
+{% if email.subtitle %}{{email.subtitle | striptags}}{% endif %}
+{% if email.introtext %}{{email.introtext | striptags}}{% endif %}
+{% if email.content %}{{email.content | striptags}}{% endif %}
+
+{% if fields %}
+{% for field in fields %}
+    {{field.label}}:  {{field.value | striptags}}
+{% endfor %}
+{% endif %}
+{% endblock %}

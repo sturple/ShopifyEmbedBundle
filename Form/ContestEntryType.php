@@ -15,7 +15,8 @@ class ContestEntryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('firstName', null,array('label'=>'First Name'))
+            ->add('lastName', null,array('label'=>'Last Name'))
             ->add('email')
             ->add('location', null,array('required'=> false))
             ->add('description', null,array('required'=> false))

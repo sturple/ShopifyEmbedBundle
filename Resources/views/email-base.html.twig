@@ -1,0 +1,181 @@
+<!-- Inliner Build Version 4380b7741bb759d6cb997545f3add21ad48f010b -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width"/>
+    </head>
+    <body style="width: 100% !important; min-width: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; color: #{{global.colorText|default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; text-align: left; line-height: 19px; font-size: 14px; background: #{{global.colorBackgroundBody | default('f1f1f1')}}; margin: 0; padding: 0;" bgcolor="#{{global.colorBackgroundBody | default('f1f1f1')}}">
+        <style type="text/css">
+            a               { color: #{{global.colorLink|default('666666')}} !important;  }
+            a:hover         { color: #{{global.colorLinkHover|default('666666')}} !important;  }
+            a:active        { color: #{{global.colorLink|default('666666')}} !important;  }
+            a:visited       { color: #{{global.colorLink|default('666666')}} !important; }
+            h1 a:active     { color: #{{global.colorLinkHover|default('666666')}} !important;  }
+            h2 a:active     { color: #{{global.colorLinkHover|default('666666')}} !important;  }
+            h3 a:active     { color: #{{global.colorLinkHover|default('666666')}} !important; }
+            h4 a:active     { color: #{{global.colorLinkHover|default('666666')}} !important;  }
+            h5 a:active     { color: #{{global.colorLinkHover|default('666666')}} !important;  }
+            h6 a:active     { color: #{{global.colorLinkHover|default('666666')}} !important;  }
+            h1 a:visited    { color: #{{global.colorLink|default('666666')}} !important;   }
+            h2 a:visited    { color: #{{global.colorLink|default('666666')}} !important;   }
+            h3 a:visited    { color: #{{global.colorLink|default('666666')}} !important;   }
+            h4 a:visited    { color: #{{global.colorLink|default('666666')}} !important;   }
+            h5 a:visited    { color: #{{global.colorLink|default('666666')}} !important;   }
+            h6 a:visited    { color: #{{global.colorLink|default('666666')}} !important;   }
+
+            table.button:hover td           { background: #{{global.colorLinkHover|default('666666')}} !important; }
+            table.button:visited td         { background: #{{global.colorLink|default('666666')}} !important;    }
+            table.button:active td          { background: #{{global.colorLink|default('666666')}} !important;  }
+            table.button:hover td a         { color: #ffffff !important;  }
+            table.button:visited td a       { color: #ffffff !important; }
+            table.button:active td a        { color: #ffffff !important; }
+            table.button:hover td           { background: #{{global.colorLinkHover|default('666666')}} !important; }
+            table.tiny-button:hover td      { background: #{{global.colorLinkHover|default('666666')}} !important; }
+            table.small-button:hover td     { background: #{{global.colorLinkHover|default('666666')}} !important; }
+            table.medium-button:hover td    { background: #{{global.colorLinkHover|default('666666')}} !important; }
+            table.large-button:hover td     { background: #{{global.colorLinkHover|default('666666')}} !important; }
+
+            table.button:hover td a             {color: #ffffff !important; }
+            table.button:active td a            {color: #ffffff !important;}
+            table.button td a:visited           {color: #ffffff !important;}
+            table.tiny-button:hover td a        {color: #ffffff !important;}
+            table.tiny-button:active td a       {color: #ffffff !important; }
+            table.tiny-button td a:visited      {color: #ffffff !important;}
+            table.small-button:hover td a       {color: #ffffff !important;}
+            table.small-button:active td a      {color: #ffffff !important; }
+            table.small-button td a:visited     {color: #ffffff !important; }
+            table.medium-button:hover td a      {color: #ffffff !important;}
+            table.medium-button:active td a     {color: #ffffff !important; }
+            table.medium-button td a:visited    {color: #ffffff !important; }
+            table.large-button:hover td a       {color: #ffffff !important;}
+            table.large-button:active td a      {color: #ffffff !important;}
+            table.large-button td a:visited     {color: #ffffff !important;}
+            table.secondary:hover td            {background: #d0d0d0 !important;color: #555555;}
+            table.secondary:hover td a          {color: #555555 !important;}
+            table.secondary td a:visited        {color: #555555 !important; }
+            table.secondary:active td a         {color: #555555 !important;}
+            table.success:hover td              { background: #457a1a !important;}
+            table.alert:hover td                { background: #970b0e !important; }
+            a:hover {
+                text-decoration: underline !important;
+                color: #{{global.colorLinkHover|default('666666')}} !important;
+            }
+            @media only screen and (max-width:600px){table[class=body] img{max-width:auto!important;max-height:auto!important}table[class=body] center{min-width:0!important}table[class=body] .container{width:95%!important}table[class=body] .row{width:100%!important;display:block!important}table[class=body] .wrapper{display:block!important;padding-right:0!important}table[class=body] .column,table[class=body] .columns{table-layout:fixed!important;float:none!important;width:100%!important;padding-right:0!important;padding-left:0!important;display:block!important}table[class=body] .wrapper.first .column,table[class=body] .wrapper.first .columns{display:table!important}table[class=body] table.column td,table[class=body] table.columns td{width:100%!important}table[class=body] .column td.one,table[class=body] .columns td.one{width:8.333333%!important}table[class=body] .column td.two,table[class=body] .columns td.two{width:16.666666%!important}table[class=body] .column td.three,table[class=body] .columns td.three{width:25%!important}table[class=body] .column td.four,table[class=body] .columns td.four{width:33.333333%!important}table[class=body] .column td.five,table[class=body] .columns td.five{width:41.666666%!important}table[class=body] .column td.six,table[class=body] .columns td.six{width:50%!important}table[class=body] .column td.seven,table[class=body] .columns td.seven{width:58.333333%!important}table[class=body] .column td.eight,table[class=body] .columns td.eight{width:66.666666%!important}table[class=body] .column td.nine,table[class=body] .columns td.nine{width:75%!important}table[class=body] .column td.ten,table[class=body] .columns td.ten{width:83.333333%!important}table[class=body] .column td.eleven,table[class=body] .columns td.eleven{width:91.666666%!important}table[class=body] .column td.twelve,table[class=body] .columns td.twelve{width:100%!important}table[class=body] td.offset-by-eight,table[class=body] td.offset-by-eleven,table[class=body] td.offset-by-five,table[class=body] td.offset-by-four,table[class=body] td.offset-by-nine,table[class=body] td.offset-by-one,table[class=body] td.offset-by-seven,table[class=body] td.offset-by-six,table[class=body] td.offset-by-ten,table[class=body] td.offset-by-three,table[class=body] td.offset-by-two{padding-left:0!important}table[class=body] table.columns td.expander{width:1px!important}table[class=body] .right-text-pad,table[class=body] .text-pad-right{padding-left:10px!important}table[class=body] .left-text-pad,table[class=body] .text-pad-left{padding-right:10px!important}table[class=body] .hide-for-small,table[class=body] .show-for-desktop{display:none!important}table[class=body] .hide-for-desktop,table[class=body] .show-for-small{display:block!important;width:auto!important;overflow:visible!important}}@media only screen and (min-width:600px){.container-padding-large{padding:24px}table.twelve{width:532px}table.twelve center{min-width:532px}}
+
+        </style>
+        <table class="body" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; height: 100%; width: 100%; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; background: #f1f1f1; margin: 0; padding: 0;" bgcolor="#f1f1f1">
+            <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                <td class="center" align="center" valign="top" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 12px 0 24px;">
+                    <center style="width: 100%; min-width: 580px;">
+                        <table class="container" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: inherit; width: 580px; -webkit-box-shadow: 2px 4px 6px 0px rgba(50, 50, 50, 0.36); -moz-box-shadow: 2px 4px 6px 0px rgba(50, 50, 50, 0.36); box-shadow: 2px 4px 6px 0px rgba(50, 50, 50, 0.36); background: #ffffff; margin: 0 auto; padding: 0;" bgcolor="#ffffff">
+                            <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                                <td class="container-padding-large" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 12px;" align="left" valign="top">
+                                    <table class="row" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 100%; position: relative; display: block; padding: 0px;">
+                                        <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                                            <td class="wrapper last" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; position: relative; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 10px 0px 0px;" align="left" valign="top">
+                                                <table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 580px; margin: 0 auto; padding: 0;">
+                                                    <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                                                        <td class="center logo" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 12px 8px 20px;" align="center" valign="top">
+                                                            <img class="center" src="https://apps.fifthgeardev.net/uploads/lp/{{global.logoGUID}}" width="420" alt="{{global.logoText}}" style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%; float: none; clear: both; display: block; margin: 0 auto;" align="none"/></td>
+                                                        <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;" align="left" valign="top"></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    {% block body %}{% endblock %}
+                                    <table class="row" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 100%; position: relative; display: block; padding: 0px;">
+                                        <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                                            <td class="wrapper last" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; position: relative; margin: 0; padding: 10px 0px 24px;" align="left" valign="top">
+                                                <table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 580px; margin: 0 auto; padding: 0;">
+                                                    <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                                                        <td class="center title footer-title" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; color: #{{global.colorText |default('666666')}}; font-family: 'Open Sans',arial,helvetica,sans-serif; font-weight: normal; line-height: 16px; font-size: 16px; margin: 0; padding: 24px 0 6px;" align="center" valign="top">
+                                                            <center style="width: 100%; min-width: 580px;">
+                                                                {{store.name}}
+                                                            </center>
+                                                        </td>
+                                                        <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;" align="left" valign="top"></td>
+                                                    </tr>
+                                                </table>
+                                                <table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 580px; margin: 0 auto; padding: 0;">
+                                                    <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                                                        <td class="center body-text footer-text" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; color: #{{global.colorText |default('666666')}}; font-family: 'Open Sans',arial,helvetica,sans-serif; font-weight: normal; line-height: 16px; font-size: 11px; margin: 0; padding: 0;" align="center" valign="top">
+                                                            <center style="width: 100%; min-width: 580px;">
+                                                                <span>
+                                                                    {{store.address1}}
+                                                                </span>
+                                                            </center>
+                                                        </td>
+                                                        <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;" align="left" valign="top"></td>
+                                                    </tr>
+                                                </table>
+                                                <table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 580px; margin: 0 auto; padding: 0;">
+                                                    <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                                                        <td class="center body-text footer-text" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; color: #{{global.colorText |default('666666')}}; font-family: 'Open Sans',arial,helvetica,sans-serif; font-weight: normal; line-height: 16px; font-size: 11px; margin: 0; padding: 0;" align="center" valign="top">
+                                                            <center style="width: 100%; min-width: 580px;">
+                                                                <span>
+                                                                    {{store.city}}, {{store.province}}, {{store.country}}, {{store.zip}}
+                                                                </span>
+                                                            </center>
+                                                        </td>
+                                                        <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;" align="left" valign="top"></td>
+                                                    </tr>
+                                                </table>
+                                                <table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 580px; margin: 0 auto; padding: 0;">
+                                                    <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                                                        <td class="center body-text footer-text" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; color: #{{global.colorText |default('666666')}}; font-family: 'Open Sans',arial,helvetica,sans-serif; font-weight: normal; line-height: 16px; font-size: 11px; margin: 0; padding: 0;" align="center" valign="top">
+                                                            <center style="width: 100%; min-width: 580px;">
+                                                                <span>
+                                                                    {% if global.phoneOffice %}{{ global.phoneOffice}}{% endif %}
+                                                                    {% if global.phoneToll %} | {{ global.phoneToll}} {% endif %}
+                                                                    {% if global.email %}
+                                                                        | <a href="mailto:{{ global.email}}" style="color: #{{global.colorLink | default('60c060')}}; text-decoration: none;">Email</a>
+                                                                    {% endif %}
+                                                                    {% if store.domain %}
+                                                                        | <a href="{{store.domain}}" style="color: #{{global.colorLink | default('60c060')}}; text-decoration: none;">Website</a>
+                                                                    {% endif %}
+
+                                                                </span>
+                                                            </center>
+                                                        </td>
+                                                        <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;" align="left" valign="top"></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="container disclaimer-container" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: inherit; width: 580px; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; margin: 0 auto; padding: 0;" background="none">
+                            <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                                <td style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 24px;" align="left" valign="top">
+                                    <table class="row" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 100%; position: relative; display: block; padding: 0px;">
+                                        <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                                            <td class="wrapper last" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; position: relative; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 10px 0px 0px;" align="left" valign="top">
+                                                <table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 580px; margin: 0 auto; padding: 0;">
+                                                    <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                                                        <td class="center body-text footer-text" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; color: #{{global.colorText |default('666666')}}; font-family: 'Open Sans',arial,helvetica,sans-serif; font-weight: normal; line-height: 16px; font-size: 11px; margin: 0; padding: 24px 0 12px;" align="center" valign="top">
+                                                            <center style="width: 100%; min-width: 580px;">
+                                                                {% if fields.email.value %} This email was sent to <a href="mailto:{{fields.email.value | striptags }}" style="color: #{{global.colorLink | default('60c060')}}; text-decoration: none;">{{fields.email.value | striptags }}{%endif%}</a> | 
+                                                                <a href="unsubscribe@fifthgeardev.com" style="color: #{{global.colorLink |default('60c060')}}; text-decoration: none;">
+                                                                    <font color="#{{global.colorLink |default('60c060')}}">Unsubscribe</font>
+                                                                </a>
+                                                            </center>
+                                                        </td>
+                                                        <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;" align="left" valign="top"></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

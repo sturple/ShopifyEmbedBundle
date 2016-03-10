@@ -1,0 +1,88 @@
+{% extends 'FgmsShopifyBundle::email-base.html.twig' %}
+{% block body %}
+{% if email.title %}
+<table class="row" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: center; width: 100%; position: relative; display: block; padding: 0px;">
+    <tr style="vertical-align: top; text-align: center; padding: 0;" align="center">
+        <td class="wrapper last" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; position: relative; color: #{{global.colorTitle |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 10px 0px 0px;" align="left" valign="top">
+            <table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: center; width: 580px; margin: 0 auto; padding: 0;">
+                <tr style="vertical-align: top; text-align: center; padding: 0;" align="center">
+                    <td class="title" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; color: #{{global.colorTitle |default('666666')}}; font-family: 'Open Sans',arial,helvetica,sans-serif; font-weight: normal; line-height: 26px; font-size: 20px; margin: 0; padding: 0px 0px 10px;" align="left" valign="top">
+                        {{email.title | raw}}
+                    </td>
+                    <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; visibility: hidden; width: 0px; color: #{{global.colorTitle |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;" align="left" valign="top"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+{% endif %}
+{% if email.subtitle %}
+<table class="row" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: center; width: 100%; position: relative; display: block; padding: 0px;">
+    <tr style="vertical-align: top; text-align: center; padding: 0;" align="center">
+        <td class="wrapper last" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; position: relative; color: #{{global.colorSubtitle |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 10px 0px 0px;" align="left" valign="top">
+            <table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: center; width: 580px; margin: 0 auto; padding: 0;">
+                <tr style="vertical-align: top; text-align: center; padding: 0;" align="center">
+                    <td class="subtitle" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; color: #{{global.colorSubtitle |default('666666')}}; font-family: 'Open Sans',arial,helvetica,sans-serif; font-weight: normal; line-height: 22px; font-size: 16px; font-style: italic; margin: 0; padding: 0px 0px 10px;" align="left" valign="top">
+                        {{email.subtitle | raw}}
+                    </td>
+                    <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; visibility: hidden; width: 0px; color: #{{global.colorSubtitle |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;" align="left" valign="top"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+{% endif %}
+{% if email.introtext %}
+<table class="row" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 100%; position: relative; display: block; padding: 0px;">
+    <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+        <td class="wrapper last" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; position: relative; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 16px; margin: 0; padding: 10px 0px 0px;" align="left" valign="top">
+            <table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 580px; margin: 0 auto; padding: 0;">
+                <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                    <td class="subtitle" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; color: #{{global.colorText |default('666666')}}; font-family: 'Open Sans',arial,helvetica,sans-serif; font-weight: normal; line-height: 22px; font-size: 16px; margin: 0; padding: 0px 0px 10px;" align="left" valign="top">
+                        {{email.introtext | raw}}
+                    </td>
+                    <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 16px; margin: 0; padding: 0;" align="left" valign="top"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+{% endif %}
+{% if email.content %}
+<table class="row" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 100%; position: relative; display: block; padding: 0px;">
+    <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+        <td class="wrapper last" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; position: relative; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 10px 0px 0px;" align="left" valign="top">
+            <table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 580px; margin: 0 auto; padding: 0;">
+                <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                    <td class="subtitle" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; color: #{{global.colorText |default('666666')}}; font-family: 'Open Sans',arial,helvetica,sans-serif; font-weight: normal; line-height: 22px; font-size: 14px; margin: 0; padding: 0px 0px 10px;" align="left" valign="top">
+                        {{email.content | raw}}
+                    </td>
+                    <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;" align="left" valign="top"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+{% endif %}
+{% if fields %}
+<table class="row" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 100%; position: relative; display: block; padding: 0px;">
+    <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+        <td class="wrapper text-pad last" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; position: relative; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 10px 0px 0px;" align="left" valign="top">
+            <table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 580px; margin: 0 auto; padding: 0;">
+                {% for field in fields %}
+                <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+                    <td class="panel four sub-columns body-text label" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; min-width: 0px; width: 33.333333%; color: #{{global.colorText |default('666666')}}; font-family: 'Open Sans',arial,helvetica,sans-serif; font-weight: bold; line-height: 22px; font-size: 14px; background: #ffffff; margin: 0; padding: 10px; border: 1px solid #efefef;" align="left" bgcolor="#ffffff" valign="top">
+                        {{field.label}}
+                    </td>
+                    <td class="panel eight sub-columns body-text" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; min-width: 0px; width: 66.666666%; color: #{{global.colorText |default('666666')}}; font-family: 'Open Sans',arial,helvetica,sans-serif; font-weight: normal; line-height: 22px; font-size: 14px; background: #ffffff; margin: 0; padding: 10px; border: 1px solid #efefef;" align="left" bgcolor="#ffffff" valign="top">
+                        {{field.value | raw}}
+                    </td>
+                    <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;" align="left" valign="top"></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </td>
+    </tr>
+</table>
+{% endif %}
+{% endblock %}
