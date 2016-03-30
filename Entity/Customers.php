@@ -7,12 +7,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Rma
+ * Customers
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Fgms\ShopifyBundle\Entity\RmaRepository")
  */
-class Rma
+class Customers
 {
     /**
      * @var integer
@@ -36,6 +36,13 @@ class Rma
      * @ORM\Column(name="status", type="string", length=24)
      */
     private $status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="transaction", type="string", length=24)
+     */
+    private $transaction;
 
     /**
      * @var \DateTime
@@ -188,6 +195,34 @@ class Rma
 
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="purchaseLocation", type="string", length=255, nullable=true)
+     */
+    private $purchaseLocation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="purchaseReceipt", type="string", length=255,nullable=true )
+     */
+    private $purchaseReceipt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="purchaseDate", type="datetime",  nullable=true)
+     */
+    private $purchaseDate;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="terms", type="boolean",  nullable=true)
+     */
+    private $terms;
+
+    /**
      * Get id
      *
      * @return integer
@@ -201,7 +236,7 @@ class Rma
      * Set session
      *
      * @param string $session
-     * @return Rma
+     * @return Customers
      */
     public function setSession($session)
     {
@@ -224,7 +259,7 @@ class Rma
      * Set status
      *
      * @param string $status
-     * @return Rma
+     * @return Customers
      */
     public function setStatus($status)
     {
@@ -243,13 +278,34 @@ class Rma
         return $this->status;
     }
 
+    /**
+     * Set transaction
+     *
+     * @param string $status
+     * @return Customers
+     */
+    public function setTransaction($transaction)
+    {
+        $this->transaction = $transaction;
 
+        return $this;
+    }
+
+    /**
+     * Get transaction
+     *
+     * @return string
+     */
+    public function getTransaction()
+    {
+        return $this->transaction;
+    }
 
     /**
      * Set ip
      *
      * @param string $ip
-     * @return ContactRequest
+     * @return Customers
      */
     public function setIp($ip)
     {
@@ -272,7 +328,7 @@ class Rma
      * Set createDate
      *
      * @param \DateTime $createDate
-     * @return Rma
+     * @return Customers
      */
     public function setCreateDate()
     {
@@ -295,7 +351,7 @@ class Rma
      * Set createDate
      *
      * @param \DateTime $createDate
-     * @return Rma
+     * @return Customers
      */
     public function setCollectionDate($collectionDate)
     {
@@ -319,7 +375,7 @@ class Rma
      * Set updateDate
      *
      * @param \DateTime $updateDate
-     * @return Rma
+     * @return Customers
      */
     public function setUpdateDate()
     {
@@ -342,7 +398,7 @@ class Rma
      * Set transport
      *
      * @param string $transport
-     * @return Rma
+     * @return Customers
      */
     public function setTransport($transport)
     {
@@ -365,7 +421,7 @@ class Rma
      * Set company
      *
      * @param string $company
-     * @return Rma
+     * @return Customers
      */
     public function setCompany($company)
     {
@@ -388,7 +444,7 @@ class Rma
      * Set firstName
      *
      * @param string $firstName
-     * @return Rma
+     * @return Customers
      */
     public function setFirstName($firstName)
     {
@@ -411,7 +467,7 @@ class Rma
      * Set lastName
      *
      * @param string $lastName
-     * @return Rma
+     * @return Customers
      */
     public function setLastName($lastName)
     {
@@ -434,7 +490,7 @@ class Rma
      * Set address1
      *
      * @param string $address1
-     * @return Rma
+     * @return Customers
      */
     public function setAddress1($address1)
     {
@@ -457,7 +513,7 @@ class Rma
      * Set address2
      *
      * @param string $address2
-     * @return Rma
+     * @return Customers
      */
     public function setAddress2($address2)
     {
@@ -480,7 +536,7 @@ class Rma
      * Set city
      *
      * @param string $city
-     * @return Rma
+     * @return Customers
      */
     public function setCity($city)
     {
@@ -503,7 +559,7 @@ class Rma
      * Set postal
      *
      * @param string $postal
-     * @return Rma
+     * @return Customers
      */
     public function setPostal($postal)
     {
@@ -526,7 +582,7 @@ class Rma
      * Set province
      *
      * @param string $province
-     * @return Rma
+     * @return Customers
      */
     public function setProvince($province)
     {
@@ -549,7 +605,7 @@ class Rma
      * Set country
      *
      * @param string $country
-     * @return Rma
+     * @return Customers
      */
     public function setCountry($country)
     {
@@ -572,7 +628,7 @@ class Rma
      * Set phoneToll
      *
      * @param string $phoneToll
-     * @return Rma
+     * @return Customers
      */
     public function setPhoneToll($phoneToll)
     {
@@ -595,7 +651,7 @@ class Rma
      * Set phoneMobile
      *
      * @param string $phoneMobile
-     * @return Rma
+     * @return Customers
      */
     public function setPhoneMobile($phoneMobile)
     {
@@ -618,7 +674,7 @@ class Rma
      * Set phoneOffice
      *
      * @param string $phoneOffice
-     * @return Rma
+     * @return Customers
      */
     public function setPhoneOffice($phoneOffice)
     {
@@ -641,7 +697,7 @@ class Rma
      * Set phoneFax
      *
      * @param string $phoneFax
-     * @return Rma
+     * @return Customers
      */
     public function setPhoneFax($phoneFax)
     {
@@ -664,7 +720,7 @@ class Rma
      * Set email
      *
      * @param string $email
-     * @return Rma
+     * @return Customers
      */
     public function setEmail($email)
     {
@@ -687,7 +743,7 @@ class Rma
      * Set notes
      *
      * @param string $notes
-     * @return Rma
+     * @return Customers
      */
     public function setNotes($notes)
     {
@@ -711,7 +767,7 @@ class Rma
      * Set storeName
      *
      * @param string $storeName
-     * @return ShopifyShopSettings
+     * @return Customers
      */
     public function setStoreName($storeName)
     {
@@ -730,5 +786,100 @@ class Rma
         return $this->storeName;
     }
 
+
+
+
+
+    /**
+     * Set purchaseLocation
+     *
+     * @param string $purchaseLocation
+     * @return Customers
+     */
+    public function setPurchaseLocation($purchaseLocation)
+    {
+        $this->purchaseLocation = $purchaseLocation;
+
+        return $this;
+    }
+
+    /**
+     * Get purchaseLocation
+     *
+     * @return string
+     */
+    public function getPurchaseLocation()
+    {
+        return $this->purchaseLocation;
+    }
+
+    /**
+     * Set purchaseReceipt
+     *
+     * @param string $purchaseReceipt
+     * @return Customers
+     */
+    public function setPurchaseReceipt($purchaseReceipt)
+    {
+        $this->purchaseReceipt = $purchaseReceipt;
+
+        return $this;
+    }
+
+    /**
+     * Get purchaseReceipt
+     *
+     * @return string
+     */
+    public function getPurchaseReceipt()
+    {
+        return $this->purchaseReceipt;
+    }
+
+    /**
+     * Set purchaseDate
+     *
+     * @param string $purchaseDate
+     * @return Customers
+     */
+    public function setPurchaseDate($purchaseDate)
+    {
+        $this->purchaseDate = $purchaseDate;
+
+        return $this;
+    }
+
+    /**
+     * Get purchaseDate
+     *
+     * @return string
+     */
+    public function getPurchaseDate()
+    {
+        return $this->purchaseDate;
+    }
+
+    /**
+      * Set terms
+      *
+      * @param boolean $terms
+      * @return Customers
+      */
+     public function setTerms($terms)
+     {
+         $this->terms = $terms;
+
+         return $this;
+     }
+
+     /**
+      * Get terms
+      *
+      * @return boolean
+      */
+     public function getTerms()
+     {
+         return $this->terms;
+     }
 
 }

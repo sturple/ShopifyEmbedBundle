@@ -37,10 +37,14 @@ fgms_shopify_forms_rma:
     path: /forms/rma/
     defaults: { _controller: FgmsShopifyBundle:ShopifyForms:rmaIndex }
 
+
 fgms_shopify_forms_rma:
    path: /forms/rma/{rmaNumber}/
    defaults: { _controller: FgmsShopifyBundle:ShopifyForms:rmaDetail }
 
+fgms_shopify_forms_warranty:
+    path: /forms/warranty/
+    defaults: { _controller: FgmsShopifyBundle:ShopifyForms:warrantyIndex }
 
 #Product options Routs
 fgms_shopify_options:
@@ -237,7 +241,7 @@ fgms_shopify_specials_index:
     defaults: { _controller: FgmsShopifyBundle:ShopifySpecials:index}
     methods: [POST,GET]
 
-#landing pages
+#specials edit pages
 fgms_shopify_specials_edit:
     path: /specials/{id}/
     defaults: { _controller: FgmsShopifyBundle:ShopifySpecials:edit}

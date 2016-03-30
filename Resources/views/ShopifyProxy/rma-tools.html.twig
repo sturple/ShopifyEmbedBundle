@@ -1,57 +1,41 @@
 {% extends 'FgmsShopifyBundle::proxy-base.html.twig' %}
 {% block javascripts %}
-	
 <script type="text/javascript">
-	
 	jQuery(function($){
 		if ($('.alert .alert-danger').length > 0) {
-			$('html, body').animate({scrollTop : $($('.alert-danger')).position().top}, 'slow');	
+			$('html, body').animate({scrollTop : $($('.alert-danger')).position().top}, 'slow');
 		}
 		else {
 			if ($('#form_session').length == 0) {
-				$('html, body').animate({scrollTop : $($('form')).position().top}, 'slow');	
+				$('html, body').animate({scrollTop : $($('form')).position().top}, 'slow');
 			}
-			
 		}
 
 		$('.script-rma-delete').click(function(e){
-			
-			if (confirm('Delete '+ $(this).data('product')+'?')){
-				window.location = $(this).data('href');
-			}
-			
+			if (confirm('Delete '+ $(this).data('product')+'?')){window.location = $(this).data('href');}
 			return false;
 		})
-				
+
 		$('[data-toggle="tooltip"]').tooltip()
 	})
-
-	
 </script>
-
 {% endblock %}
-
-
 {% block body %}
-
 		<h2 style="margin-top: -38px;">RMA: {{rma.session | slice(24,32) }}</h2>
 		<div style="margin: 0 0 32px">
-			
 			<div class="pull-right" >
 				Status: <em> {{rma.status}}</em>
 				{% if rma.updateDate %}<div>Updated: <em>{{rma.updateDate | date('d/m/y')}}</em></div>{%endif%}
 			</div>
 			<div class="clearfix"></div>
 		</div>
-		
 
-		
 		<div class="well">
 			<div class="row">
 				<div class="col-sm-6"><h2 style="padding-top: 0">Contact Details</h2></div>
 				<div class="col-sm-6 align-right-sm"><a style="color: #fff;" href="../../form/rma/?session={{rma.session}}" style="" class="btn btn-default "><i class="fa fa-pencil-square-o"></i> Edit Contact Info</a></div>
 			</div>
-			
+
 			<table class="table">
 				<tbody>
 					<tr></tr>
@@ -62,30 +46,30 @@
 							<div>{{rma.address1}} {{rma.address2}}</div>
 							<div>{{rma.city}}, {{rma.province}}, {{rma.country}}, {{rma.postal}}</div>
 						</td>
-					</tr>									
+					</tr>
 					{% if rma.phoneToll | length > 0 %}<tr><td>Toll</td><td>{{rma.phoneToll}}</td></tr>{%endif%}
 					{% if rma.phoneOffice | length > 0 %}<tr><td>Office</td><td>{{rma.phoneOffice}}</td></tr>{%endif%}
 					{% if rma.phoneMobile | length > 0 %}<tr><td>Mobile</td><td>{{rma.phoneMobile}}</td></tr>{%endif%}
-					{% if rma.phoneFax | length > 0 %}<tr><td>Fax</td><td>{{rma.phoneFax}}</td></tr>{%endif%}					
+					{% if rma.phoneFax | length > 0 %}<tr><td>Fax</td><td>{{rma.phoneFax}}</td></tr>{%endif%}
 					{% if rma.email | length > 0 %}<tr><td>Email</td><td>{{rma.email}}</td></tr>{%endif%}
-					
+
 				</tbody>
 			</table>
 
-			
+
 		</div>
 		<div class="well">
 			<h2>Shipping Instructions</h2>
 			<ul class="fa-ul">
-				<li><i class="fa-li fa fa-check"></i> The bottom of the original packing slip contains Level 5 Tools returns address (does it?). Use this portion of the form to affix to the box(s). </li>
+				<li><i class="fa-li fa fa-check"></i> The bottom of the original packing slip contains Level 5 Tools returns address. Use this portion of the form to affix to the box(s). </li>
 				<li><i class="fa-li fa fa-check"></i> Be sure to record your RMA number and clearly mark the outside of the box(s) with this number.</li>
 				<li><i class="fa-li fa fa-check"></i> Ship only the items that are authorized.  You will receive an authorization confirmation from Level 5 Tools upon submitting this form.</li>
 				<li><i class="fa-li fa fa-check"></i> Ship returned items to:  full address Level 5 Tools, 118 Abbie Avenue Kansas City, KS, United States 66103 </li>
 				<li><i class="fa-li fa fa-check"></i> Shipments received by Level 5 Tools without an RMA number will be refused.</li>
 			</ul>
 		</div>
-				
-		
+
+
 
 
 		<div class="well">
@@ -95,19 +79,19 @@
 				You can no longer add or edit your tools becuase your rma has been submitted, To update or change your tools, please contact us for further assistance.
 			</blockquote>
 		{%endif%}
-		
+
 			{% for flashMessage in app.session.flashbag.get('notice') %}
 			<div class="alert alert-danger alert-dismissible" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				{{ flashMessage | raw}}
 			</div>
 			{% endfor %}
-			
+
 				<table class="table">
 					{% if rmaItems | length > 0%}
 					<thead>
 						<tr>
-							<th style="width:30%">Product</th>							
+							<th style="width:30%">Product</th>
 							<th style="width: 50%">Details</th>
 							<th style="text-align: center;">Image</th>
 							{% if rma.status | lower == 'created'%}
@@ -125,7 +109,7 @@
 						<tr>
 							<td colspan="4">
 								<h4>Edit Product Return</h4>
-								
+
 								{% if form %}
 								{{ form_start(form) }}
 								{{ form_row(form.product)}}
@@ -143,9 +127,9 @@
 
 								<div class="collapse in" id="script-rma-brand-type">
 									{{ form_row(form.productBrand) }}
-									{{ form_row(form.productType) }}										
+									{{ form_row(form.productType) }}
 								</div>
-								{{ form_row(form.productNotes)}}								
+								{{ form_row(form.productNotes)}}
 								<div class="form-group">
 									{{ form_label(form.productImageFile)}}
 									<div class="col-sm-9">
@@ -155,7 +139,7 @@
 													<img style="width: 100px; height: auto" src="https://apps.fifthgeardev.net/uploads/rma/{{item.productImageGuid}}" />
 													{{item.productImageGuid}}
 											</a></em>
-											
+
 										</div>
 										{% if form_errors(form.productImageFile)  %}
 										<div style="margin-top: 12px;" class="alert alert-danger">{{ form_errors(form.productImageFile) }}</div>
@@ -163,37 +147,37 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-sm-3">											
+									<div class="col-sm-3">
 									</div>
 									<div class="col-sm-9">
 										<div class="pull-left">{{form_widget(form.save,{'attr' : {'class' : 'fa-check btn btn-default'}})}}</div>
-										<div class="pull-right align-right-sm"><a data-toggle="tooltip" data-placement="top" title="Cancel Edit"  href="?session={{rma.session}}" class="btn btn-default"><i class="fa fa-ban"></i></a>	</div>																					 
+										<div class="pull-right align-right-sm"><a data-toggle="tooltip" data-placement="top" title="Cancel Edit"  href="?session={{rma.session}}" class="btn btn-default"><i class="fa fa-ban"></i></a>	</div>
 									</div>
-								</div>	
+								</div>
 								{{ form_end(form) }}
 								{% else %}
 									<blockquote>Form Error</blockquote>
-								{% endif %}										
+								{% endif %}
 							</td>
 							<td style="text-align: center; padding-top: 60px;"><a data-toggle="tooltip" data-placement="top" title="Delete Product" data-product="{{item.toolType}}/{{item.toolBrand}}" data-href="?session={{rma.session}}&item={{item.id}}&action=delete" href="javascript:void(0)" class="btn btn-default script-rma-delete"><i class="fa fa-trash-o"></i></a></td>
-						</tr>								
+						</tr>
 						{%else%}
 						<tr>
 							<td><strong>{{item.product}} </strong>{%if item.productType | length > 0 %}{{item.productType}}{%endif%} {%if item.productBrand | length > 0 %}<em>{{item.productBrand}}</em>{%endif%}</td>
-							
+
 							<td>{{item.productNotes}}</td>
 							{% if item.productImageGuid | length > 0  %}
 							<td style="text-align: center;"><a  data-toggle="lightbox" data-gallery="rmaimage" class="" href="https://apps.fifthgeardev.net/uploads/rma/{{item.productImageGuid}}"><img style="width: 60px; height: 40px" src="https://apps.fifthgeardev.net/uploads/rma/{{item.productImageGuid}}" /></a> </td>
 							{% else %}
-							<td></td>	
+							<td></td>
 							{% endif %}
 							{% if rma.status | lower == 'created'%}
 							<td style="text-align: center;"><a data-toggle="tooltip" data-placement="top" title="Edit Product" href="?session={{rma.session}}&item={{item.id}}" class="btn btn-default"><i class="fa fa-pencil-square-o"></i></a></td>
 							<td style="text-align: center;"><a data-toggle="tooltip" data-placement="top" title="Delete Product" data-product="{{item.product}} {{item.productType}}/{{item.toolBrand}}"  data-href="?session={{rma.session}}&item={{item.id}}&action=delete" href="javascript:void(0)" class="btn btn-default script-rma-delete"><i class="fa fa-trash-o"></i></a></td>
 							{% endif %}
-						</tr>									
-						{%endif%}					
-					
+						</tr>
+						{%endif%}
+
 					{% endfor %}
 						{% if focusitem == 0 and focusFlag == 'false' and rma.status | lower == 'created' %}
 						<tr>
@@ -216,33 +200,33 @@
 
 								<div class="collapse" id="script-rma-brand-type">
 									{{ form_row(form.productBrand) }}
-									{{ form_row(form.productType) }}										
+									{{ form_row(form.productType) }}
 								</div>
 
-								
+
 								{{ form_row(form.productNotes) }}
 								{{ form_row(form.productImageFile) }}
-								
+
 								<div class="form-group">
-									<div class="col-sm-3">											
+									<div class="col-sm-3">
 									</div>
 									<div class="col-sm-9">
 										<div class="pull-left">{{form_widget(form.save,{'attr' : {'class' : 'fa-plus btn btn-default'}})}}</div>
-										<div class="pull-right align-right-sm"></div>																					 
+										<div class="pull-right align-right-sm"></div>
 									</div>
-								</div>	
+								</div>
 								{{ form_end(form) }}
 								{% else %}
 									<blockquote>Form Error</blockquote>
-								{% endif %}									
+								{% endif %}
 							</td>
 						</tr>
 						{% endif %}
-					</tbody>					
-				</table>				
+					</tbody>
+				</table>
 
-		
-			
+
+
 
 		</div>
 		{% if rma.notes | length > 0 %}
@@ -252,12 +236,12 @@
 				<tbody>
 					<tr>
 						<td colspan="2">
-							
+
 							<div><em>{{rma.notes}}</em></div>
 						</td>
 					</tr>
 				</tbody>
-			</table>			
+			</table>
 		</div>
 	{% endif %}
 	{% if rma.status | lower == 'created'%}
@@ -270,17 +254,11 @@
 		<div class="col-sm-6"></div>
 		<div class="col-sm-6 align-right-sm"><a style="color: #fff;" href="../../form/rma/?session={{rma.session}}&status=submit" style="" class="btn btn-default btn-lg"><i class="fa fa-share"></i> Submit RMA Request</a></div>
 	</div>
-	
 	{% endif%}
-	
-	<!-- Button trigger modal -->
-
-
-
 
 {% endblock %}
 {% block stylesheets %}
 <style>
 
-</style>	
+</style>
 {% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'FgmsShopifyBundle::base.html.twig' %}
+{% block javascripts %}	{% endblock %}
+{% block navigation%}{% include "FgmsShopifyBundle::forms-navigation.html.twig" %}{%endblock%}
+{% block body %}
+    <style>
+    h4 { padding-top: 0; margin-top: 0;}
+    </style>
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+
+					<th>Date</th>
+					<th>Status</th>
+					<th style="width:20%">Contact</th>
+					<th style="width:40%">Items</th>
+                    <th style="width:30%">Notes</th>
+					<th>View</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for entry in formIndex %}
+				<tr data-session="{{entry.status}}">
+					<td>{{entry.createDate | date('d/m/y')}}</td>
+					<td data-toggle="tooltip" data-placement="top" title="{{entry.session}}">
+                        {{entry.session | slice(24,32) }}
+						<select>
+						{%for item in statusOptions%}
+							<option {%if item.name == entry.status%}SELECTED{%endif%}>{{item.name}}</option>
+						{% endfor %}
+						</select>
+					</td>
+					<td>
+						<h4 >Contact</h4>
+						<div><strong>{{entry.company}}</strong></div>
+						<div>{{entry.firstName}} {{entry.lastName}}</div>
+						{% if entry.email  %}<div>Email: {{entry.email}}</div>{% endif %}
+						{% if entry.phoneToll  %}<div>Toll: {{entry.phoneToll}}</div>{% endif %}
+						{% if entry.phoneOffice  %}<div>Office: {{entry.phoneOffice}}</div>{% endif %}
+						{% if entry.phoneMobile  %}<div>Mobile: {{entry.phoneMobile}}</div>{% endif %}
+						{% if entry.phoneFax  %}<div>Fax: {{entry.phoneFax}}</div>{% endif %}
+						<strong style="margin-top: 12px">Address</strong>
+						<div>{{entry.address1}} {{entry.address2}}</div>
+						<div>{{entry.city}}, {{entry.province}}, {{entry.country}}</div>
+						<div>{{entry.postal}}</div>
+					</td>
+					<td>
+
+						<ul class="fa-ul">
+							{% for item in entry.items %}
+								<li><i class="fa-li fa fa-check"></i>
+                                    {% if item.quantity %}{{item.quantity}} {% endif %}<strong>{{item.product}}</strong>{{item.productType}} <em>{{item.productBrand}}</em>
+                                    {% if item.productNotes %} - {{item.productNotes}}{% endif %}
+                                </li>
+							{% endfor%}
+						</ul>
+					</td>
+                    <td>
+                        {% if entry.purchaseDate %}
+
+                        <div class="product-purchase-info">
+                            {% if entry.purchaseDate  %}<div>Purchase Date: {{entry.purchaseDate | date('d/m/y')}}</div>{% endif %}
+                            {% if entry.purchaseLocation  %}<div>Purchase Location: {{entry.purchaseLocation}}</div>{% endif %}
+                            {% if entry.purchaseReceipt  %}<div>Purchase Reciept: {{entry.purchaseReceipt}}</div>{% endif %}
+                        </div>
+                        {% endif %}
+                        {% if entry.notes %}
+                        <div style="padding-top: 12px;">{{entry.notes}}</div>
+                        {% endif %}
+                    </td>
+					<td><a  target="_blank" href="https://level5tools.myshopify.com/tools/fg/form/{% if formMenu == 'rma' %}rmaitem{% else %}warrantyitem{% endif %}/?session={{entry.session}}"
+                            class="btn btn-primary"><i class="fa fa-wrench"></i> {% if formMenu == 'rma' %}RMA{% else %}Warranty{% endif %}</a></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+
+
+		</table>
+	</div>
+{% endblock %}
