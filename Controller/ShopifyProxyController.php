@@ -72,8 +72,8 @@ class ShopifyProxyController extends Controller {
 
 				}
 				$form = $this->get_form_product('rma');
-				$title = 'Process Product Returns';
-				$subtitle ='Part1: Your Contact Details';
+				$title = 'Return Merchandise Authorization';
+				$subtitle ='Part 1/2: Your Contact Details';
 				break;
             case 'warranty':
                 if ( $this->get('request')->query->get('status','') == 'submit'){
@@ -88,8 +88,8 @@ class ShopifyProxyController extends Controller {
 
                 }
                 $form = $this->get_form_product('warranty');
-                $title = 'Process Product Warranty';
-                $subtitle ='Part1: Your Contact Details';
+                $title = 'Product Warranty Registration';
+                $subtitle ='Part 1/2: Your Contact Details';
                 break;
 			case 'rmaitem':
 				if ( $this->get('request')->query->get('action','') == 'delete'){
@@ -229,7 +229,7 @@ class ShopifyProxyController extends Controller {
 
 		$this->template_array['customer'] = $customer;
 		$this->template_array['items'] = $items;
-		$this->template_array['title'] = ($entity == 'RmaItem') ? 'Product Return Details' : 'Product Warranty Details' ;
+		$this->template_array['title'] = ($entity == 'RmaItem') ? 'Return Merchandise Authorization' : 'Product Warranty Registration' ;
 		return $this->renderAsLiquid('FgmsShopifyBundle:ShopifyProxy:product.html.twig',$this->template_array);
 	}
 
@@ -306,7 +306,7 @@ class ShopifyProxyController extends Controller {
         else {
             if ($customer->getPurchaseDate() == null){
                 $customer->setPurchaseDate(new \DateTime("now"));
-            }            
+            }
             $form = $this->createForm(new WarrantyType(),$customer);
         }
 

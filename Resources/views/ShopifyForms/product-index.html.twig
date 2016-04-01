@@ -9,47 +9,46 @@
 		<table class="table">
 			<thead>
 				<tr>
-
+                    <th>Ref. ID</th>
 					<th>Date</th>
-					<th>Status</th>
 					<th style="width:20%">Contact</th>
 					<th style="width:40%">Items</th>
                     <th style="width:30%">Notes</th>
-					<th>View</th>
+                    <th>Status</th>
+
 				</tr>
 			</thead>
-			<tbody>
+			<tbody style="font-size: 11px;">
 				{% for entry in formIndex %}
 				<tr data-session="{{entry.status}}">
-					<td>{{entry.createDate | date('d/m/y')}}</td>
-					<td data-toggle="tooltip" data-placement="top" title="{{entry.session}}">
-                        {{entry.session | slice(24,32) }}
-						<select>
-						{%for item in statusOptions%}
-							<option {%if item.name == entry.status%}SELECTED{%endif%}>{{item.name}}</option>
-						{% endfor %}
-						</select>
-					</td>
+
+                    <td>
+                        <a  title="{{entry.session}}" target="_blank" style="font-weight:bold;"
+                            href="https://level5tools.myshopify.com/tools/fg/form/{% if formMenu == 'rma' %}rmaitem{% else %}warrantyitem{% endif %}/?session={{entry.session}}" >
+                            {{entry.session | slice(24,32) }}
+                        </a>
+                    </td>
+                    <td>{{entry.createDate | date('d/m/y')}}</td>
+
 					<td>
-						<h4 >Contact</h4>
+
 						<div><strong>{{entry.company}}</strong></div>
-						<div>{{entry.firstName}} {{entry.lastName}}</div>
-						{% if entry.email  %}<div>Email: {{entry.email}}</div>{% endif %}
+						<div style="padding-bottom: 8px;">{{entry.firstName}} {{entry.lastName}}</div>
+						{% if entry.email  %}<div>{{entry.email}}</div>{% endif %}
 						{% if entry.phoneToll  %}<div>Toll: {{entry.phoneToll}}</div>{% endif %}
 						{% if entry.phoneOffice  %}<div>Office: {{entry.phoneOffice}}</div>{% endif %}
 						{% if entry.phoneMobile  %}<div>Mobile: {{entry.phoneMobile}}</div>{% endif %}
 						{% if entry.phoneFax  %}<div>Fax: {{entry.phoneFax}}</div>{% endif %}
-						<strong style="margin-top: 12px">Address</strong>
-						<div>{{entry.address1}} {{entry.address2}}</div>
+
+						<div style="padding-top: 8px;">{{entry.address1}} {{entry.address2}}</div>
 						<div>{{entry.city}}, {{entry.province}}, {{entry.country}}</div>
 						<div>{{entry.postal}}</div>
 					</td>
 					<td>
-
 						<ul class="fa-ul">
 							{% for item in entry.items %}
 								<li><i class="fa-li fa fa-check"></i>
-                                    {% if item.quantity %}{{item.quantity}} {% endif %}<strong>{{item.product}}</strong>{{item.productType}} <em>{{item.productBrand}}</em>
+                                    {% if item.quantity %}({{item.quantity}}) {% endif %}<strong>{{item.product}}</strong>{{item.productType}} <em>{{item.productBrand}}</em>
                                     {% if item.productNotes %} - {{item.productNotes}}{% endif %}
                                 </li>
 							{% endfor%}
@@ -65,12 +64,18 @@
                         </div>
                         {% endif %}
                         {% if entry.notes %}
-                        <div style="padding-top: 12px;">{{entry.notes}}</div>
+                        <div style="padding-top: 8px;">{{entry.notes}}</div>
                         {% endif %}
                     </td>
-					<td><a  target="_blank" href="https://level5tools.myshopify.com/tools/fg/form/{% if formMenu == 'rma' %}rmaitem{% else %}warrantyitem{% endif %}/?session={{entry.session}}"
-                            class="btn btn-primary"><i class="fa fa-wrench"></i> {% if formMenu == 'rma' %}RMA{% else %}Warranty{% endif %}</a></td>
-				</tr>
+
+                    <td >
+                        <select>
+                        {%for item in statusOptions%}
+                            <option {%if item.name == entry.status%}SELECTED{%endif%}>{{item.name}}</option>
+                        {% endfor %}
+                        </select>
+                    </td>
+                </tr>
 				{% endfor %}
 			</tbody>
 

@@ -1,73 +1,20 @@
 {% extends 'FgmsShopifyBundle::proxy-base.html.twig' %}
 
 {% block body %}
-		<h2 style="margin-top: -38px;">{% if customer.transaction == 'rma' %}Rma{% else %}Warranty{% endif %}: {{customer.session | slice(24,32) }}</h2>
-		<div style="margin: 0 0 32px">
-			<div class="pull-right" >
+		<h2 style="margin-top: -38px;">Part 2/2: Product Details</h2>
+		<div style="margin-top: -12px;">{% if customer.transaction == 'rma' %}RMA{% else %}Warranty{% endif %} Reference: {{customer.session | slice(24,32) }}</div>
+		<div style="margin: 8px 0 32px">
+			<div>
 				Status: <em> {{customer.status}}</em>
 				{% if customer.updateDate %}<div>Updated: <em>{{customer.updateDate | date('d/m/y')}}</em></div>{%endif%}
 			</div>
 			<div class="clearfix"></div>
 		</div>
-
-		<div class="well">
-			<div class="row">
-				<div class="col-sm-6"><h2 style="padding-top: 0">Contact Details</h2></div>
-				<div class="col-sm-6 align-right-sm"><a style="color: #fff;" href="../../form/{% if customer.transaction == 'rma' %}rma{% else %}warranty{% endif %}/?session={{customer.session}}" style="" class="btn btn-default "><i class="fa fa-pencil-square-o"></i> Edit Contact Info</a></div>
-			</div>
-			<table class="table">
-				<tbody>
-					<tr></tr>
-					<tr><td>Company</td><td>{{customer.company}}</td></tr>
-					<tr><td>Name</td><td>{{customer.firstName}} {{customer.lastName}}</td></tr>
-					<tr><td>Address</td>
-						<td>
-							<div>{{customer.address1}} {{customer.address2}}</div>
-							<div>{{customer.city}}, {{customer.province}}, {{customer.country}}, {{customer.postal}}</div>
-						</td>
-					</tr>
-					{% if customer.phoneToll | length > 0 %}<tr><td>Toll</td><td>{{customer.phoneToll}}</td></tr>{%endif%}
-					{% if customer.phoneOffice | length > 0 %}<tr><td>Office</td><td>{{customer.phoneOffice}}</td></tr>{%endif%}
-					{% if customer.phoneMobile | length > 0 %}<tr><td>Mobile</td><td>{{customer.phoneMobile}}</td></tr>{%endif%}
-					{% if customer.phoneFax | length > 0 %}<tr><td>Fax</td><td>{{customer.phoneFax}}</td></tr>{%endif%}
-					{% if customer.email | length > 0 %}<tr><td>Email</td><td>{{customer.email}}</td></tr>{%endif%}
-
-                    {% if customer.purchaseDate %}
-                        <tr><td colspan="2"><strong>Purchase Information</strong></td></tr>
-                        <tr><td>Purchase Date</td><td>{{customer.purchaseDate| date('d/m/y')}}</td></tr>
-                    {% endif %}
-                    {% if customer.purchaseLocation %}<tr><td>Email</td><td>{{customer.purchaseLocation}}</td></tr>{% endif %}
-                    {% if customer.purchaseReceipt %}<tr><td>Email</td><td>{{customer.purchaseReceipt}}</td></tr>{% endif %}
-                    
-
-				</tbody>
-			</table>
-		</div>
-		<div class="well">
-            {% if customer.transaction == 'rma' %}
-			<h2>Shipping Instructions</h2>
-			<ul class="fa-ul">
-				<li><i class="fa-li fa fa-check"></i> The bottom of the original packing slip contains Level 5 Tools returns address. Use this portion of the form to affix to the box(s). </li>
-				<li><i class="fa-li fa fa-check"></i> Be sure to record your RMA number and clearly mark the outside of the box(s) with this number.</li>
-				<li><i class="fa-li fa fa-check"></i> Ship only the items that are authorized.  You will receive an authorization confirmation from Level 5 Tools upon submitting this form.</li>
-				<li><i class="fa-li fa fa-check"></i> Ship returned items to:  full address Level 5 Tools, 118 Abbie Avenue Kansas City, KS, United States 66103 </li>
-				<li><i class="fa-li fa fa-check"></i> Shipments received by Level 5 Tools without an RMA number will be refused.</li>
-			</ul>
-            {% else %}
-            <h2>Warranty Instructions</h2>
-            <ul class="fa-ul">
-				<li><i class="fa-li fa fa-check"></i> In order for Level5 Tools to provide warranty support and process any warranty claims that a copy of my original receipt will be required. </li>
-	        </ul>
-            {% endif %}
-		</div>
-
-
-
     <div class="well">
-		<h2 style="padding-top: 0">Product</h2>
+		<h2 style="padding-top: 0">Product{% if items | length > 1 %}s{% endif %}</h2>
         {% if customer.status | lower != 'created'%}
             <blockquote style="font-size: 0.95em;">
-            	You can no longer add or edit your tools because your form has been submitted, To update or change your tools, please contact us for further assistance.
+            	You can no longer add or edit your tools because your form has been submitted. To update or change your tools, please contact us for further assistance.
             </blockquote>
         {% endif %}
 
@@ -227,38 +174,91 @@
 
 
 		</div>
-		{% if customer.notes | length > 0 %}
+
+
+
+
 		<div class="well">
-			<h2 style="padding-top: 0">Notes</h2>
+			<div class="row">
+				<div class="col-sm-6"><h2 style="padding-top: 0">Contact Details</h2></div>
+				<div class="col-sm-6 align-right-sm"><a style="color: #fff;" href="../../form/{% if customer.transaction == 'rma' %}rma{% else %}warranty{% endif %}/?session={{customer.session}}" style="" class="btn btn-default "><i class="fa fa-pencil-square-o"></i> Edit Contact Info</a></div>
+			</div>
 			<table class="table">
 				<tbody>
-					<tr>
-						<td colspan="2">
-
-							<div><em>{{customer.notes}}</em></div>
+					<tr><td>Company</td><td>{{customer.company}}</td></tr>
+					<tr><td>Name</td><td>{{customer.firstName}} {{customer.lastName}}</td></tr>
+					<tr><td>Address</td>
+						<td>
+							<div>{{customer.address1}} {{customer.address2}}</div>
+							<div>{{customer.city}}, {{customer.province}}, {{customer.country}}, {{customer.postal}}</div>
 						</td>
 					</tr>
+					{% if customer.phoneToll | length > 0 %}<tr><td>Toll</td><td>{{customer.phoneToll}}</td></tr>{%endif%}
+					{% if customer.phoneOffice | length > 0 %}<tr><td>Office</td><td>{{customer.phoneOffice}}</td></tr>{%endif%}
+					{% if customer.phoneMobile | length > 0 %}<tr><td>Mobile</td><td>{{customer.phoneMobile}}</td></tr>{%endif%}
+					{% if customer.phoneFax | length > 0 %}<tr><td>Fax</td><td>{{customer.phoneFax}}</td></tr>{%endif%}
+					{% if customer.email | length > 0 %}<tr><td>Email</td><td>{{customer.email}}</td></tr>{%endif%}
+
+                    {% if customer.purchaseDate %}
+                        <tr><td colspan="2"><strong>Purchase Information</strong></td></tr>
+                        <tr><td>Purchase Date</td><td>{{customer.purchaseDate| date('d/m/y')}}</td></tr>
+                    {% endif %}
+                    {% if customer.purchaseLocation %}<tr><td>Email</td><td>{{customer.purchaseLocation}}</td></tr>{% endif %}
+                    {% if customer.purchaseReceipt %}<tr><td>Email</td><td>{{customer.purchaseReceipt}}</td></tr>{% endif %}
+					{% if customer.notes | length > 0 %}
+					<tr><td colspan="2">
+						<strong>Notes</strong>
+						<div style="padding-top: 8px;"><em>{{customer.notes}}</em></div>
+					</td></tr>
+
+					{% endif %}
+
 				</tbody>
 			</table>
 		</div>
-	{% endif %}
-	{% if customer.status | lower == 'created'%}
-	<div class="row">
-		<div class="col-sm-12">
-			<p><em> <strong>IMPORTANT</strong>: Once submitted, you will not be able to revise this Request.  Please contact us if you need to make any changes.</em></p>
-		</div>
+
+
+	<div class="well">
+		{% if customer.transaction == 'rma' %}
+		<h2>RMA Instructions</h2>
+		<h3>Product Details</h3>
+		<ul class="fa-ul">
+			<li><i class="fa-li fa fa-check"></i>Verify the product information you have provided above is correct.</li>
+			<li><i class="fa-li fa fa-check"></i>Upon pressing "Submit" you will not be able to revise this RMA form.</li>
+			<li><i class="fa-li fa fa-check"></i>Any additional products can be added by submitting a new RMA form.</li>
+			<li><i class="fa-li fa fa-check"></i>In order for Level5 Tools to provide warranty support and process any warranty claims a copy of the original purchase receipt will be required.</li>
+
+		</ul>
+		<h3>Shipping</h3>
+		<ul class="fa-ul">
+			<li><i class="fa-li fa fa-check"></i>Be sure to record your RMA number and clearly mark the outside of the box(es) with this number.</li>
+			<li><i class="fa-li fa fa-check"></i>Ship only the items that are authorized. You will receive an authorization confirmation from Level 5 Tools upon submitting this form.</li>
+			<li><i class="fa-li fa fa-check"></i>Ship returned items to: full address Level 5 Tools, 118 Abbie Avenue Kansas City, KS, United States 66103.</li>
+			<li><i class="fa-li fa fa-check"></i>Shipments received by Level 5 Tools without an RMA number will be refused.</li>
+		</ul>
+
+		{% else %}
+		<h2>Before You Complete This Registration...</h2>
+		<ul class="fa-ul">
+			<li><i class="fa-li fa fa-check"></i>Verify the contact and product information you have provided above is correct.</li>
+			<li><i class="fa-li fa fa-check"></i>Upon pressing "Submit" you will not be able to revise this <em>Warranty Registration Form</em>.</li>
+			<li><i class="fa-li fa fa-check"></i>Additional products can be registered by submitting a new <em>Warranty Registration Form</em>.</li>
+			<li><i class="fa-li fa fa-check"></i>For Level5 Tools to provide warranty support and process any warranty claims, <strong>a copy of the original purchase receipt is required</strong>.</li>
+		</ul>
+		{% endif %}
 	</div>
-	<div class="row">
+	{% if customer.status | lower == 'created'%}
+	<div class="row" style="padding-top: 24px;">
 		<div class="col-sm-6"></div>
 		<div class="col-sm-6 align-right-sm">
             <a  style="color: #fff;"
                 href="../../form/{% if customer.transaction == 'rma' %}rma{% else %}warranty{% endif %}/?session={{customer.session}}&status=submit"
                 class="btn btn-default btn-lg">
-                <i class="fa fa-share"></i> Submit {% if customer.transaction == 'rma' %}Rma{% else %}Warranty{% endif %} Request
+                <i class="fa fa-share"></i> Submit {% if customer.transaction == 'rma' %}RMA{% else %}Warranty{% endif %} Request
             </a>
         </div>
 	</div>
-	{% endif%}
+	{% endif %}
 
 {% endblock %}
 {% block javascripts %}

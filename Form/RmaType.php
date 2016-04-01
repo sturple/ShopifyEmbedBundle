@@ -20,19 +20,19 @@ class RmaType extends AbstractType
             ->add('company')
             ->add('firstName')
             ->add('lastName')
-            ->add('address1','textarea')
-            ->add('address2',null,array('required'=>false))
+            ->add('address1','textarea',array('label'=>'Address 1'))
+            ->add('address2',null,array('required'=>false,'label'=>'Address 2'))
             ->add('city')
-            ->add('postal',null,array('label'=>'Zip/Postal Code'))
+            ->add('postal',null,array('label'=>'Zip/Postal'))
             ->add('province',null,array('label'=>'State/Province'))
-            ->add('country','country')
+            ->add('country','country',array('preferred_choices'=>array('US')))
 
             ->add('phoneMobile',null,array('required'=>false))
             ->add('phoneOffice',null,array('required'=>false))
             ->add('phoneFax',null,array('required'=>false))
             ->add('email')
             ->add('notes',null,array('required'=>false))
-            ->add('save','submit',array('label'=>'Update'))
+            ->add('save','submit',array('label'=>'Proceed to Step 2', 'attr'=>array('class'=>'btn-lg btn-primary btn btn-advance')))
 
         ;
     }
