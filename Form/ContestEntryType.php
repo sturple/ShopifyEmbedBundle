@@ -15,14 +15,14 @@ class ContestEntryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', null,array('label'=>'First Name'))
-            ->add('lastName', null,array('label'=>'Last Name'))
-            ->add('email')
-            ->add('location', null,array('required'=> false))
-            ->add('description', null,array('required'=> false))
+            ->add('firstName', null,array('label'=>'First name','required'=> true))
+            ->add('lastName', null,array('label'=>'Last name','required'=> true))
+            ->add('email',null, array('required'=>true))
+            ->add('location', null,array('required'=> true,'label'=>'Photo location'))
+            ->add('description', null,array('required'=> false,'label'=>'Photo description'))
             ->add('photoFile','file', array('required'=> false))
-            ->add('photoDate', 'date', array('required'=> false))
-            ->add('photoUrl', null,array('required'=> false))
+            ->add('photoDate', 'date', array('required'=> true))
+            ->add('photoUrl', null,array('required'=> false,'label'=>'Photo link'))
             ->add('terms','hidden')
             ->add('submit','submit',array('label'=>'Submit Contest Entry', 'attr'=>array('class'=>'btn btn-primary btn-lg', 'style'=>'margin-top:24px;')))
         ;

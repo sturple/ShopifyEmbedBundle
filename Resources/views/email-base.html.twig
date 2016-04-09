@@ -133,7 +133,7 @@
                                                                         | <a href="mailto:{{ global.email}}" style="color: #{{global.colorLink | default('60c060')}}; text-decoration: none;">Email</a>
                                                                     {% endif %}
                                                                     {% if store.domain %}
-                                                                        | <a href="{{store.domain}}" style="color: #{{global.colorLink | default('60c060')}}; text-decoration: none;">Website</a>
+                                                                        | <a href="http://{{store.domain}}" style="color: #{{global.colorLink | default('60c060')}}; text-decoration: none;">Website</a>
                                                                     {% endif %}
 
                                                                 </span>
@@ -158,7 +158,7 @@
                                                     <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
                                                         <td class="center body-text footer-text" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: center; color: #{{global.colorText |default('666666')}}; font-family: 'Open Sans',arial,helvetica,sans-serif; font-weight: normal; line-height: 16px; font-size: 11px; margin: 0; padding: 24px 0 12px;" align="center" valign="top">
                                                             <center style="width: 100%; min-width: 580px;">
-                                                                {% if fields.email.value %} This email was sent to <a href="mailto:{{fields.email.value | striptags }}" style="color: #{{global.colorLink | default('60c060')}}; text-decoration: none;">{{fields.email.value | striptags }}{%endif%}</a> | 
+                                                                {% if fields.email.value %} This email was sent to <a href="mailto:{{fields.email.value | striptags }}" style="color: #{{global.colorLink | default('60c060')}}; text-decoration: none;">{{fields.email.value | striptags }}{%endif%}</a> |
                                                                 <a href="unsubscribe@fifthgeardev.com" style="color: #{{global.colorLink |default('60c060')}}; text-decoration: none;">
                                                                     <font color="#{{global.colorLink |default('60c060')}}">Unsubscribe</font>
                                                                 </a>

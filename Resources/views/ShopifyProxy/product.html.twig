@@ -11,7 +11,7 @@
 			<div class="clearfix"></div>
 		</div>
     <div class="well">
-		<h2 style="padding-top: 0">Product{% if items | length > 1 %}s{% endif %}</h2>
+		<h2 style="padding-top: 0">Product{% if items | length > 1 %}s{% endif %} {% if customer.transaction == 'rma' %}to be Returned{% else %}to be Registered{% endif %}</h2>
         {% if customer.status | lower != 'created'%}
             <blockquote style="font-size: 0.95em;">
             	You can no longer add or edit your tools because your form has been submitted. To update or change your tools, please contact us for further assistance.
@@ -62,7 +62,7 @@
 							   style="margin-left: 8px;"
 							   data-target="#script-rma-brand-type"
 							   aria-expanded="false"
-							   aria-controls="script-rma-brand-type">Not in the List</a>
+							   aria-controls="script-rma-brand-type">My product is not in the list above.</a>
 							</div>
 						</div>
 
@@ -126,7 +126,7 @@
 				{% if focusitem == 0 and focusFlag == 'false' and customer.status | lower == 'created' %}
 				<tr>
 					<td colspan="4">
-						<h4 style="margin-bottom: 12px;"><em>Add Product</em></h4>
+						<h4 style="margin-bottom: 12px;"><em>Add Product {% if customer.transaction == 'rma' %}to this RMA Submission{% else %}to this Warranty Registration{% endif %}</em></h4>
 						{% if form %}
 						{{ form_start(form) }}
                         {% if form.quantity %}{{ form_row(form.quantity)}}{% endif %}
@@ -139,7 +139,7 @@
 							   data-toggle="collapse"
 							   data-target="#script-rma-brand-type"
 							   aria-expanded="false"
-							   aria-controls="script-rma-brand-type">Not in the List</a>
+							   aria-controls="script-rma-brand-type">My product is not in the list above.</a>
 							</div>
 						</div>
 
@@ -223,18 +223,19 @@
 		<h2>RMA Instructions</h2>
 		<h3>Product Details</h3>
 		<ul class="fa-ul">
-			<li><i class="fa-li fa fa-check"></i>Verify the product information you have provided above is correct.</li>
-			<li><i class="fa-li fa fa-check"></i>Upon pressing "Submit" you will not be able to revise this RMA form.</li>
-			<li><i class="fa-li fa fa-check"></i>Any additional products can be added by submitting a new RMA form.</li>
-			<li><i class="fa-li fa fa-check"></i>In order for Level5 Tools to provide warranty support and process any warranty claims a copy of the original purchase receipt will be required.</li>
+			<li><i class="fa-li fa fa-check"></i>Verify your contact and product information provided above is correct.</li>
+			<li><i class="fa-li fa fa-check"></i>Upon pressing "Submit" you will not be able to revise this <em>RMA Form</em>.</li>
+			<li><i class="fa-li fa fa-check"></i>Any additional products can be added by submitting a new <em>RMA Form</em>.</li>
+			<li><i class="fa-li fa fa-check"></i>For Level5 Tools to provide warranty support and process any warranty claims, <strong>a copy of the original purchase receipt is required</strong>.</li>
 
 		</ul>
 		<h3>Shipping</h3>
 		<ul class="fa-ul">
 			<li><i class="fa-li fa fa-check"></i>Be sure to record your RMA number and clearly mark the outside of the box(es) with this number.</li>
 			<li><i class="fa-li fa fa-check"></i>Ship only the items that are authorized. You will receive an authorization confirmation from Level 5 Tools upon submitting this form.</li>
-			<li><i class="fa-li fa fa-check"></i>Ship returned items to: full address Level 5 Tools, 118 Abbie Avenue Kansas City, KS, United States 66103.</li>
-			<li><i class="fa-li fa fa-check"></i>Shipments received by Level 5 Tools without an RMA number will be refused.</li>
+			<li><i class="fa-li fa fa-check"></i>Ship returned items to: Level 5 Tools, 118 Abbie Avenue Kansas City, KS, United States 66103.</li>
+			<li><i class="fa-li fa fa-check"></i>Any shipments delivered to Level 5 Tools without an RMA number clearly marked on the package will be refused.</li>
+			<li><i class="fa-li fa fa-check"></i>If the item(s) to be returned are part of a Warranty Claim, <strong>you must include a copy of the original purchase receipt.</strong></li>
 		</ul>
 
 		{% else %}

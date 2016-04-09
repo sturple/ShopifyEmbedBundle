@@ -10,7 +10,10 @@
 
 {% if fields %}
 {% for field in fields %}
+    {% if field.label == 'Photo link' %}
+    {% else %}
     {{field.label}}:  {{field.value | striptags}}
+{% endif %}
 {% endfor %}
 {% endif %}
 {% endblock %}

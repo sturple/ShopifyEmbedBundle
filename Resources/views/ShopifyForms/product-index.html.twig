@@ -1,5 +1,14 @@
 {% extends 'FgmsShopifyBundle::base.html.twig' %}
-{% block javascripts %}	{% endblock %}
+
+{% block javascripts %}
+<script>
+$(function(){
+    $('form select').on('change',function(){
+        $(this).closest('form').submit();
+    })
+})
+</script>
+{% endblock %}
 {% block navigation%}{% include "FgmsShopifyBundle::forms-navigation.html.twig" %}{%endblock%}
 {% block body %}
     <style>
@@ -12,9 +21,9 @@
                     <th>Ref. ID</th>
 					<th>Date</th>
 					<th style="width:20%">Contact</th>
-					<th style="width:40%">Items</th>
-                    <th style="width:30%">Notes</th>
-                    <th>Status</th>
+					<th style="width:25%">Items</th>
+                    <th style="width:25%">Notes</th>
+                    <th style="width:10%">Status</th>
 
 				</tr>
 			</thead>
@@ -69,11 +78,9 @@
                     </td>
 
                     <td >
-                        <select>
-                        {%for item in statusOptions%}
-                            <option {%if item.name == entry.status%}SELECTED{%endif%}>{{item.name}}</option>
-                        {% endfor %}
-                        </select>
+
+                            {% if entry.status == 'Created' %}In Progress{% else %}Submitted{% endif %}
+                        
                     </td>
                 </tr>
 				{% endfor %}

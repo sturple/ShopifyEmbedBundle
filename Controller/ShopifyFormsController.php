@@ -78,18 +78,35 @@ class ShopifyFormsController extends Controller {
 			$itemQuery =$this->getDoctrine()
 				->getRepository('FgmsShopifyBundle:RmaItem')
 				->createQueryBuilder('item')
+
 				->where("item.session = '". $item['session']."' AND item.status = 'active'")
 				->orderBy('item.createDate')
 				->getQuery();
 			$item['items'] = $itemQuery->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+/*
+            $form = $this->createFormBuilder($item)
+                ->add('status','entity',array('class'=>'FgmsShopifyBundle:RmaStatus',
+                                                'choice_label'=>'name',
+                                                'choice_attr'=>array('class'=>''),
+                                                'data'=>$item['status'],
+                                                'label_attr'=>array('class'=>'hidden'),
+                                                'attr'=>array('style'=>'padding: 0px; font-size: 11px;')))
+                ->getForm();
+            $item['form']  =  $form->createView();*/
+
+            /*if ($form !== false){
+    			$form->handleRequest($this->get('request'));
+    			if ($form->isValid()){
+    				$em = $this->getDoctrine()->getManager();
+    				$em->persist($form->getData());
+    				$em->flush();
+                }
+            }*/
 		}
-		$statusOptions = $this->getDoctrine()
-			->getRepository('FgmsShopifyBundle:RmaStatus')
-			->findBy(array('status'=>'active'), array('sortOrder'=>'ASC'));
+
 		$this->template_array['title'] ='Product Returns';
 		$this->template_array['formMenu'] ='rma';
 		$this->template_array['formIndex'] = $rmaIndex;
-		$this->template_array['statusOptions'] = $statusOptions;
 		return $this->render('FgmsShopifyBundle:ShopifyForms:product-index.html.twig',$this->template_array);
 	}
     public function warrantyIndexAction(Request $request){
@@ -101,6 +118,7 @@ class ShopifyFormsController extends Controller {
 			->orderBy('warranty.createDate')
 			->getQuery();
 		$warrantyIndex= $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+
 		// lets now add the rmaitems
 		foreach ($warrantyIndex as &$item){
 			$itemQuery =$this->getDoctrine()
@@ -110,7 +128,9 @@ class ShopifyFormsController extends Controller {
 				->orderBy('item.createDate')
 				->getQuery();
 			$item['items'] = $itemQuery->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-		}
+
+
+        }
 		$statusOptions = $this->getDoctrine()
 			->getRepository('FgmsShopifyBundle:RmaStatus')
 			->findBy(array('status'=>'active'), array('sortOrder'=>'ASC'));
@@ -128,6 +148,9 @@ class ShopifyFormsController extends Controller {
 		return $this->render('FgmsShopifyBundle:ShopifyForms:rma-index.html.twig',$this->template_array);
 	}
 
+    public function updateFormAction(){
+
+    }
 
     private function get_app_settings() {
 		$settings = ShopifyClient::GET_SETTINGS($this);

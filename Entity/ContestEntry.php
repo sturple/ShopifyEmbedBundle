@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
 * ContestEntry
 *
@@ -103,10 +103,14 @@ class ContestEntry
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     *
-     * @Vich\UploadableField(mapping="settings_contest", fileNameProperty="photoGuid")
-     *
      * @var File
+     * @Vich\UploadableField(mapping="settings_contest", fileNameProperty="photoGuid")
+     * @Assert\File(
+     *     maxSize = "10M",
+     *     mimeTypes = {"image/bmp", "image/jpeg", "image/jpg", "image/png","image/gif" },
+     *     mimeTypesMessage = "Please upload a valid Image (bmp,jpeg,jpg,png,gif) ",
+     *     maxSizeMessage = "Please ensure your file is below 10M"
+     * )
      */
     private $photoFile;
 

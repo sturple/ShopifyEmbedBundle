@@ -70,6 +70,8 @@
         <td class="wrapper text-pad last" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; position: relative; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 10px 0px 0px;" align="left" valign="top">
             <table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 580px; margin: 0 auto; padding: 0;">
                 {% for field in fields %}
+                {% if field.label == 'Photo link' %}
+                {% else %}
                 <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
                     <td class="panel four sub-columns body-text label" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; min-width: 0px; width: 33.333333%; color: #{{global.colorText |default('666666')}}; font-family: 'Open Sans',arial,helvetica,sans-serif; font-weight: bold; line-height: 22px; font-size: 14px; background: #ffffff; margin: 0; padding: 10px; border: 1px solid #efefef;" align="left" bgcolor="#ffffff" valign="top">
                         {{field.label}}
@@ -79,6 +81,7 @@
                     </td>
                     <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: #{{global.colorText |default('666666')}}; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;" align="left" valign="top"></td>
                 </tr>
+                {% endif %}
                 {% endfor %}
             </table>
         </td>

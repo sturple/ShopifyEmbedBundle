@@ -11,16 +11,21 @@
 				$('html, body').animate({scrollTop : $($('form')).position().top}, 'slow');
 			}
 		}
-		$('[data-toggle="tooltip"]').tooltip()
+		$('[data-toggle="tooltip"]').tooltip();
+		$('form').on('submit', function(e){
+			$('button[type="submit"]').replaceWith("<div style='margin-top: 24px;'><img src='{{'{{'}} 'ajax-loader.gif' | asset_img_url {{'}}'}}' /> <span style='font-size: 1.1em; margin-left:8px;'>Uploading.  Please don't close this browser window...</span></div>");
+
+		});
 	})
 </script>
 {% endblock %}
 
 {% block body %}
-
+	<style>.help-block{color: red;}</style>
 	<div class="Include">
 		<!--include -->
-		{{'{%'}} include 'contest-details' {{'%}'}}
+		{{'{%'}} include 'monthly-photo-contest' {{'%}'}}
+		<div class="hidden">{{store |json_encode}}
 	</div>
 	<h2>Contest Entry</h2>
 	{% if form %}
@@ -38,9 +43,18 @@
 	{{form_row(form.lastName)}}
 	{{form_row(form.email)}}
 	{{form_row(form.location)}}
-	{{form_row(form.description)}}
-	{{form_row(form.photoFile)}}
 	{{form_row(form.photoDate)}}
+	{{form_row(form.description)}}
+	<h4 style="padding: 24px 0 12px">EITHER upload your photo file OR provide a link if your photo is already online:</h4>
+	<div class="form-group">
+		{{form_label(form.photoFile)}}
+		<div class="col-sm-10">
+			{{form_widget(form.photoFile)}}
+			<div style="font-size: 0.9em; font-style: italic; padding:4px 0;">Allowed file types are jpg, tiff, gif and png. File size to be less than 5MB.</div>
+			{{form_errors(form.photoFile)}}
+		</div>
+	</div>
+
 	{{form_row(form.photoUrl)}}
 
 
@@ -50,7 +64,7 @@
 			<div class="checkbox checkbox-inline">
 				<input required type="checkbox" id="fgms_shopifybundle_contestentry_terms" name="fgms_shopifybundle_contestentry[terms]"  value="1" >
 				<label for="fgms_shopifybundle_contestentry_terms"><span>I've read the
-				<a  href="/community/pages/ajax.html?type=modal&form_class=col-sm-9&label_class=sr-only&placeholder_flag=true&theme_id={{'{{'}}theme.id{{'}}'}}&asset=snippets/contest-details.liquid"
+				<a  href="/community/pages/ajax.html?type=modal&form_class=col-sm-9&label_class=sr-only&placeholder_flag=true&theme_id={{'{{'}}theme.id{{'}}'}}&asset=snippets/monthly-photo-contest-terms.liquid"
 					data-toggle="modal"
 					rel="nofollow"
 					data-target="#general-modal" >Terms and Conditions</a>.</span>	</label>

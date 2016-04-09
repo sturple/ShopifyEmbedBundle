@@ -33,16 +33,26 @@ class ShopifyContestController extends Controller {
 
 
 	public function publicAction($permalink){
+        //permalink format monthfullyyyy
+        $matches = null;
+        $permalink = strtolower($permalink);
+        $isValid = preg_match('/^(january|febuary|march|april|may|june|july|august|september|october|november|december)([0-9]{4})/', $permalink, $matches);
+        if (!$isValid){
+            return $this->redirect('/404');
+        }
 		$this->get_app_settings();
-		$this->template_array['title'] ='Contest ';
+
+		$this->template_array['title'] ='PEETZ Photo Contest ';
 
 		$contestEntry = new ContestEntry();
 		if ($contestEntry->getCreateDate() == null){
 			$contestEntry->setIpAddress($this->get('request')->server->get('HTTP_X_REAL_IP'));
 			$contestEntry->setCreateDate();
             $contestEntry->setUpdateDate();
+            $contestEntry->setPhotoDate(new \DateTime("now"));
 			$contestEntry->setShop($this->store_name);
             $contestEntry->setContestId($permalink);
+
 		}
 
 		$contestEntryType = new ContestEntryType();
@@ -66,25 +76,26 @@ class ShopifyContestController extends Controller {
                                         'email'=> array(
                                             'introtext'=>'<p>Hello '. $contestEntry->getFirstName(). ',</p>This message is simply to confirm that your contest entry has been received by PEETZ Outdoors. Good luck!',
                                             'content'=>'Note that you can also receive additional entries each month by posting your photos to our various social pages
-                                            (Facebook, Twitter, Instagram, Pinterest).  For more details and instructions, <a href="" style="text-decoration: none;color: #'.$globals->getColorLink() .'">click here</a>.',
+                                            (Facebook, Twitter, Instagram, Pinterest).  For more details and instructions, <a href="http://'.$storeDetails['domain'].'/apps/fgms/contest/' .$permalink.'/" style="text-decoration: none;color: #'.$globals->getColorLink() .'">click here</a>.',
 
                                         ),
                                         'fields'=>array(
                                                 'date'=>array('label'=>'Date','value'=>$contestEntry->getCreateDate()->format('Y-m-d H:i:s')),
-                                                'firstName'=>array('label'=>'First Name', 'value'=>$contestEntry->getFirstName()),
-                                                'lastName'=>array('label'=>'Last Name', 'value'=>$contestEntry->getLastName()),
+                                                'firstName'=>array('label'=>'First name', 'value'=>$contestEntry->getFirstName()),
+                                                'lastName'=>array('label'=>'Last name', 'value'=>$contestEntry->getLastName()),
                                                 'email'=>array('label'=>'Email', 'value'=>'<a href="mailto:' .$contestEntry->getEmail().'" style="text-decoration: none; color: #'.$globals->getColorLink() .';">'.$contestEntry->getEmail(). '</a>'),
                                                 'location'=>array('label'=>'Location','value'=>$contestEntry->getLocation()),
-                                                'description'=>array('label'=>'Description','value'=>$contestEntry->getDescription()),
-                                                'photo_date'=>array('label'=>'Photo Date','value'=>$contestEntry->getPhotoDate()->format('Y-m-d')),
-                                                'photo_url'=>array('label'=>'Photo URL','value'=>'<a href="'.$imageUrl.'" style="text-decoration: none; color: #'.$globals->getColorLink() .';" target="_blank">' .$imageUrl .'</a>')
+                                                'description'=>array('label'=>'Photo description','value'=>$contestEntry->getDescription()),
+                                                'photo_date'=>array('label'=>'Photo date','value'=>$contestEntry->getPhotoDate()->format('Y-m-d')),
+                                                'photo_url'=>array('label'=>'Photo link','value'=>'<a href="'.$imageUrl.'" style="text-decoration: none; color: #'.$globals->getColorLink() .';" target="_blank">' .$imageUrl .'</a>')
                                             ),
                                         'store'=>$storeDetails
                                         )
                                 );
-            
+
             $this->get('fgms.mailer')->sendEmail(array( 'to'=>array($contestEntry->getEmail()),
                                                         'subject'=>'Monthly Photo Contest Entry | ' . $storeDetails['name'],
+                                                        'from'=>array('postmaster@peetzoutdoors.com'),
                                                         'html'=>$this->renderView('FgmsShopifyBundle:Emails:Contest-client-email.html.twig',$data),
                                                         'txt'=>$this->renderView('FgmsShopifyBundle:Emails:Contest-client-email.txt.twig',$data)
 
@@ -95,15 +106,16 @@ class ShopifyContestController extends Controller {
             unset($data['email']['content']);
             unset($data['email']['subtitle']);
             unset($data['email']['introtext']);
-            $this->get('fgms.mailer')->sendEmail(array( 'to'=>array('shawn.turple@fifthgeardev.com'),
-                                                        'bcc'=>array('webmaster@fifthgeardev.com'),
+            $this->get('fgms.mailer')->sendEmail(array( 'to'=>array('info@peetzoutdoors.com'),
+                                                        'bcc'=>array(),
+                                                        'from'=>array('postmaster@peetzoutdoors.com'),
                                                         'subject'=>'Monthly Photo Contest Entry | ' . $storeDetails['name'],
                                                         'html'=>$this->renderView('FgmsShopifyBundle:Emails:Contest-store-email.html.twig',$data),
                                                         'txt'=>$this->renderView('FgmsShopifyBundle:Emails:Contest-store-email.txt.twig',$data)
 
                                                     ));
             //$(this)->get('fgms.mailer')->sendEmail()
-            return $this->redirect('/../../pages/product-question-delivered');
+            return $this->redirect('/../../pages/contest-entry-received');
 			//$this->get('fgms.mailer')->sendContestEmail($contestEntry,$this->get('fgms.settings')->getFormSettings($this->store_name));
 			//$this->sendEmailMessage($form, $formType);
 

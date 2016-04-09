@@ -67,6 +67,7 @@ class ShopifyProxyController extends Controller {
 					if ($rma){
 						$rma->setStatus('Submitted');
 						$this->getDoctrine()->getManager()->flush();
+                        //$this->sendEmailMessage('rma',$rma);
 						return $this->redirect('../../form/rmaitem/?session='.$this->get('request')->query->get('session'));
 					}
 
@@ -83,8 +84,10 @@ class ShopifyProxyController extends Controller {
                     if ($rma){
                         $rma->setStatus('Submitted');
                         $this->getDoctrine()->getManager()->flush();
+                        //$this->sendEmailMessage('warranty',$rma);
                         return $this->redirect('../../form/warrantyitem/?session='.$this->get('request')->query->get('session'));
                     }
+
 
                 }
                 $form = $this->get_form_product('warranty');
@@ -179,40 +182,25 @@ class ShopifyProxyController extends Controller {
 
 
 
-	private function sendEmailMessage($form=false, $formType=true){
-		if (($form !== false) and ($formType !== false)){
-			$message = \Swift_Message::newInstance()
-				->setSubject('Testing Swift Mailer')
-				->setFrom('wp.shawn.turple@fifthgeardev.com')
-				->setTo('shawn.turple@shaw.ca')
-				->setBody(
-					/*
-					$this->renderView(
-						// app/Resources/views/Emails/registration.html.twig
-						'Emails/registration.html.twig',
-						array('name' => $name)
-						)*/
 
-					'testing email'
-					,
-					'text/html'
-				)
-				/*
-				 * If you also want to include a plaintext version of the message
-				->addPart(
-					$this->renderView(
-						'Emails/registration.txt.twig',
-						array('name' => $name)
-					),
-					'text/plain'
-				)
-				*/
-			;
-			$this->get('mailer')->send($message);
+	private function sendEmailMessage(){
+        return;
+        $data = array_merge($this->template_array,
+                            array(  'global'=>$globals,
+                                    'email'=> array(
+                                        'introtext'=>'',
+                                        'content'=>''
+                                    ),
+                                    'fields'=>array(),
+                                    'store'=>$storeDetails
+                                    )
+                            );
 
-		}
-
-
+        $this->get('fgms.mailer')->sendEmail(array( 'to'=>array('webmaster@fifthgeardev.com'),
+                                                    'subject'=>'Registration | ' . $storeDetails['name'],
+                                                    'html'=>$this->renderView('FgmsShopifyBundle:Emails:Registration-email.html.twig',$data),
+                                                    'txt'=>$this->renderView('FgmsShopifyBundle:Emails:Registration-email.txt.twig',$data)
+                                                ));
 
 	}
 
