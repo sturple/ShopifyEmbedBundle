@@ -37,7 +37,7 @@ $(function(){
                             {{entry.session | slice(24,32) }}
                         </a>
                     </td>
-                    <td>{{entry.createDate | date('d/m/y')}}</td>
+                    <td>{{entry.createDate | date('M n, Y')}}</td>
 
 					<td>
 
@@ -67,7 +67,7 @@ $(function(){
                         {% if entry.purchaseDate %}
 
                         <div class="product-purchase-info">
-                            {% if entry.purchaseDate  %}<div>Purchase Date: {{entry.purchaseDate | date('d/m/y')}}</div>{% endif %}
+                            {% if entry.purchaseDate  %}<div>Purchase Date: {{entry.purchaseDate | date('M n, Y')}}</div>{% endif %}
                             {% if entry.purchaseLocation  %}<div>Purchase Location: {{entry.purchaseLocation}}</div>{% endif %}
                             {% if entry.purchaseReceipt  %}<div>Purchase Reciept: {{entry.purchaseReceipt}}</div>{% endif %}
                         </div>
@@ -80,7 +80,7 @@ $(function(){
                     <td >
 
                             {% if entry.status == 'Created' %}In Progress{% else %}Submitted{% endif %}
-                        
+
                     </td>
                 </tr>
 				{% endfor %}

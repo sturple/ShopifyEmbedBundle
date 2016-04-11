@@ -184,7 +184,7 @@ class ShopifyProxyController extends Controller {
 
 
 	private function sendEmailMessage(){
-        return;
+
         $data = array_merge($this->template_array,
                             array(  'global'=>$globals,
                                     'email'=> array(
@@ -340,7 +340,10 @@ class ShopifyProxyController extends Controller {
          $form = $this->createFormBuilder($item, array('csrf_protection' => false));
         }
         if ($entity == 'WarrantyItem'){
-            $form = $form->add('quantity','integer', array('required'=>false,'label'=>'Quantity'));
+            $form = $form->add('quantity','integer', array('required'=>false,'label'=>'Quantity', 'attr'=>array('min'=>1)));
+        }
+        else {
+            $form = $form->add('productImageFile','file',array('label'=>'Upload', 'required'=>false));
         }
 
         $form = $form
@@ -349,7 +352,7 @@ class ShopifyProxyController extends Controller {
             ->add('productType',null, array('required'=>false,'label'=>'Tool'))
             ->add('productBrand',null, array('required'=>false,'label'=>'Brand'))
             ->add('productNotes',null, array('required'=>false,'label'=>'Notes'))
-            ->add('productImageFile','file',array('label'=>'Upload', 'required'=>false))
+
             ->add('save','submit',array('label'=>' Add'))
             ->getForm();
 

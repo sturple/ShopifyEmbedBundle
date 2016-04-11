@@ -51,6 +51,7 @@ class WarrantyItem
 
     /**
      * @var string
+     * @Assert\Range(min="1")
      *
      * @ORM\Column(name="quantity", type="string", length=100, nullable=true)
      */

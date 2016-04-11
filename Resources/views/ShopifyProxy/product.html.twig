@@ -26,7 +26,7 @@
 		{% endfor %}
 
 		<table class="table">
-			{% if items | length > 0%}
+			{% if items | length > 0 %}
 			<thead>
 				<tr>
                     {% if customer.transaction == 'warranty' %}
@@ -71,6 +71,7 @@
 							{{ form_row(form.productType) }}
 						</div>
 						{{ form_row(form.productNotes)}}
+						{% if form.productImageFil %}
 						<div class="form-group">
 							{{ form_label(form.productImageFile)}}
 							<div class="col-sm-9">
@@ -88,7 +89,9 @@
 								<div style="margin-top: 12px;" class="alert alert-danger">{{ form_errors(form.productImageFile) }}</div>
 								{% endif %}
 							</div>
+
 						</div>
+						{% endif %}
 						<div class="form-group">
 							<div class="col-sm-2">
 							</div>
@@ -150,7 +153,7 @@
 
 
 						{{ form_row(form.productNotes) }}
-						{{ form_row(form.productImageFile) }}
+						{% if form.productImageFile %}{{ form_row(form.productImageFile) }}{% endif %}
 
 						<div class="form-group">
 							<div class="col-sm-2">
@@ -201,10 +204,10 @@
 
                     {% if customer.purchaseDate %}
                         <tr><td colspan="2"><strong>Purchase Information</strong></td></tr>
-                        <tr><td>Purchase Date</td><td>{{customer.purchaseDate| date('d/m/y')}}</td></tr>
+                        <tr><td>Purchase Date</td><td>{{customer.purchaseDate| date('M n, Y')}}</td></tr>
                     {% endif %}
-                    {% if customer.purchaseLocation %}<tr><td>Email</td><td>{{customer.purchaseLocation}}</td></tr>{% endif %}
-                    {% if customer.purchaseReceipt %}<tr><td>Email</td><td>{{customer.purchaseReceipt}}</td></tr>{% endif %}
+                    {% if customer.purchaseLocation %}<tr><td>Purchase Location</td><td>{{customer.purchaseLocation}}</td></tr>{% endif %}
+                    {% if customer.purchaseReceipt %}<tr><td>Receipt Number</td><td>{{customer.purchaseReceipt}}</td></tr>{% endif %}
 					{% if customer.notes | length > 0 %}
 					<tr><td colspan="2">
 						<strong>Notes</strong>
@@ -248,6 +251,7 @@
 		</ul>
 		{% endif %}
 	</div>
+	
 	{% if customer.status | lower == 'created'%}
 	<div class="row" style="padding-top: 24px;">
 		<div class="col-sm-6"></div>

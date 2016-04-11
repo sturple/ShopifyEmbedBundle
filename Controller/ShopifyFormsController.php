@@ -29,6 +29,7 @@ class ShopifyFormsController extends Controller {
 			->getManager()
 			->getRepository('FgmsShopifyBundle:FormSettings')
 			->findOneBy(array('shop'=>$this->store_name));
+
 		// settings hasn't been setup yet lets create default settings.
 		if (! $settings){
 			$settings = new FormSettings();
@@ -70,7 +71,7 @@ class ShopifyFormsController extends Controller {
 			->getRepository('FgmsShopifyBundle:Customers')
 			->createQueryBuilder('rma')
 			->where("rma.storeName = '". $this->store_name."' and rma.transaction = 'rma'"  )
-			->orderBy('rma.createDate')
+			->orderBy('rma.createDate','DESC')
 			->getQuery();
 		$rmaIndex= $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 		// lets now add the rmaitems
@@ -115,7 +116,7 @@ class ShopifyFormsController extends Controller {
 			->getRepository('FgmsShopifyBundle:Customers')
 			->createQueryBuilder('warranty')
 			->where("warranty.storeName = '". $this->store_name."' and warranty.transaction = 'warranty'"  )
-			->orderBy('warranty.createDate')
+			->orderBy('warranty.createDate','DESC')
 			->getQuery();
 		$warrantyIndex= $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
