@@ -41,7 +41,7 @@
                         <div class="column-wrapper">
                             {% if lp.sidebarContent | length > 0 %}<div style="margin-bottom: 24px;">{{markdownSidebar | raw}}</div>{% endif %}
                             {% if lp.specialOfferLink | length > 0 %}
-                               <a style="margin-bottom: 24px; width: 100%" href="{{lp.specialOfferLink}}" target="_blank"  class="btn btn-primary btn-lg">Buy Online</a>
+                               <a style="margin-bottom: 24px; width: 100%" href="{{lp.specialOfferLink}}" target="_blank"  class="btn btn-secondary btn-xl">Order Online</a>
                            {% endif %}
                             <p >You can also call us direct at:</p>
                             <p><span style="font-size: 1.8em; font-weight:500;">{{formGlobals.phoneToll }}</span></p>
@@ -80,7 +80,7 @@
     
     function fgmsTrack(data){
         data.referrer = document.referrer;
-        if (typeof ga == 'function') {	ga('send','event',data.eCategory,data.eAction,data.eLabel,data.eId)	};
+        if (typeof ga == 'function') {	ga('send','event',data.category,data.action,data.label,data.id)	};
     
         $.ajax(	{
             type : 'POST',
