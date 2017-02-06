@@ -35,13 +35,27 @@ class ShopifyShopSettings
      * @ORM\Column(name="storeName", type="string", length=255)
      */
     private $storeName;
-
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="storeUrl", type="string", length=255)
+     */
+    private $storeUrl;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="proxyUrl", type="string", length=255)
+     */
+    private $proxyUrl;    
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="createDate", type="datetime")
      * @Gedmo\Timestampable(on="create")
      */
+    
     private $createDate;
 
     /**
@@ -134,6 +148,53 @@ class ShopifyShopSettings
     {
         return $this->storeName;
     }
+    
+     /**
+     * Set storeUrl
+     *
+     * @param string $storeUrl
+     * @return ShopifyShopSettings
+     */
+    public function setStoreUrl($storeUrl)
+    {
+        $this->storeUrl = $storeUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get storeUrl
+     *
+     * @return string
+     */
+    public function getStoreUrl()
+    {
+        return $this->storeUrl;
+    }
+    
+    /**
+     * Set proxyUrl
+     *
+     * @param string $proxyUrl
+     * @return ShopifyShopSettings
+     */
+    public function setProxyUrl($proxyUrl)
+    {
+        $this->proxyUrl = $proxyUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get proxyUrl
+     *
+     * @return string
+     */
+    public function getProxyUrl()
+    {
+        return $this->proxyUrl;
+    }    
+    
 
     /**
      * Set createDate
