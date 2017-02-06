@@ -1,0 +1,127 @@
+    <div id="outer-container" class="partner-store" data-tracking-id="{{lp.id}}" data-background="https://apps.fifthgeardev.net/uploads/lp/{{lp.backgroundGuid}}">
+        <div class="container" >
+            <div class="inner-container">
+                    <div id="partner-header-wrapper" class="">
+                    <div class="column-wrapper">			
+                        <div class="row" style="position: relative;">
+                            <!-- header -->
+                            <div class="col-md-4 col-sm-3">
+                                <a href="{{storeUrl}}" target="_blank" >                                    							
+                                    <img class=" partner-shop-logo" src="https://apps.fifthgeardev.net/uploads/lp/{{formGlobals.lPageLogoGuid}}" alt="{{formGlobals.company}} Logo" />		        
+                                </a>
+                            </div>
+                            <div class="col-md-8 col-sm-9 hidden-xs">
+                                <div class="header-action-wrapper">
+                                    <a data-ga-label="visit-website" href="{{formGlobals.website}}"  class="btn btn-primary btn-lg ">Visit Website</a>
+                                </div>
+                            </div>	
+                        </div>
+                    </div>	
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="feature-header" style="background-image: url('https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageHorizontalGuid}}')" >
+                           <img class=" partner-logo" src="https://apps.fifthgeardev.net/uploads/lp/{{lp.logoGuid}}" alt="{{lp.company}} Logo" />	
+                        </div>                    
+                    </div>
+                </div>
+                <div id="content">	
+                    <div class="row">
+                        <div class="col-sm-8 lp-content">
+                            <div  class="column-wrapper">
+                                <h1 class="lp-h1 ppc">{{lp.pageTitle | raw}}</h1>                        
+                                {% if lp.pageSubtitle %}<div class="lp-subtitle">{{lp.pageSubtitle | raw}}</div>{%endif %}
+                                {% if markdownAnnouncement | length > 10 %}
+                                    <div class="partner-store-announcement">{{markdownAnnouncement | raw }}</div>                            
+                                {% endif %}
+                                {{markdownContent | raw}}
+                                {% if lp.postContent | length > 3 %}
+                                    <div class="lp-post-content">{{'{%'}} include '{{lp.postContent}}'{{'%}'}}</div>
+                                {% endif%}
+                            </div>
+                            
+                        </div>
+                        <div class="col-sm-4  lp-sidebar">
+                            <div class="column-wrapper">
+                                {% if lp.sidebarContent | length > 0 %}<div style="margin-bottom: 24px;">{{markdownSidebar | raw}}</div>{% endif %}
+                                {% if lp.specialOfferLink | length > 0 %}
+                                   <a style="margin-bottom: 24px; width: 100%" href="{{lp.specialOfferLink}}" target="_blank"  class="btn btn-secondary btn-xl">Order Online</a>
+                               {% endif %}
+                                <p >You can also call us direct at:</p>
+                                <p><span style="font-size: 1.8em; font-weight:500;">{{formGlobals.phoneToll }}</span></p>
+                            </div>
+    
+                        </div>                        
+                    </div>
+                    {% if lp.collectiona %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="parter-store-collection">                            
+                                {{'{%'}} include 'collection-feature', list : '{{lp.collectiona}}' {{'%}'}}
+                            </div>                        
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if lp.collectionb %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="parter-store-collection">                            
+                                {{'{%'}} include 'collection-feature', list: '{{lp.collectionb}}' {{'%}'}}
+                            </div>                        
+                        </div>
+                    </div>            
+                </div>
+                {% endif %}
+                <div class="lp-footer">          
+                    <div class="column-wrapper">                   
+                        
+                    </div>            
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">        
+    $(function(){
+        $('*[data-background]').each(function() {
+            $(this).css({'background-image': 'url(' + $(this).data('background')+')'});
+        });  
+        fgmsTrack({category : 'View', action: 'OnLoad', label: 'Page Load', id : $('*[data-tracking-id]').data('tracking-id')});
+        $( window ).resize(function() {updateLineHeight();});
+        $('a,button,input[type="submit"],iframe').addClass('script-tracking');
+        $('*[data-tracking-id]').on('click','.script-tracking',function(){	
+            var eCategory = ($(this).data('category')) ? $(this).data('category') : 'Link' ;			
+            var eAction = ($(this).data('action')) ? $(this).data('action') : 'Click' ;			
+            var eLabel = ($(this).data('label')) ? $(this).data('label') : (($(this).find('img').length > 0) ? $(this).find('img').attr('alt') : $(this).text()) ;		
+            fgmsTrack({category : eCategory, action: eAction, label: eLabel, id : $(this).closest('*[data-tracking-id]').data('tracking-id')});			
+        }) 
+    })
+    function fgmsTrack(data){
+        data.referrer = document.referrer;
+        if (typeof ga == 'function') {	ga('send','event',data.category,data.action,data.label,data.id)	};
+    
+        $.ajax(	{
+            type : 'POST',
+            url : "track/",
+            data : data,
+            dataType: 'json'
+        }).done( function (msg) {	
+            
+        }).fail( function (msg) {
+            
+        });			
+    }    
+    </script>
+<style>
+*[data-background], .background-class {
+    background-repeat: repeat-y;
+    background-position: top center;
+    background-attachment: fixed;
+    background-size: cover;
+	height: 100%;
+}
+
+#outer-container  .inner-container {
+    background-color: #fff;
+}
+
+</style>

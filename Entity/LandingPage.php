@@ -29,38 +29,35 @@ class LandingPage
      * @ORM\Column(name="type", type="string", length=255, nullable=true)
      */
     private $type;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
-	
+
     /**
      * @var string
      *
      * @ORM\Column(name="company", type="string", length=255, nullable=true)
      */
     private $company;
-	
+
     /**
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=255, nullable=true)
      */
     private $status;
-	
 
-	
     /**
      * @var string
      *
      * @ORM\Column(name="permalink", type="string", length=255, nullable=true)
      */
     private $permalink;
-	
-	
+
     /**
      * @var string
      *
@@ -72,30 +69,66 @@ class LandingPage
      * @var string
      *
      * @ORM\Column(name="content", type="text", nullable=true)
-     */
+     */	
     private $content;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="announcement", type="text", nullable=true)
+     */
+    private $announcement;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="announcementStartDate", type="datetime", nullable=true)
+     */		
+	private $announcementStartDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="announcementEndDate", type="datetime", nullable=true)
+     */	
+	private $announcementEndDate;
 
     /**
      * @var string
      *
      * @ORM\Column(name="postContent", type="text", nullable=true)
      */
-    private $postContent;    
+
+    private $postContent;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="collectiona", type="string", length=255, nullable=true)
+     */
+    private $collectiona;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="collectionb", type="string", length=255, nullable=true)
+     */
+    private $collectionb;	
+
     /**
      * @var string
      *
      * @ORM\Column(name="sidebarContent", type="text", nullable=true)
      */
     private $sidebarContent;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="summary", type="text", nullable=true)
      */
     private $summary;
-	
-	
+
     /**
      * @var string
      *
@@ -115,7 +148,7 @@ class LandingPage
      * @ORM\Column(name="buttonUrl", type="string", length=255, nullable=true)
      */
     private $buttonUrl;
-	
+
     /**
      * @var string
      *
@@ -146,8 +179,6 @@ class LandingPage
      */
     private $logoGuid;
 
-
-
     /**
      * @var string
      *
@@ -168,8 +199,6 @@ class LandingPage
      * @ORM\Column(name="youtubeThumbGuid", type="string", length=255, nullable=true)
      */
     private $youtubeThumbGuid;
-
-
 
     /**
      * @var string
@@ -192,7 +221,6 @@ class LandingPage
      */
     private $specialOfferImageHorizontalGuid;
 
-
     /**
      * @var string
      *
@@ -201,7 +229,6 @@ class LandingPage
     private $specialOfferImageVerticalGuid;
 
  
-
     /**
      * @var string
      *
@@ -283,7 +310,7 @@ class LandingPage
      * @ORM\Column(name="emailCustomerMessageText", type="text", nullable=true)
      */
     private $emailCustomerMessageText;	
-	
+
     /**
      * @var string
      *
@@ -302,8 +329,8 @@ class LandingPage
      * @ORM\Column(name="updateDate", type="datetime", nullable=true)
      */
     private $updateDate;
-	
-	
+
+
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
@@ -311,8 +338,26 @@ class LandingPage
      * 
      * @var File
      */
-    private $logoFile;	
-	
+    private $logoFile;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * 
+     * @Vich\UploadableField(mapping="lp_background_image", fileNameProperty="backgroundGuid")
+     * 
+     * @var File
+     */
+    private $backgroundFile;	
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="backgroundGuid", type="string", length=255, nullable=true)
+     *
+     * 
+     */
+    private $backgroundGuid;	
+
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
@@ -321,7 +366,7 @@ class LandingPage
      * @var File
      */
     private $youtubeThumbFile;	
-	
+
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
@@ -330,7 +375,7 @@ class LandingPage
      * @var File
      */
     private $specialOfferImageHorizontalFile;		
-	
+
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
@@ -345,22 +390,20 @@ class LandingPage
      * @ORM\Column(name="formEnable", type="boolean", nullable=true)
      */
     private $formEnable;	
-		
+
     /**
      * @var boolean
      *
      * @ORM\Column(name="emailEnable", type="boolean", nullable=true)
      */
     private $emailEnable;	
-	
+
     /**
      * @var boolean
      *
      * @ORM\Column(name="emailCustomerEnable", type="boolean", nullable=true)
      */
     private $emailCustomerEnable;		
-	
-
 
     /**
      * @var string
@@ -368,7 +411,7 @@ class LandingPage
      * @ORM\Column(name="campaignUrl", type="string", length=255, nullable=true)
      */
     private $campaignUrl;
-	
+
     /**
      * @var string
      *
@@ -387,9 +430,7 @@ class LandingPage
      * @ORM\Column(name="campaignLastName", type="string", length=255, nullable=true)
      */
     private $campaignLastName;
-	
-	
-	
+
     /**
      * Get id
      *
@@ -409,7 +450,6 @@ class LandingPage
     public function setTitle($title)
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -453,7 +493,6 @@ class LandingPage
     public function setCompany($company)
     {
         $this->company = $company;
-
         return $this;
     }
 
@@ -466,7 +505,7 @@ class LandingPage
     {
         return $this->company;
     }	
-	
+
     /**
      * Set status
      *
@@ -476,7 +515,6 @@ class LandingPage
     public function setStatus($status)
     {
         $this->status = $status;
-
         return $this;
     }
 
@@ -489,7 +527,7 @@ class LandingPage
     {
         return $this->status;
     }
-	
+
     /**
      * Set status
      *
@@ -520,7 +558,6 @@ class LandingPage
     public function setPageSubtitle($subtitle)
     {
         $this->pageSubtitle = $subtitle;
-
         return $this;
     }
 
@@ -542,7 +579,6 @@ class LandingPage
     public function setSummary($summary)
     {
         $this->summary = $summary;
-
         return $this;
     }
 
@@ -564,7 +600,6 @@ class LandingPage
     public function setContent($content)
     {
         $this->content = $content;
-
         return $this;
     }
     /**
@@ -576,7 +611,28 @@ class LandingPage
     {
         return $this->content;
     }    
-    
+
+    /**
+     * Set announcement
+     *
+     * @param string $announcement
+     * @return LandingPage
+     */
+    public function setAnnouncement($announcement)
+    {
+        $this->announcement = $announcement;
+        return $this;
+    }
+    /**
+     * Get announcement
+     *
+     * @return string 
+     */
+    public function getAnnouncement()
+    {
+        return $this->announcement;
+    } 	
+	
     /**
      * Set postContent
      *
@@ -586,7 +642,6 @@ class LandingPage
     public function setPostContent($content)
     {
         $this->postContent = $content;
-
         return $this;
     }
     /**
@@ -597,8 +652,51 @@ class LandingPage
     public function getPostContent()
     {
         return $this->postContent;
-    }    
-        
+    }
+
+    /**
+     * Set collectiona
+     *
+     * @param string $collectiona
+     * @return LandingPage
+     */
+    public function setCollectiona($collection)
+    {
+        $this->collectiona = $collection;
+        return $this;
+    }
+
+    /**
+     * Get collectiona
+     *
+     * @return string 
+     */
+    public function getCollectiona()
+    {
+        return $this->collectiona;
+    }	
+
+     /**
+     * Set collectionb
+     *
+     * @param string $collectionb
+     * @return LandingPage
+     */
+    public function setCollectionb($collection)
+    {
+        $this->collectionb = $collection;
+        return $this;
+    }
+
+    /**
+     * Get collectionb
+     *
+     * @return string 
+     */
+    public function getCollectionb()
+    {
+        return $this->collectionb;
+    }	       
     /**
      * Get sidebarContent
      *
@@ -618,12 +716,9 @@ class LandingPage
     public function setSidebarContent($content)
     {
         $this->sidebarContent = $content;
-
         return $this;
     }
 
-
-    
     /**
      * Set template
      *
@@ -633,10 +728,8 @@ class LandingPage
     public function setTemplate($template)
     {
         $this->template = $template;
-
         return $this;
     }
-
     /**
      * Get template
      *
@@ -646,7 +739,6 @@ class LandingPage
     {
         return $this->template;
     }
-
     /**
      * Set logoUrl
      *
@@ -689,7 +781,7 @@ class LandingPage
     {
         return $this->buttonUrl;
     }
-	
+
     /**
      * Set phoneOffice
      *
@@ -699,7 +791,6 @@ class LandingPage
     public function setPhoneOffice($phoneOffice)
     {
         $this->phoneOffice = $phoneOffice;
-
         return $this;
     }
 
@@ -722,7 +813,6 @@ class LandingPage
     public function setPhoneFax($phoneFax)
     {
         $this->phoneFax = $phoneFax;
-
         return $this;
     }
 
@@ -745,7 +835,6 @@ class LandingPage
     public function setPhoneToll($phoneToll)
     {
         $this->phoneToll = $phoneToll;
-
         return $this;
     }
 
@@ -768,7 +857,6 @@ class LandingPage
     public function setLogoGuid($logoGuid)
     {
         $this->logoGuid = $logoGuid;
-
         return $this;
     }
 
@@ -783,7 +871,27 @@ class LandingPage
     }
 
 
-	
+   /**
+     * Set backgroundGuid
+     *
+     * @param string $backgroundGuid
+     * @return LandingPage
+     */
+    public function setBackgroundGuid($guid)
+    {
+        $this->backgroundGuid = $guid;
+        return $this;
+    }
+
+    /**
+     * Get backgroundGuid
+     *
+     * @return string 
+     */
+    public function getBackgroundGuid()
+    {
+        return $this->backgroundGuid;
+    }	
 	
     /**
      * Set pageTitle
@@ -794,7 +902,6 @@ class LandingPage
     public function setPageTitle($pageTitle)
     {
         $this->pageTitle = $pageTitle;
-
         return $this;
     }
 
@@ -817,7 +924,6 @@ class LandingPage
     public function setYoutubeCode($youtubeCode)
     {
         $this->youtubeCode = $youtubeCode;
-
         return $this;
     }
 
@@ -863,7 +969,6 @@ class LandingPage
     public function setYoutubeThumbBlob($youtubeThumbBlob)
     {
         $this->youtubeThumbBlob = $youtubeThumbBlob;
-
         return $this;
     }
 
@@ -886,7 +991,6 @@ class LandingPage
     public function setYoutubeCaption($youtubeCaption)
     {
         $this->youtubeCaption = $youtubeCaption;
-
         return $this;
     }
 
@@ -909,7 +1013,6 @@ class LandingPage
     public function setLocatorLink($locatorLink)
     {
         $this->locatorLink = $locatorLink;
-
         return $this;
     }
 
@@ -932,7 +1035,6 @@ class LandingPage
     public function setSpecialOfferImageHorizontalGuid($specialOfferImageHorizontalGuid)
     {
         $this->specialOfferImageHorizontalGuid = $specialOfferImageHorizontalGuid;
-
         return $this;
     }
 
@@ -955,7 +1057,6 @@ class LandingPage
     public function setSpecialOfferImageHorizontalBlob($specialOfferImageHorizontalBlob)
     {
         $this->specialOfferImageHorizontalBlob = $specialOfferImageHorizontalBlob;
-
         return $this;
     }
 
@@ -978,7 +1079,6 @@ class LandingPage
     public function setSpecialOfferImageVerticalGuid($specialOfferImageVerticalGuid)
     {
         $this->specialOfferImageVerticalGuid = $specialOfferImageVerticalGuid;
-
         return $this;
     }
 
@@ -1001,7 +1101,6 @@ class LandingPage
     public function setSpecialOfferImageVerticalBlob($specialOfferImageVerticalBlob)
     {
         $this->specialOfferImageVerticalBlob = $specialOfferImageVerticalBlob;
-
         return $this;
     }
 
@@ -1024,7 +1123,6 @@ class LandingPage
     public function setSpecialOfferLink($specialOfferLink)
     {
         $this->specialOfferLink = $specialOfferLink;
-
         return $this;
     }
 
@@ -1047,7 +1145,6 @@ class LandingPage
     public function setFormEnable($formEnable)
     {
         $this->formEnable = $formEnable;
-
         return $this;
     }
 
@@ -1069,7 +1166,6 @@ class LandingPage
     public function setEmailEnable($emailEnable)
     {
         $this->emailEnable = $emailEnable;
-
         return $this;
     }
 
@@ -1091,7 +1187,6 @@ class LandingPage
     public function setEmailTo($emailTo)
     {
         $this->emailTo = $emailTo;
-
         return $this;
     }
 
@@ -1114,7 +1209,6 @@ class LandingPage
     public function setEmailCc($emailCc)
     {
         $this->emailCc = $emailCc;
-
         return $this;
     }
 
@@ -1137,7 +1231,6 @@ class LandingPage
     public function setEmailBcc($emailBcc)
     {
         $this->emailBcc = $emailBcc;
-
         return $this;
     }
 
@@ -1160,7 +1253,6 @@ class LandingPage
     public function setEmailSubject($emailSubject)
     {
         $this->emailSubject = $emailSubject;
-
         return $this;
     }
 
@@ -1183,7 +1275,6 @@ class LandingPage
     public function setEmailMessageHtml($emailMessage)
     {
         $this->emailMessageHtml = $emailMessage;
-
         return $this;
     }
 
@@ -1205,7 +1296,6 @@ class LandingPage
     public function setEmailMessageText($emailMessage)
     {
         $this->emailMessageText = $emailMessage;
-
         return $this;
     }
 
@@ -1229,7 +1319,6 @@ class LandingPage
     public function setEmailCustomerEnable($emailCustomerEnable)
     {
         $this->emailCustomerEnable = $emailCustomerEnable;
-
         return $this;
     }
 
@@ -1252,7 +1341,6 @@ class LandingPage
     public function setEmailCustomerCc($emailCustomerCc)
     {
         $this->emailCustomerCc = $emailCustomerCc;
-
         return $this;
     }
 
@@ -1275,7 +1363,6 @@ class LandingPage
     public function setEmailCustomerBcc($emailCustomerBcc)
     {
         $this->emailCustomerBcc = $emailCustomerBcc;
-
         return $this;
     }
 
@@ -1298,7 +1385,6 @@ class LandingPage
     public function setEmailCustomerSubject($emailCustomerSubject)
     {
         $this->emailCustomerSubject = $emailCustomerSubject;
-
         return $this;
     }
 
@@ -1321,7 +1407,6 @@ class LandingPage
     public function setEmailCustomerMessageHtml($emailCustomerMessage)
     {
         $this->emailCustomerMessageHtml = $emailCustomerMessage;
-
         return $this;
     }
 
@@ -1345,7 +1430,6 @@ class LandingPage
     public function setEmailCustomerMessageText($emailCustomerMessage)
     {
         $this->emailCustomerMessageText = $emailCustomerMessage;
-
         return $this;
     }
 
@@ -1369,7 +1453,6 @@ class LandingPage
     public function setShop($shop)
     {
         $this->shop = $shop;
-
         return $this;
     }
 
@@ -1416,7 +1499,7 @@ class LandingPage
     {
         $this->updateDate =  new \DateTime("now");
         return $this;
-    }
+    }	
 
     /**
      * Get updateDate
@@ -1427,6 +1510,55 @@ class LandingPage
     {
         return $this->updateDate;
     }	
+	
+	
+   /**
+     * Set updateDate
+     *
+     * @param \DateTime $announcementStartDate
+     * @return LandingPage
+     */
+    public function setAnnouncementStartDate($date="now")
+    {
+        $this->announcementStartDate =  new \DateTime($date);
+        return $this;
+    }	
+
+    /**
+     * Get announcementStartDate
+     *
+     * @return \DateTime 
+     */
+    public function getAnnouncementStartDate()
+    {
+        return $this->announcementStartDate;
+    }	
+	
+  /**
+     * Set updateDate
+     *
+     * @param \DateTime $announcementStartDate
+     * @return LandingPage
+     */
+    public function setAnnouncementEndDate($date="now")
+    {
+        $this->announcementEndDate =  new \DateTime($date);
+        return $this;
+    }	
+
+    /**
+     * Get announcementStartDate
+     *
+     * @return \DateTime 
+     */
+    public function getAnnouncementEndDate()
+    {
+        return $this->announcementEndDate;
+    }		
+			
+	
+	
+	
 	
 	
 	/* 
@@ -1441,12 +1573,27 @@ class LandingPage
     /**
      * @return File
      */
+    public function getBackgroundFile()
+    {
+        return $this->backgroundFile;
+    }	
+	
+	/* 
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $backgroundFile
+     */
+    public function setBackgroundFile(File $image = null)
+    {
+        $this->backgroundFile = $image;
+        if ($image) { $this->setUpdateDate();  }
+    }
+
+    /**
+     * @return File
+     */
     public function getLogoFile()
     {
         return $this->logoFile;
-    }	
-	
-	
+    }		
 	
 	/* 
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $youtubeThumbFile

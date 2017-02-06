@@ -1,0 +1,158 @@
+{% extends 'FgmsShopifyBundle::base.html.twig' %}
+{% block javascripts %}{% endblock %}
+{% block body %}
+
+{% if form %}		
+{{ form_start(form) }}
+<div>
+    <div style="text-align: right">
+        {{form_widget(form.save,{'attr' : {'class' : 'btn btn-success btn-lg'}})}}
+        <a class="btn btn-primary btn-lg" style="margin-right: 12px;" href="/shopify/lp"><i class="fa fa-hand-o-left" aria-hidden="true"></i> </a>
+    </div>
+    
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#lpTabSettings" aria-controls="lpTabSettings" role="tab" data-toggle="tab">Store Configuration</a></li>
+      <li role="presentation"><a href="#lpTabContent" aria-controls="lpTabContent" role="tab" data-toggle="tab">Content</a></li>
+      <li role="presentation"><a href="#lpTabAnnouncements" aria-controls="lpTabAnnouncements" role="tab" data-toggle="tab">Announcements</a></li>
+    </ul>
+    
+    <!-- Tab panes -->
+    <div class="tab-content" style="padding-top: 24px;">
+        <div role="tabpanel" class="tab-pane active" id="lpTabSettings">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">General Settings</h3>
+                        </div>
+                        <div class="panel-body">
+                            {{ form_row(form.title)}}
+                            {{ form_row(form.summary)}}
+                            {{ form_row(form.status)}}
+                            {{ form_row(form.template)}}							
+                            <div class="form-group">
+                                {{ form_label(form.permalink)}}
+                                <div class="col-sm-9">
+                                    {{form_widget(form.permalink)}}
+                                    <div style="font-size: 0.9em;margin-top: 8px;">
+                                        <a target="_blank" href="{{storeUrl}}/{{proxyUrl}}/lp/{{lp.permalink}}/">{{storeUrl}}/{{lp.permalink}}/</a>
+                                    </div>
+                                </div>
+                            </div>						
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Contact Details</h3>
+                        </div>
+                        <div class="panel-body">
+                            contact name, company, telephone, toll, email, address..			
+                        </div>
+                    </div>                    
+                </div>
+            </div>			  
+        </div>
+        <div role="tabpanel" class="tab-pane" id="lpTabContent">            
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Page Content</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                {{ form_label(form.backgroundFile)}}
+                                <div class="col-sm-9">
+                                    {{form_widget(form.backgroundFile)}}
+                                    <div style="font-size: 0.9em;margin-top: 8px;">
+                                        <em><a href="https://apps.fifthgeardev.net/uploads/lp/{{lp.backgroundGuid}}" target="_blank" >
+                                            {% if lp.backgroundGuid | length > 0 %}
+                                                <img style="width: 100px; height: auto" src="https://apps.fifthgeardev.net/uploads/lp/{{lp.backgroundGuid}}" />
+                                                {{lp.backgroundGuid}}
+                                            {% endif %}
+                                        </a></em>
+                                    </div>
+                                </div>
+                            </div>	                            
+                            <div class="form-group">
+                                {{ form_label(form.specialOfferImageHorizontalFile)}}
+                                <div class="col-sm-9">
+                                    {{form_widget(form.specialOfferImageHorizontalFile)}}
+                                    <div style="font-size: 0.9em;margin-top: 8px;">
+                                        <em><a href="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageHorizontalGuid}}" target="_blank" >
+                                            {% if lp.specialOfferImageHorizontalGuid | length > 0 %}
+                                                <img style="width: 100px; height: auto" src="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageHorizontalGuid}}" />
+                                                {{lp.specialOfferImageHorizontalGuid}}
+                                            {% endif %}
+                                        </a></em>
+                                    </div>
+                                </div>
+                            </div>								
+                            {{ form_row(form.pageTitle)}}
+                            {{ form_row(form.pageSubtitle)}}                            
+                            {{ form_row(form.company)}}                            
+                            <div class="form-group">
+                                {{ form_label(form.logoFile)}}
+                                <div class="col-sm-9">
+                                    {{form_widget(form.logoFile)}}
+                                    <div style="font-size: 0.9em;margin-top: 8px;">
+                                        <em><a href="https://apps.fifthgeardev.net/uploads/lp/{{lp.logoGuid}}" target="_blank" >
+                                                <img style="width: 100px; height: auto" src="https://apps.fifthgeardev.net/uploads/lp/{{lp.logoGuid}}" />
+                                                {{lp.logoGuid}}
+                                        </a></em>
+                                    </div>
+                                </div>
+                            </div>                                                      
+                            <div class="form-group">
+                                <div class="col-sm-9 col-sm-offset-2" style="font-size: 0.9em; margin-bottom: -12px; font-style: italic;"><a href="https://daringfireball.net/projects/markdown/">Markdown</a> syntax is supported </div>
+                            </div>
+                            
+                            {{ form_row(form.content)}}
+                            <div class="form-group">
+                                <div class="col-sm-9 col-sm-offset-2" style="font-size: 0.9em; margin-bottom: -12px;font-style: italic;"><a href="https://daringfireball.net/projects/markdown/">Markdown</a> syntax is supported </div>
+                            </div>                                
+                            {{ form_row(form.sidebarContent)}}
+                            
+                            <div class="form-group">
+                                <div class="col-sm-9 col-sm-offset-2" style="font-size: 0.9em; margin-bottom: -12px;font-style: italic;">If collection is not here, make sure it is enabled for online. </div>
+                            </div>
+                            {{ form_row(form.collectiona)}}
+                            {{ form_row(form.collectionb)}}
+                            <div class="form-group">
+                                <div class="col-sm-9 col-sm-offset-2" style="font-size: 0.9em; margin-bottom: -12px;font-style: italic;">Snippet Used for post content (about us) </div>
+                            </div>                            
+                            {{ form_row(form.postContent)}}
+                            {{ form_row(form.specialOfferLink)}}
+                            
+                        </div>
+                    </div>								
+                    
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane " id="lpTabAnnouncements">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Announcements</h3>
+                        </div>
+                        <div class="panel-body">            
+                            <div class="form-group">
+                                <div class="col-sm-9 col-sm-offset-2" style="font-size: 0.9em; margin-bottom: -12px;font-style: italic;"><a href="https://daringfireball.net/projects/markdown/">Markdown</a> syntax is supported </div>
+                            </div>                                
+                            {{ form_row(form.announcement)}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>		
+</div>	
+{{ form_widget(form) }}	
+{{ form_end(form) }}
+{% else %}
+<blockquote>Form Error</blockquote>
+{% endif %}
+{% endblock%}

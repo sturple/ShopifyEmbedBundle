@@ -25,7 +25,8 @@ class LandingPagePPCType extends AbstractType
                                                             'Disable'=>'Disable',
                                                             'Delete'=>'Delete')))
             ->add('template','choice',array('choices'=>array('publicQR.html.twig'=>'QR',
-                                                             'publicPPC.html.twig'=>'PPC')))
+                                                             'publicPPC.html.twig'=>'PPC',
+                                                             'publicPartnerStore.html.twig'=>'Partner Store')))
             ->add('title',null,array('required'=>false))
             ->add('summary','textarea',array('required'=>false,'attr'=>array('rows'=>3)))            
             ->add('permalink',null,array('required'=>false))

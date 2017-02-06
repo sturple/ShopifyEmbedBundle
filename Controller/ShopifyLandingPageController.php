@@ -12,6 +12,7 @@ use \Fgms\ShopifyBundle\Model\ShopifyClient;
 use \Fgms\ShopifyBundle\Entity\LandingPage;
 use \Fgms\ShopifyBundle\Form\LandingPageQRType;
 use \Fgms\ShopifyBundle\Form\LandingPagePPCType;
+use \Fgms\ShopifyBundle\Form\LandingPagePartnerStoreType;
 use \Fgms\ShopifyBundle\Entity\LandingPageInquiry;
 use \Fgms\ShopifyBundle\Form\LandingPageInquiryType;
 use \Fgms\ShopifyBundle\Entity\EventTracking;
@@ -101,7 +102,52 @@ class ShopifyLandingPageController extends Controller {
 			
 		return $this->render('FgmsShopifyBundle:ShopifyLandingPage:formQR.html.twig',$this->template_array);			
 		
-	}	
+	}
+	public function editPartnerStoreAction($id){
+		$id = intval($id);
+		$this->get_app_settings();	
+		$snippet_raw = ShopifyClient::get_assets($this->shopify);
+		$snippet_choice = array();
+		foreach ($snippet_raw as $snippet){
+			$snippet_choice[$snippet] = $snippet;
+		}
+		$collection_choice = ShopifyClient::get_collections($this->shopify, $this->logger);
+			
+		$lp = $this->getDoctrine()
+			->getRepository('FgmsShopifyBundle:LandingPage')
+			->findOneBy(array('id'=>$id,'shop'=>$this->store_name),array('id'=>'ASC'));
+		// create a new one if not exists
+		if (!$lp){
+			$lp = new LandingPage();
+			$lp->setCreateDate();
+			$lp->setShop($this->store_name);
+			$lp->setType('ps');
+			$lp->setTemplate('publicPartnerStore.html.twig');
+			
+		}
+		$this->template_array['title'] ='Partner Store: ' .$lp->getTitle();
+		$this->template_array['lp'] = $lp;
+		$form = $this->createForm(new LandingPagePartnerStoreType($snippet_choice,$collection_choice),$lp);
+		
+		//form requests
+		$form->handleRequest($this->get('request'));
+		if ($form->isValid()){	
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($form->getData());
+			$em->flush();
+			if ($lp->getId() > 0){
+				// lets create shortlink
+				return $this->redirect('/shopify/lp/ps/'.$lp->getId());
+			}
+			
+		}
+		$this->template_array['form'] = $form->createView();
+			
+		return $this->render('FgmsShopifyBundle:ShopifyLandingPage:formPartnerStore.html.twig',$this->template_array);			
+		
+	}
+		
+	
 	public function editPPCAction($id)
 	{
 		$this->get_app_settings();	
@@ -114,7 +160,7 @@ class ShopifyLandingPageController extends Controller {
 		
 		$lp = $this->getDoctrine()
 			->getRepository('FgmsShopifyBundle:LandingPage')
-			->findOneBy(array('id'=>$id),array('id'=>'ASC'));
+			->findOneBy(array('id'=>$id,'shop'=>$this->store_name),array('id'=>'ASC'));
 		// create a new one if not exists
 		if (!$lp){
 			$lp = new LandingPage();
@@ -152,7 +198,7 @@ class ShopifyLandingPageController extends Controller {
 		
 		$lp = $this->getDoctrine()
 			->getRepository('FgmsShopifyBundle:LandingPage')
-			->findOneBy(array('permalink'=>$permalink),array('id'=>'ASC'));
+			->findOneBy(array('permalink'=>$permalink,'shop'=>$this->store_name),array('id'=>'ASC'));
 		if (!$lp){
 			return $this->redirect('https://' .$this->store_name.'/404/');
 		}
@@ -181,10 +227,12 @@ class ShopifyLandingPageController extends Controller {
 		}
 		$template = ($lp->getTemplate() != null) ? $lp->getTemplate() : 'publicPPC.html.twig';
 		$this->logger->error('TEMPLATE:: '.$template);
+		//$order = $this->shopify->call('GET','/admin/products/'.$productId.'.json');
 		$this->template_array['form'] = $form->createView();		
 		$this->template_array['lp'] = $lp;
 		$this->template_array['markdownContent'] =  $this->get('markdown.parser')->transformMarkdown($lp->getContent());
 		$this->template_array['markdownSidebar'] =  $this->get('markdown.parser')->transformMarkdown($lp->getSidebarContent());
+		$this->template_array['markdownAnnouncement'] =  $this->get('markdown.parser')->transformMarkdown($lp->getAnnouncement());
 		$this->template_array['formGlobals'] = $this->get('fgms.settings')->getFormSettings($this->store_name);
 		return $this->renderAsLiquid('FgmsShopifyBundle:ShopifyLandingPage:'.$template,$this->template_array);	
 	}
@@ -232,7 +280,13 @@ class ShopifyLandingPageController extends Controller {
 		$this->shopify = $settings['shopify'];
 		$this->logger = $settings['logger'];
 		$this->store_name = $settings['shop'];
-		$this->template_array= array('title'=>'','output'=>'', 'products'=>array(),'shop_name'=>$settings['shop'], 'app_api'=>$settings['api_key']);	
+		$this->template_array= array('title'=>'',
+									 'output'=>'',
+									 'products'=>array(),
+									 'shop_name'=>$settings['shop'],
+									 'storeUrl' =>$settings['storeUrl'],
+									 'proxyUrl' =>$settings['proxyUrl'],
+									 'app_api'=>$settings['api_key']);	
     }
 
 
