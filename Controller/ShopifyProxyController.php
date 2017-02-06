@@ -239,16 +239,16 @@ class ShopifyProxyController extends Controller {
 		$online->setFormType('Online');
 		$online->setReturnUrl('/pages/contact');
 		$form = $this->createFormBuilder($online,array('csrf_protection' => false))
-            ->add('firstName')
-            ->add('lastName')
-            ->add('address1')
-            ->add('address2')
+            ->add('firstName', null, array('label'=>'First Name'))
+            ->add('lastName', null, array('label'=>'Last Name'))
+            ->add('address1', null,array('label'=>'Address','required'=>false))
+          
             ->add('city')
             ->add('province')
             ->add('postal')
             ->add('country')
-            ->add('message')
-            ->add('email')
+			->add('email')
+            ->add('message')            
             ->add('listA',null, array('label'=>'Subscribe to email list','required'=>false))
 			->add('save','submit',array('label'=>'Submit Inquiry'))
 			->getForm();
