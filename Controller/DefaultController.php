@@ -11,7 +11,6 @@ use \Fgms\ShopifyBundle\Model\ShopifyClient;
 use \Fgms\ShopifyBundle\Model\ShopifyApp;
 use \Fgms\ShopifyBundle\Entity\ShopifyShopSettings;
 
-
 class DefaultController extends Controller {
     var  $cdata = array(),
         $errors = array(),
@@ -54,7 +53,6 @@ class DefaultController extends Controller {
     public function oauthAction(Request $request){
 		$this->logger = $this->get('logger');
         $this->request = $request;
-
         $session = $this->get('request')->getSession();
 
 		$this->logger->notice('----->oauth  Request Shop- '.$request->query->get('shop'));
@@ -70,7 +68,6 @@ class DefaultController extends Controller {
 			->getRepository('FgmsShopifyBundle:ShopifyShopSettings')
 			->findOneBy(array('storeName'=>$this->store_name,'status'=>'active'));
 
-
 		$session->set('token',$shopSettings->getAccessToken());
 
 		$this->logger->notice('---->oauth session token '.$session->get('token'));
@@ -83,13 +80,11 @@ class DefaultController extends Controller {
     private function get_app_settings() {
 		$settings = ShopifyClient::GET_SETTINGS($this);
 		$this->shopify = $settings['shopify'];
-		$this->logger = $settings['logger'];
+		$this->logger = $this->get('logger');//$settings['logger'];
 		$this->store_name = $settings['shop'];
 		$this->template_array= array('title'=>'','output'=>'', 'products'=>array(),'shop_name'=>$settings['shop'], 'app_api'=>$settings['api_key'], 'enables'=>$settings['enables']);
-
+		$this->logger->notice('settings: '. print_R($this->template_array,true));
     }
-
-
 
 
     // this function is what adds a new shop ... and gets access code.
@@ -116,24 +111,20 @@ class DefaultController extends Controller {
 					$shopSettings = new ShopifyShopSettings();
 					$shopSettings->setCreateDate();
 					$shopSettings->setStoreName($this->store_name);
-
 				}
 				$shopSettings->setStatus('active');
 				$shopSettings->setAccessToken($access_token);
 				$em->persist($shopSettings);
 				$em->flush();
 
-
                 $this->session->set('shop',$this->store_name) ;
                 $this->logger->notice('FGMS App Succesfully Added to '. $this->store_name);
             }
-
         }
-
         //STEP 1. This is the first step to authorization of Shopify App, load form / and get redirect url
         else {
             //create Form
-            $form = $this->createFormBuilder()
+            $form = $this->createFormBuilder(array('shop'=>'12metre.myshopify.com'),array('csrf_protection' => false))
                 ->add('shop','text')
                 ->add('save','submit',array('label'=>'Add App'))
                 ->getForm();
@@ -141,11 +132,12 @@ class DefaultController extends Controller {
             $form->handleRequest($request);
             if ($form->isValid()){
                 $this->store_name = $form->getData()['shop'];
-                $this->logger->notice('*** Getting new Access Token I need Code for Store: ' . $this->store_name);
+				$yaml = new Parser();
+				$yaml = $yaml->parse(file_get_contents($this->get('kernel')->getRootDir().'/config/parameters.yml'));
+				$params = $yaml['parameters'];
                 // Step 1: get the shopname from the user and redirect the user to the
                 // shopify authorization page where they can choose to authorize this app
-                $shopifyClient = new ShopifyClient($this->store_name, "", $this->api_key, $this->shared_secret,$this->logger);
-
+                $shopifyClient = new ShopifyClient($this->store_name, "", $params['shopify_api_key'], $params['shopify_shared_secret'],$this->get('logger'));
                 $pageURL = 'http';
                 if ($this->request->server->get("HTTPS") == "on") 		{ $pageURL .= "s"; }
                 $pageURL .= "://";
@@ -162,17 +154,15 @@ class DefaultController extends Controller {
                 }
 
                 // redirect to authorize url
-                $auth_url = $shopifyClient->getAuthorizeUrl($this->scope, $this->redirect_url);
-                $this->logger->notice('* STEP 1. Pageurl: '. $auth_url);
+                $auth_url = $shopifyClient->getAuthorizeUrl($params['shopify_scope'], $params['shopify_redirect_url']);                
                 return $this->redirect($auth_url);
-
             }
+			else {
+				// ok in case you are currently logged into app session shop will be enabled, need to remove.
+				$this->session->clear();
+			}
             return $this->render('FgmsShopifyBundle:Default:addApp.html.twig', array('form'=>$form->createView()));
         }
-
         return $this->render('FgmsShopifyBundle:Default:index.html.twig', array('name' => 'Success'));
-
     }
-
-
 }
