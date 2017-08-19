@@ -1,0 +1,152 @@
+<div id="outer-container" data-tracking-id="{{lp.id}}" class="ppc-12-meter-alt">
+  <div class="lp-hero-image" data-background="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageHorizontalGuid}}">
+    <div class="lp-hero-image-overlay">
+      <div class="container">
+        <div class="lp-hero-image-overlay-content">
+          <div class="h1">Experience</div>
+          <p>An America's Cup Racing Experience <span>Help Crew the Yacht or Just Sit Back and Enjoy the Ride</span></p>
+          <div class="action-buttons">
+            <a class="btn btn-secondary">Book Now</a>
+            <a class="btn btn-default">25 % Off! Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lp-awards-section">
+    <img src="https://cdn.shopify.com/s/files/1/1334/6905/files/tripadvisor-certificate-of-excellence-2016.png?2830969464434601130" alt="trip advisor 2016" />
+    <div >Consistently Rated One of the Caribbean's Top Attractions</div>
+    <div>Guaranteed to leave you breathless and truly exhilarated</div>
+  </div>
+  <div class="lp-video-section">
+    <div class="container">
+      <div>This will be..</div>
+      <h2>Your Most Memorable Day in Sint Maarten</h2>
+      <div><!-- 16:9 aspect ratio -->
+        <div style="max-width: 830px; margin: 0 auto 32px;">
+          <a class="script-gallery-action" href="http://www.youtube.com/watch?v=VSwy8knXLQs" data-smoothzoom="hp">
+            <img src="https://cdn.shopify.com/s/files/1/1334/6905/files/home-video-thumb.jpg?16715141671616930938%22"
+            alt="12 Metre Regatta, St. Maarten and Cozumel Video" />
+          </a>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <a class="btn btn-secondary">Book Now</a>
+        <a class="btn btn-default">25 % Off! Learn More</a>
+      </div>
+    </div>
+  </div>
+  <div class="lp-gallery-4-section">
+    {{'{%'}} include 'template_page_gallery' ,random: true {{'%}'}}
+  </div>
+  <div class="lp-12-metre-challenge-section">
+    <div class="container">
+      <div class="logo">
+          <img src="https://cdn.shopify.com/s/files/1/1334/6905/files/logo-12metre-challenge.png?9768131345846281498" alt="logo 12 meter challenge">
+      </div>
+      <h2>The 12 Metre "Challenge"</h2>
+      <p>Every day, we run authentic head-to-head races (called "challenges") on an America's Cup race course set in the beautiful Great Bay of Sint Maarten.</p>
+      <div class="row">
+        <div class="col-sm-4">
+          <h3>Pre Race</h3>
+          <p>Form into teams and receive instruction</p>
+        </div>
+        <div class="col-sm-4">
+          <h3>The Challange Race</h3>
+          <p>Select to participate or sit back enjoy the thrills</p>
+        </div>
+        <div class="col-sm-4">
+          <h3>The Victory Celebration</h3>
+          <p>There can be no losers in this uniquely thrilling racing experience</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lp-stars-stripes-section">
+    <div class="container">
+      <h2>The Race Yachts</h2>
+      <p class="intro-text">In Sint Maarten, our classic sailing thoroughbreds, nearly seventy feet long with masts the height of an eight-story building,
+      take you on a duel of a lifetime for the spilt-second advantage and the glory of being the first to cross the finish line</p>
+    </div>
+    <div class="section-feature-image" data-background="https://cdn.shopify.com/s/files/1/1334/6905/files/12-metre-challenge-38.jpg?13505581303801058685">
+      <div class="section-feature-image-overlay-content">
+        <h2>Stars & Stripes 87 (US-55)</h2>
+        <p>The very yacht that defeated the Australian defender Kookaburra III by 4 races to nil to win the America's Cup back for the USA.<p>
+        <p>Experience the jaw-dropping speed and precision with which Stars & Stripes 87 (US-55) cuts through the ocean on one of our daily regattas in Sint Maarten</p>
+        </div>
+    </div>
+  </div>
+  <div class="lp-testimonial-section">
+    {{'{%'}} include 'template_testimonials', no_action: true {{'%}'}}
+  </div>
+  <div class="lp-content-section">
+    <div class="section-feature-image" data-background="https://cdn.shopify.com/s/files/1/1334/6905/files/12-metre-challenge-47.jpg?5686536996978007999">
+      <div class="section-feature-image-overlay-content">
+        <h1>{{lp.pageTitle}}</h1>
+        {% if lp.pageSubtitle %}<div class="lp-subtitle">{{lp.pageSubtitle}}</div>{%endif %}
+        {{markdownContent | raw}}
+      </div>
+    </div>
+  </div>
+  <div class="lp-ready-for-adventure-section">
+    <div class="modular modular-book-now full-wrapper" >
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="home-page-content secondary">
+              <div class="h2">Ready for Adventure?</div>
+              <p>For real-time seat availability and to book your 12 Metre Challenge race excursion today.
+              <div>Click book now or call us at +1 721.542.0045</div>
+              </p>
+
+              <div class="action-buttons">
+                <a class="btn btn-secondary">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style> body {margin:0 !important;}</style>
+<script type="text/javascript">
+
+$(function(){
+    fgmsTrack({category : 'View', action: 'OnLoad', label: 'Page Load', id : $('*[data-tracking-id]').data('tracking-id')});
+
+    $('a,button,input[type="submit"],iframe').addClass('script-tracking');
+    $('*[data-tracking-id]').on('click','.script-tracking',function(){
+        var eCategory = ($(this).data('category')) ? $(this).data('category') : 'Link' ;
+        var eAction = ($(this).data('action')) ? $(this).data('action') : 'Click' ;
+        var eLabel = ($(this).data('label')) ? $(this).data('label') : (($(this).find('img').length > 0) ? $(this).find('img').attr('alt') : $(this).text()) ;
+        fgmsTrack({category : eCategory, action: eAction, label: eLabel, id : $(this).closest('*[data-tracking-id]').data('tracking-id')});
+    })
+
+    $('.nav-tabs.accordion a[role="tab"]').click(function(e){
+        var tabSelector = $(this).attr('href');
+        if ( $(tabSelector).find('button[data-filter="*"]').length > 0 ){
+            $(tabSelector).find('button[data-filter="*"]').trigger('click');
+        }
+    })
+})
+
+
+
+function fgmsTrack(data){
+    data.referrer = document.referrer;
+    if (typeof ga == 'function') {	ga('send','event',data.category,data.action,data.label,data.id)	};
+
+    $.ajax(	{
+        type : 'POST',
+        url : "track/",
+        data : data,
+        dataType: 'json'
+    }).done( function (msg) {
+
+    }).fail( function (msg) {
+
+    });
+}
+
+</script>

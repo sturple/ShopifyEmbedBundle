@@ -4,25 +4,25 @@
 {% endblock %}
 {% block body %}
 
-{% if form %}		
+{% if form %}
 {{ form_start(form) }}
 
 
 
 
-		
+
 	<div>
 		<div style="text-align: right">
 			{{form_widget(form.save,{'attr' : {'class' : 'btn btn-success btn-lg'}})}}
 			<a class="btn btn-primary btn-lg" style="margin-right: 12px;" href="/shopify/lp"><i class="fa fa-hand-o-left" aria-hidden="true"></i> </a>
 		</div>
-		
+
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
 		  <li role="presentation" class="active"><a href="#lpTabSettings" aria-controls="lpTabSettings" role="tab" data-toggle="tab">Settings</a></li>
 		  <li role="presentation"><a href="#lpTabContent" aria-controls="lpTabContent" role="tab" data-toggle="tab">Content</a></li>
 		</ul>
-		
+
 		<!-- Tab panes -->
 		<div class="tab-content" style="padding-top: 24px;">
 			<div role="tabpanel" class="tab-pane active" id="lpTabSettings">
@@ -36,8 +36,9 @@
 								{{ form_row(form.title)}}
 								{{ form_row(form.summary)}}
 								{{ form_row(form.status)}}
-                                {{ form_row(form.template)}}
-							
+                {{ form_row(form.template)}}
+								{{ form_row(form.templateOverride)}}
+
 								<div class="form-group">
 									{{ form_label(form.permalink)}}
 									<div class="col-sm-9">
@@ -46,11 +47,11 @@
 											<a target="_blank" href="https://{{lp.shop}}/tools/fg/lp/{{lp.permalink}}/">https://{{lp.shop}}/tools/fg/lp/{{lp.permalink}}/</a>
 										</div>
 									</div>
-								</div>						
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>			  
+				</div>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="lpTabContent">
 				<div class="row">
@@ -73,40 +74,40 @@
 											</a></em>
 										</div>
 									</div>
-								</div>								
+								</div>
 								{{ form_row(form.pageTitle)}}
                                 {{ form_row(form.pageSubtitle)}}
                                 <div class="form-group">
                                     <div class="col-sm-9 col-sm-offset-2" style="font-size: 0.9em; margin-bottom: -12px; font-style: italic;"><a href="https://daringfireball.net/projects/markdown/">Markdown</a> syntax is supported </div>
                                 </div>
-                                
+
                                 {{ form_row(form.content)}}
                                 <div class="form-group">
                                     <div class="col-sm-9 col-sm-offset-2" style="font-size: 0.9em; margin-bottom: -12px;font-style: italic;"><a href="https://daringfireball.net/projects/markdown/">Markdown</a> syntax is supported </div>
-                                </div>                                
+                                </div>
                                 {{ form_row(form.sidebarContent)}}
                                 <div class="form-group">
                                     <div class="col-sm-9 col-sm-offset-2" style="font-size: 0.9em; margin-bottom: -12px;font-style: italic;">Snippet Used for post content (about us) </div>
-                                </div>                                
+                                </div>
                                 {{ form_row(form.postContent)}}
                                 {{ form_row(form.specialOfferLink)}}
 
-														
-								
+
+
 							</div>
-						</div>								
-						
+						</div>
+
 					</div>
 				</div>
 			</div>
-        </div>		
-	</div>	
-	
-		
+        </div>
+	</div>
 
 
 
-{{ form_widget(form) }}	
+
+
+{{ form_widget(form) }}
 {{ form_end(form) }}
 {% else %}
 	<blockquote>Form Error</blockquote>

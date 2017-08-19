@@ -208,19 +208,23 @@ fgms_shopify_landing_page_index:
     defaults: { _controller: FgmsShopifyBundle:ShopifyLandingPage:index}
     methods: [POST,GET]
 
-#landing pages
+#landing pages pay per click
 fgms_shopify_landing_page_ppc_edit:
     path: /lp/ppc/{id}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyLandingPage:editPPC}
     methods: [POST,GET]
 
-#landing pages
+#landing pages qr code
 fgms_shopify_landing_page_qr_edit:
     path: /lp/qr/{id}/
     defaults: { _controller: FgmsShopifyBundle:ShopifyLandingPage:editQR}
     methods: [POST,GET]
 
-
+#landing pages facebook
+fgms_shopify_landing_page_ps_edit:
+    path: /lp/ps/{id}/
+    defaults: { _controller: FgmsShopifyBundle:ShopifyLandingPage:editPartnerStore}
+    methods: [POST,GET]
 
 #Specials Public
 fgms_shopify_specials_public:

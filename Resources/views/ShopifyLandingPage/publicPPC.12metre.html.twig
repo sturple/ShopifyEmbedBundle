@@ -1,0 +1,119 @@
+    <div id="outer-container" data-tracking-id="{{lp.id}}">
+        <div class="container" style=" min-height: 400px;" >    
+            <div class="lp-header">
+                <div id="header-wrapper" class="">
+                    <div class="column-wrapper">			
+                        <div class="row" style="position: relative;">
+                            <!-- header -->
+                            <div class="col-md-4 col-sm-3">
+                                <a href="{{formGlobals.website}}" target="_blank" >
+                                    <span class="sr-only"></span>								
+                                    <img class=" lp-site-logo" src="https://apps.fifthgeardev.net/uploads/lp/{{formGlobals.lPageLogoGuid}}" alt="{{formGlobals.company}} Logo" />		        
+                                </a>
+                            </div>
+                            <div class="col-md-8 col-sm-9">
+                                <div class="lp-site-caption">
+                                    <a data-ga-label="visit-website" href="{{formGlobals.website}}"  class="btn btn-primary ">Visit Website</a>
+                                </div>
+                            </div>	
+                        </div>
+                    </div>	
+                </div>
+            </div>
+            <div id="feature-image">
+                <img src="https://apps.fifthgeardev.net/uploads/lp/{{lp.specialOfferImageHorizontalGuid}}" class="img-responsive" alt="{{formGlobals.company}} Feature Image" />
+            </div>
+            <div id="content">							
+                
+                <div class="row">
+                    <div class="col-md-8 lp-content">
+                        <div  class="column-wrapper">
+                            <h1 class="lp-h1 ppc">{{lp.pageTitle}}</h1>
+                            
+                            {% if lp.pageSubtitle %}<div class="lp-subtitle">{{lp.pageSubtitle}}</div>{%endif %}                            
+ 
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                              <li role="presentation" class="active"><a href="#overview_tab" aria-controls="overview_tab" role="tab" data-toggle="tab">Overview</a></li>
+                              <li role="presentation"><a href="#gallery_tab" aria-controls="gallery_tab" role="tab" data-toggle="tab">Media Gallery</a></li>    
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                              <div role="tabpanel" class="tab-pane active" id="overview_tab">
+                                {{markdownContent | raw}}
+                                {% if lp.postContent | length > 3 %}
+                                    <div class="lp-post-content">{{'{%'}} include '{{lp.postContent}}'{{'%}'}}</div>
+                                {% endif%}                                
+                              </div>
+                              <div role="tabpanel" class="tab-pane" id="gallery_tab">
+                                {{'{%'}} include 'shortcode-gallery-full'{{'%}'}}                              
+                               
+                              </div>
+                            </div>                           
+
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-4 lp-sidebar">
+                        <div class="column-wrapper">
+                            <div class="widget-learn-more">
+                                <div class="sidebar-logo">
+                                    <img src="https://cdn.shopify.com/s/files/1/1334/6905/files/logo-12metre-challenge.png?9768131345846281498" alt="logo 12 meter challenge">
+                                </div>      
+                                <h2>Let's Race!</h2>
+                                <p>To learn more about our race excursions, our America's Cup yachts, or to make a booking, call +1 721.542.0045.</p>
+                                <p style="margin-bottom: 24px;">To see real-time seat availability and make a booking online today:</p>     
+                                <a href="https://12metre.starboardsuite.com" style="width: 100%; max-width: 320px;" target="_blank" class="btn btn-primary lp-btn-lg">Book Now</a>
+                                <div style="font-size: 1.7em; margin-top: 24px;text-transform: uppercase; text-align: center;">Call +1 721.542.0045</div>  
+                            </div>                            
+                            {% if lp.sidebarContent | length > 0 %}<div style="margin-top: 24px;">{{markdownSidebar | raw}}</div>{% endif %}                           
+                        </div>
+                    </div>                        
+                </div>               
+            </div>
+            <div class="lp-footer">          
+                <div class="column-wrapper"><a href="https://12metre.starboardsuite.com">Book Online Today</a> | Call +1 721.542.0045</div>            
+            </div>	
+        </div>
+    </div>
+    <script type="text/javascript">
+        
+    $(function(){
+        fgmsTrack({category : 'View', action: 'OnLoad', label: 'Page Load', id : $('*[data-tracking-id]').data('tracking-id')});
+
+        $('a,button,input[type="submit"],iframe').addClass('script-tracking');
+        $('*[data-tracking-id]').on('click','.script-tracking',function(){	
+            var eCategory = ($(this).data('category')) ? $(this).data('category') : 'Link' ;			
+            var eAction = ($(this).data('action')) ? $(this).data('action') : 'Click' ;			
+            var eLabel = ($(this).data('label')) ? $(this).data('label') : (($(this).find('img').length > 0) ? $(this).find('img').attr('alt') : $(this).text()) ;		
+            fgmsTrack({category : eCategory, action: eAction, label: eLabel, id : $(this).closest('*[data-tracking-id]').data('tracking-id')});			
+        })
+        
+        $('.nav-tabs.accordion a[role="tab"]').click(function(e){            
+            var tabSelector = $(this).attr('href');            
+            if ( $(tabSelector).find('button[data-filter="*"]').length > 0 ){
+                $(tabSelector).find('button[data-filter="*"]').trigger('click');
+            }    
+        }) 
+    })
+    
+    
+    
+    function fgmsTrack(data){
+        data.referrer = document.referrer;
+        if (typeof ga == 'function') {	ga('send','event',data.category,data.action,data.label,data.id)	};
+    
+        $.ajax(	{
+            type : 'POST',
+            url : "track/",
+            data : data,
+            dataType: 'json'
+        }).done( function (msg) {	
+            
+        }).fail( function (msg) {
+            
+        });			
+    }
+    
+    </script>
