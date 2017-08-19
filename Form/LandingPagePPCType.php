@@ -9,17 +9,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class LandingPagePPCType extends AbstractType
 {
     var $snippet_choice = array();
-    
+
     public function __construct ($snippet_choice)
     {
         $this->snippet_choice = $snippet_choice;
-    }    
+    }
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {        
+    {
         $builder
             ->add('status','choice',array('choices' => array('Active'=>'Active',
                                                             'Disable'=>'Disable',
@@ -27,11 +27,12 @@ class LandingPagePPCType extends AbstractType
             ->add('template','choice',array('choices'=>array('publicQR.html.twig'=>'QR',
                                                              'publicPPC.html.twig'=>'PPC',
                                                              'publicPartnerStore.html.twig'=>'Partner Store')))
+            ->add('templateOverride',null,array('required'=>false))                                                 
             ->add('title',null,array('required'=>false))
-            ->add('summary','textarea',array('required'=>false,'attr'=>array('rows'=>3)))            
+            ->add('summary','textarea',array('required'=>false,'attr'=>array('rows'=>3)))
             ->add('permalink',null,array('required'=>false))
-            
-            ->add('specialOfferImageHorizontalFile','file',array('label'=>'Feature Image','required'=>false))              
+
+            ->add('specialOfferImageHorizontalFile','file',array('label'=>'Feature Image','required'=>false))
             ->add('pageTitle',null,array('label'=>'Title','required'=>false))
             ->add('pageSubtitle',null,array('label'=>'Subtitle','required'=>false))
             ->add('content','textarea',array('required'=>false,'attr'=>array('rows'=>15),'label'=>'Main Content'))
@@ -41,13 +42,13 @@ class LandingPagePPCType extends AbstractType
                                         'required'=>false,
                                         'label'=>'Post Content'
                                         )
-            )            
+            )
             ->add('specialOfferLink',null,array('label'=>'Link','required'=>false))
-            
-            ->add('save','submit',array('label'=>'Save'))	
+
+            ->add('save','submit',array('label'=>'Save'))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
