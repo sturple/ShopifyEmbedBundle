@@ -69,7 +69,7 @@ class LandingPage
      * @var string
      *
      * @ORM\Column(name="content", type="text", nullable=true)
-     */	
+     */
     private $content;
 
     /**
@@ -83,14 +83,14 @@ class LandingPage
      * @var \DateTime
      *
      * @ORM\Column(name="announcementStartDate", type="datetime", nullable=true)
-     */		
+     */
 	private $announcementStartDate;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="announcementEndDate", type="datetime", nullable=true)
-     */	
+     */
 	private $announcementEndDate;
 
     /**
@@ -113,7 +113,7 @@ class LandingPage
      *
      * @ORM\Column(name="collectionb", type="string", length=255, nullable=true)
      */
-    private $collectionb;	
+    private $collectionb;
 
     /**
      * @var string
@@ -135,7 +135,12 @@ class LandingPage
      * @ORM\Column(name="template", type="string", length=255, nullable=true)
      */
     private $template;
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="templateOverride", type="string", length=255, nullable=true)
+     */
+    private $templateOverride;
     /**
      * @var string
      *
@@ -175,7 +180,7 @@ class LandingPage
      *
      * @ORM\Column(name="logoGuid", type="string", length=255, nullable=true)
      *
-     * 
+     *
      */
     private $logoGuid;
 
@@ -228,7 +233,7 @@ class LandingPage
      */
     private $specialOfferImageVerticalGuid;
 
- 
+
     /**
      * @var string
      *
@@ -303,13 +308,13 @@ class LandingPage
      * @ORM\Column(name="emailCustomerMessageHtml", type="text", nullable=true)
      */
     private $emailCustomerMessageHtml;
-	
+
     /**
      * @var string
      *
      * @ORM\Column(name="emailCustomerMessageText", type="text", nullable=true)
      */
-    private $emailCustomerMessageText;	
+    private $emailCustomerMessageText;
 
     /**
      * @var string
@@ -333,54 +338,54 @@ class LandingPage
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
+     *
      * @Vich\UploadableField(mapping="lp_logo", fileNameProperty="logoGuid")
-     * 
+     *
      * @var File
      */
     private $logoFile;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
+     *
      * @Vich\UploadableField(mapping="lp_background_image", fileNameProperty="backgroundGuid")
-     * 
+     *
      * @var File
      */
-    private $backgroundFile;	
+    private $backgroundFile;
 
     /**
      * @var string
      *
      * @ORM\Column(name="backgroundGuid", type="string", length=255, nullable=true)
      *
-     * 
+     *
      */
-    private $backgroundGuid;	
+    private $backgroundGuid;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
+     *
      * @Vich\UploadableField(mapping="lp_youtube_thumb", fileNameProperty="youtubeThumbGuid")
-     * 
+     *
      * @var File
      */
-    private $youtubeThumbFile;	
+    private $youtubeThumbFile;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
+     *
      * @Vich\UploadableField(mapping="lp_special_horizontal", fileNameProperty="specialOfferImageHorizontalGuid")
-     * 
+     *
      * @var File
      */
-    private $specialOfferImageHorizontalFile;		
+    private $specialOfferImageHorizontalFile;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
+     *
      * @Vich\UploadableField(mapping="lp_special_vertical", fileNameProperty="specialOfferImageVerticalGuid")
-     * 
+     *
      * @var File
      */
     private $specialOfferImageVerticalFile;
@@ -389,21 +394,21 @@ class LandingPage
      *
      * @ORM\Column(name="formEnable", type="boolean", nullable=true)
      */
-    private $formEnable;	
+    private $formEnable;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="emailEnable", type="boolean", nullable=true)
      */
-    private $emailEnable;	
+    private $emailEnable;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="emailCustomerEnable", type="boolean", nullable=true)
      */
-    private $emailCustomerEnable;		
+    private $emailCustomerEnable;
 
     /**
      * @var string
@@ -417,7 +422,7 @@ class LandingPage
      *
      * @ORM\Column(name="campaignEmail", type="string", length=255, nullable=true)
      */
-    private $campaignEmail;	
+    private $campaignEmail;
     /**
      * @var string
      *
@@ -434,7 +439,7 @@ class LandingPage
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -456,7 +461,7 @@ class LandingPage
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -478,12 +483,12 @@ class LandingPage
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
         return $this->type;
-    }	
+    }
     /**
      * Set company
      *
@@ -499,12 +504,12 @@ class LandingPage
     /**
      * Get company
      *
-     * @return string 
+     * @return string
      */
     public function getCompany()
     {
         return $this->company;
-    }	
+    }
 
     /**
      * Set status
@@ -521,7 +526,7 @@ class LandingPage
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getStatus()
     {
@@ -543,12 +548,12 @@ class LandingPage
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getPermalink()
     {
         return $this->permalink;
-    }	
+    }
     /**
      * Set pageSubtitle
      *
@@ -564,7 +569,7 @@ class LandingPage
     /**
      * Get pageSubtitle
      *
-     * @return string 
+     * @return string
      */
     public function getPageSubtitle()
     {
@@ -585,7 +590,7 @@ class LandingPage
     /**
      * Get summary
      *
-     * @return string 
+     * @return string
      */
     public function getSummary()
     {
@@ -605,12 +610,12 @@ class LandingPage
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
         return $this->content;
-    }    
+    }
 
     /**
      * Set announcement
@@ -626,13 +631,13 @@ class LandingPage
     /**
      * Get announcement
      *
-     * @return string 
+     * @return string
      */
     public function getAnnouncement()
     {
         return $this->announcement;
-    } 	
-	
+    }
+
     /**
      * Set postContent
      *
@@ -647,7 +652,7 @@ class LandingPage
     /**
      * Get postContent
      *
-     * @return string 
+     * @return string
      */
     public function getPostContent()
     {
@@ -669,12 +674,12 @@ class LandingPage
     /**
      * Get collectiona
      *
-     * @return string 
+     * @return string
      */
     public function getCollectiona()
     {
         return $this->collectiona;
-    }	
+    }
 
      /**
      * Set collectionb
@@ -691,16 +696,16 @@ class LandingPage
     /**
      * Get collectionb
      *
-     * @return string 
+     * @return string
      */
     public function getCollectionb()
     {
         return $this->collectionb;
-    }	       
+    }
     /**
      * Get sidebarContent
      *
-     * @return string 
+     * @return string
      */
     public function getSidebarContent()
     {
@@ -733,12 +738,35 @@ class LandingPage
     /**
      * Get template
      *
-     * @return string 
+     * @return string
      */
     public function getTemplate()
     {
         return $this->template;
     }
+
+/**
+ * Set templateOverride
+ *
+ * @param string $templateOverride
+ * @return LandingPage
+ */
+public function setTemplateOverride($templateOverride)
+{
+    $this->templateOverride = $templateOverride;
+    return $this;
+}
+/**
+ * Get templateOverride
+ *
+ * @return string
+ */
+public function getTemplateOverride()
+{
+    return $this->templateOverride;
+}
+
+
     /**
      * Set logoUrl
      *
@@ -754,7 +782,7 @@ class LandingPage
     /**
      * Get logoUrl
      *
-     * @return string 
+     * @return string
      */
     public function getLogoUrl()
     {
@@ -775,7 +803,7 @@ class LandingPage
     /**
      * Get buttonUrl
      *
-     * @return string 
+     * @return string
      */
     public function getButtonUrl()
     {
@@ -797,7 +825,7 @@ class LandingPage
     /**
      * Get phoneOffice
      *
-     * @return string 
+     * @return string
      */
     public function getPhoneOffice()
     {
@@ -819,7 +847,7 @@ class LandingPage
     /**
      * Get phoneFax
      *
-     * @return string 
+     * @return string
      */
     public function getPhoneFax()
     {
@@ -841,7 +869,7 @@ class LandingPage
     /**
      * Get phoneToll
      *
-     * @return string 
+     * @return string
      */
     public function getPhoneToll()
     {
@@ -863,7 +891,7 @@ class LandingPage
     /**
      * Get logoGuid
      *
-     * @return string 
+     * @return string
      */
     public function getLogoGuid()
     {
@@ -886,13 +914,13 @@ class LandingPage
     /**
      * Get backgroundGuid
      *
-     * @return string 
+     * @return string
      */
     public function getBackgroundGuid()
     {
         return $this->backgroundGuid;
-    }	
-	
+    }
+
     /**
      * Set pageTitle
      *
@@ -908,7 +936,7 @@ class LandingPage
     /**
      * Get pageTitle
      *
-     * @return string 
+     * @return string
      */
     public function getPageTitle()
     {
@@ -930,7 +958,7 @@ class LandingPage
     /**
      * Get youtubeCode
      *
-     * @return string 
+     * @return string
      */
     public function getYoutubeCode()
     {
@@ -953,7 +981,7 @@ class LandingPage
     /**
      * Get youtubeThumbGuid
      *
-     * @return string 
+     * @return string
      */
     public function getYoutubeThumbGuid()
     {
@@ -975,7 +1003,7 @@ class LandingPage
     /**
      * Get youtubeThumbBlob
      *
-     * @return string 
+     * @return string
      */
     public function getYoutubeThumbBlob()
     {
@@ -997,7 +1025,7 @@ class LandingPage
     /**
      * Get youtubeCaption
      *
-     * @return string 
+     * @return string
      */
     public function getYoutubeCaption()
     {
@@ -1019,7 +1047,7 @@ class LandingPage
     /**
      * Get locatorLink
      *
-     * @return string 
+     * @return string
      */
     public function getLocatorLink()
     {
@@ -1041,7 +1069,7 @@ class LandingPage
     /**
      * Get specialOfferImageHorizontalGuid
      *
-     * @return string 
+     * @return string
      */
     public function getSpecialOfferImageHorizontalGuid()
     {
@@ -1063,7 +1091,7 @@ class LandingPage
     /**
      * Get specialOfferImageHorizontalBlob
      *
-     * @return string 
+     * @return string
      */
     public function getSpecialOfferImageHorizontalBlob()
     {
@@ -1085,7 +1113,7 @@ class LandingPage
     /**
      * Get specialOfferImageVerticalGuid
      *
-     * @return string 
+     * @return string
      */
     public function getSpecialOfferImageVerticalGuid()
     {
@@ -1107,7 +1135,7 @@ class LandingPage
     /**
      * Get specialOfferImageVerticalBlob
      *
-     * @return string 
+     * @return string
      */
     public function getSpecialOfferImageVerticalBlob()
     {
@@ -1129,7 +1157,7 @@ class LandingPage
     /**
      * Get specialOfferLink
      *
-     * @return string 
+     * @return string
      */
     public function getSpecialOfferLink()
     {
@@ -1151,12 +1179,12 @@ class LandingPage
     /**
      * Get formEnable
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getFormEnable()
     {
         return $this->formEnable;
-    }		
+    }
     /**
      * Set emailEnable
      *
@@ -1172,12 +1200,12 @@ class LandingPage
     /**
      * Get emailEnable
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getEmailEnable()
     {
         return $this->emailEnable;
-    }	
+    }
     /**
      * Set emailTo
      *
@@ -1193,7 +1221,7 @@ class LandingPage
     /**
      * Get emailTo
      *
-     * @return string 
+     * @return string
      */
     public function getEmailTo()
     {
@@ -1215,7 +1243,7 @@ class LandingPage
     /**
      * Get emailCc
      *
-     * @return string 
+     * @return string
      */
     public function getEmailCc()
     {
@@ -1237,7 +1265,7 @@ class LandingPage
     /**
      * Get emailBcc
      *
-     * @return string 
+     * @return string
      */
     public function getEmailBcc()
     {
@@ -1259,7 +1287,7 @@ class LandingPage
     /**
      * Get emailSubject
      *
-     * @return string 
+     * @return string
      */
     public function getEmailSubject()
     {
@@ -1281,7 +1309,7 @@ class LandingPage
     /**
      * Get emailMessageHtml
      *
-     * @return string 
+     * @return string
      */
     public function getEmailMessageHtml()
     {
@@ -1302,14 +1330,14 @@ class LandingPage
     /**
      * Get emailMessageText
      *
-     * @return string 
+     * @return string
      */
     public function getEmailMessageText()
     {
         return $this->emailMessageText;
     }
-	
-	
+
+
     /**
      * Set emailCustomerEnable
      *
@@ -1325,13 +1353,13 @@ class LandingPage
     /**
      * Get customerEmailEnable
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getEmailCustomerEnable()
     {
         return $this->emailCustomerEnable;
-    }		
-	
+    }
+
     /**
      * Set emailCustomerCc
      *
@@ -1347,7 +1375,7 @@ class LandingPage
     /**
      * Get emailCustomerCc
      *
-     * @return string 
+     * @return string
      */
     public function getEmailCustomerCc()
     {
@@ -1369,7 +1397,7 @@ class LandingPage
     /**
      * Get emailCustomerBcc
      *
-     * @return string 
+     * @return string
      */
     public function getEmailCustomerBcc()
     {
@@ -1391,7 +1419,7 @@ class LandingPage
     /**
      * Get emailCustomerSubject
      *
-     * @return string 
+     * @return string
      */
     public function getEmailCustomerSubject()
     {
@@ -1413,13 +1441,13 @@ class LandingPage
     /**
      * Get emailCustomerMessageHtml
      *
-     * @return string 
+     * @return string
      */
     public function getEmailCustomerMessageHtml()
     {
         return $this->emailCustomerMessageHtml;
     }
-	
+
 
     /**
      * Set emailCustomerMessageText
@@ -1436,13 +1464,13 @@ class LandingPage
     /**
      * Get emailCustomerMessageText
      *
-     * @return string 
+     * @return string
      */
     public function getEmailCustomerMessageText()
     {
         return $this->emailCustomerMessageText;
     }
-		
+
 
     /**
      * Set shop
@@ -1459,13 +1487,13 @@ class LandingPage
     /**
      * Get shop
      *
-     * @return string 
+     * @return string
      */
     public function getShop()
     {
         return $this->shop;
     }
-	
+
     /**
      * Set createDate
      *
@@ -1481,12 +1509,12 @@ class LandingPage
     /**
      * Get createDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreateDate()
     {
         return $this->createDate;
-    }	
+    }
 
 
    /**
@@ -1499,19 +1527,19 @@ class LandingPage
     {
         $this->updateDate =  new \DateTime("now");
         return $this;
-    }	
+    }
 
     /**
      * Get updateDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdateDate()
     {
         return $this->updateDate;
-    }	
-	
-	
+    }
+
+
    /**
      * Set updateDate
      *
@@ -1522,18 +1550,18 @@ class LandingPage
     {
         $this->announcementStartDate =  new \DateTime($date);
         return $this;
-    }	
+    }
 
     /**
      * Get announcementStartDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getAnnouncementStartDate()
     {
         return $this->announcementStartDate;
-    }	
-	
+    }
+
   /**
      * Set updateDate
      *
@@ -1544,24 +1572,24 @@ class LandingPage
     {
         $this->announcementEndDate =  new \DateTime($date);
         return $this;
-    }	
+    }
 
     /**
      * Get announcementStartDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getAnnouncementEndDate()
     {
         return $this->announcementEndDate;
-    }		
-			
-	
-	
-	
-	
-	
-	/* 
+    }
+
+
+
+
+
+
+	/*
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $logoFile
      */
     public function setLogoFile(File $image = null)
@@ -1576,9 +1604,9 @@ class LandingPage
     public function getBackgroundFile()
     {
         return $this->backgroundFile;
-    }	
-	
-	/* 
+    }
+
+	/*
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $backgroundFile
      */
     public function setBackgroundFile(File $image = null)
@@ -1593,9 +1621,9 @@ class LandingPage
     public function getLogoFile()
     {
         return $this->logoFile;
-    }		
-	
-	/* 
+    }
+
+	/*
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $youtubeThumbFile
      */
     public function setyoutubeThumbFile(File $image = null)
@@ -1611,10 +1639,10 @@ class LandingPage
     {
         return $this->youtubeThumbFile;
     }
-	
-	
-	
-	/* 
+
+
+
+	/*
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $specialOfferImageVerticalFile
      */
     public function setSpecialOfferImageVerticalFile(File $image = null)
@@ -1629,10 +1657,10 @@ class LandingPage
     public function getSpecialOfferImageVerticalFile()
     {
         return $this->specialOfferImageVerticalFile;
-    }	
-	
-	
-	/* 
+    }
+
+
+	/*
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $specialOfferImageHorizontalFile
      */
     public function setSpecialOfferImageHorizontalFile(File $image = null)
@@ -1647,9 +1675,9 @@ class LandingPage
     public function getSpecialOfferImageHorizontalFile()
     {
         return $this->specialOfferImageHorizontalFile;
-    }		
-	
-	
+    }
+
+
 
 
 
@@ -1670,7 +1698,7 @@ class LandingPage
     /**
      * Get campaignUrl
      *
-     * @return string 
+     * @return string
      */
     public function getCampaignUrl()
     {
@@ -1693,7 +1721,7 @@ class LandingPage
     /**
      * Get campaignEmail
      *
-     * @return string 
+     * @return string
      */
     public function getCampaignEmail()
     {
@@ -1715,12 +1743,12 @@ class LandingPage
     /**
      * Get campaignFirstName
      *
-     * @return string 
+     * @return string
      */
     public function getCampaignFirstName()
     {
         return $this->campaignFirstName;
-    }	
+    }
     /**
      * Set campaignLastName
      *
@@ -1737,12 +1765,10 @@ class LandingPage
     /**
      * Get campaignLastName
      *
-     * @return string 
+     * @return string
      */
     public function getCampaignLastName()
     {
         return $this->campaignLastName;
-    }	
+    }
 }
-
-
