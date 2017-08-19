@@ -22,9 +22,12 @@ class ShopifyClient
         $this->secret = $secret;
         $this->api_key = $api_key;
 		$this->token = $token;
+		
 		$this->logger = $logger;
-
-		$this->logger->notice('ShopifyClient::__consturct',array($this->name,$this->token,$this->api_key, $this->secret));
+		if (is_object($this->logger)){
+			$this->logger->notice('ShopifyClient::__consturct',array($this->shop_domain,$this->token,$this->api_key, $this->secret));
+		}
+		
 
 	}
 
@@ -192,7 +195,6 @@ class ShopifyClient
 			$name = strtolower($name);
 			$headers[$name] = trim($value);
 		}
-
 		return $headers;
 	}
 
@@ -206,12 +208,9 @@ class ShopifyClient
 
 	//updating metafields
 	static 	public function update_metadata($shopify,$request,$params=array()){
-
 		$output = array($request->query->get('productId'),$request->query->get('metaId'));
-
 		switch ($request->query->get('action','create')){
 			case 'create' :
-
 				if ( $request->query->has('productId') ){
 					$output = $shopify->call('POST','/admin/products/'.$request->query->get('productId').'/metafields.json', array('metafield'=>$params) );
 				}
@@ -233,7 +232,6 @@ class ShopifyClient
 				break;
 		}
 		return $output;
-
 	}
 
 	// this is used to cleaning data especially if it has html
@@ -254,18 +252,34 @@ class ShopifyClient
 
 	static public function get_assets($shopify, $type='snippets'){
 		//$this->shopify->call('GET','/admin/themes/'. $theme_id .'/assets.json?asset[key]='. $this->cdata['asset'] . '&theme_id='. $theme_id);
-
 		$output = $shopify->call('GET','/admin/themes/'. ShopifyClient::get_current_theme($shopify).'/assets.json');
 		$asset_array = array();
 		foreach ($output as $items){
 			$count = null;
-			$result = preg_filter('/(^'.$type.'\/|\.liquid$)/', '', $items['key'], -1, $count);
-			if ($count > 1){$asset_array[] = $result;}
+			if (!empty($items['key'])){
+				$result = preg_filter('/(^'.$type.'\/|\.liquid$)/', '', $items['key'], -1, $count);
+				if ($count > 1){$asset_array[] = $result;}				
+			}
+
 		}
 		return $asset_array;
-
-
 	}
+
+	static public function get_collections($shopify,$logger){		
+		$output = $shopify->call('GET','/admin/custom_collections.json', array('limit'=>250,'published_status'=>'published'));
+		
+		$collection_array = array();
+		foreach ($output as $items){
+			$logger->notice('item handle'. $items['handle'] .' : ' . $items['title'] . ' '. $items['published_scope']);	
+			if (($items['published_scope'] === 'global') OR ($items['published_scope'] === 'web')){
+				$collection_array[($items['handle'])] = $items['title'];
+							
+			}
+
+		}
+		return $collection_array;
+	}	
+	
 	static public function get_products($shopify,$logger){
 		//$this->shopify->call('GET','/admin/themes/'. $theme_id .'/assets.json?asset[key]='. $this->cdata['asset'] . '&theme_id='. $theme_id);
 
@@ -286,9 +300,12 @@ class ShopifyClient
 		$output = $shopify->call('GET','/admin/themes.json');
 		$currentTheme = false;
 		foreach ($output as $theme){
-			if ($theme['role'] == 'main'){
-				$currentTheme = $theme['id'];
+			if (!empty($theme['role'])){
+				if ($theme['role'] == 'main'){
+					$currentTheme = $theme['id'];
+				}				
 			}
+
 		}
 
 		return $currentTheme;
@@ -307,56 +324,44 @@ class ShopifyClient
 			->findOneBy(array('storeName'=>$store_name,'status'=>'active'));
 		$logger = 	$controller->get('logger');
         $parameters = $yaml['parameters'];
-		$array = array('shared_secret' =>$parameters['shopify_shared_secret'],
-					 'api_key'=>$parameters['shopify_api_key'],
-					 'scope' =>$parameters['shopify_scope'],
-					 'redirect_url'=> $parameters['shopify_redirect_url'],
-					 'session' =>$controller->get('request')->getSession(),
-					 'logger' =>$logger,
-					 'enables'=>array('landingPage'=>$shopSettings->getLandingPageEnable(),
-					 				  'productReturn'=>$shopSettings->getProductReturnEnable(),
-								  	  'specials'=>$shopSettings->getSpecialEnable(),
-								  	  'contest'=>$shopSettings->getPhotoContestEnable()
-								  ),
-					 'template'=>array(),
-					 'shop'=>$store_name,
-					 'shopify'=>new ShopifyClient($store_name,$shopSettings->getAccessToken(),
-												  $parameters['shopify_api_key'],
-												  $parameters['shopify_shared_secret'],
-												  $logger)
-					 );
+		if ($shopSettings ){
+			$logger->notice('HAS settings '. $store_name);
+			$array = array('shared_secret' =>$parameters['shopify_shared_secret'],
+						 'api_key'=>$parameters['shopify_api_key'],
+						 'scope' =>$parameters['shopify_scope'],
+						 'redirect_url'=> $parameters['shopify_redirect_url'],
+						 'session' =>$controller->get('request')->getSession(),
+						 'logger' =>$logger,
+						 'enables'=>array('landingPage'=>$shopSettings->getLandingPageEnable(),
+										  'productReturn'=>$shopSettings->getProductReturnEnable(),
+										  'specials'=>$shopSettings->getSpecialEnable(),
+										  'contest'=>$shopSettings->getPhotoContestEnable()
+									  ),
+						 'template'=>array(),
+						 'storeUrl' =>$shopSettings->getStoreUrl(),
+						 'proxyUrl' =>$shopSettings->getProxyUrl(),
+						 'shop'=>$store_name,
+						 'shopify'=>new ShopifyClient($store_name,$shopSettings->getAccessToken(),
+													  $parameters['shopify_api_key'],
+													  $parameters['shopify_shared_secret'],
+													  $logger)
+						 );			
+		}
+		else {
+			$array = array('shared_secret' =>$parameters['shopify_shared_secret'],
+						 'api_key'=>$parameters['shopify_api_key'],
+						 'scope' =>$parameters['shopify_scope'],
+						 'redirect_url'=> $parameters['shopify_redirect_url'],
+						 'session' =>$controller->get('request')->getSession(),
+						 'logger' =>$logger,
+						 'template'=>array(),
+						 'shop'=>$store_name
+
+						 );				
+		}
 	return $array;
-
-
-
     }
-
 }
-/*
-class ShopifyCurlException extends Exception { }
-class ShopifyApiException extends Exception
-{
-	protected $method;
-	protected $path;
-	protected $params;
-	protected $response_headers;
-	protected $response;
 
-	function __construct($method, $path, $params, $response_headers, $response)
-	{
-		$this->method = $method;
-		$this->path = $path;
-		$this->params = $params;
-		$this->response_headers = $response_headers;
-		$this->response = $response;
 
-		parent::__construct($response_headers['http_status_message'], $response_headers['http_status_code']);
-	}
-
-	function getMethod() { return $this->method; }
-	function getPath() { return $this->path; }
-	function getParams() { return $this->params; }
-	function getResponseHeaders() { return $this->response_headers; }
-	function getResponse() { return $this->response; }
-}*/
 ?>
